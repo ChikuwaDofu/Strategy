@@ -8,10 +8,12 @@ CUnitManager::CUnitManager(){
 
 void CUnitManager::Awake(){
 	SetUnit();
-	country[0].unit[0].Awake(6,4,1,5,0);
-	country[0].unit[1].Awake(5,3,2,3,4);
-	country[1].unit[0].Awake(7,5,1,5,0);
-	country[1].unit[1].Awake(8,6,2,3,4);
+	country[0].unit[0].Awake(6,4,1);
+	country[0].unit[1].Awake(5,3,2);
+	country[1].unit[0].Awake(7,5,1);
+	country[1].unit[1].Awake(8,6,2);
+
+	picture.LoadUnitmPic();
 }
 
 void CUnitManager::SetUnit(){
@@ -35,9 +37,21 @@ int CUnitManager::GetRoute(int _country,int _unit,int _x,int _y){
 	return country[_country].unit[_unit].GetRoute(_x,_y);
 }
 
+bool CUnitManager::CheckLCOn(int _country,int _unit){
+	if(Event.LMouse.GetClick(country[_country].unit[_unit].GetunitX()*50+100,country[_country].unit[_unit].GetunitY()*50+50,country[_country].unit[_unit].GetunitX()*50+150,country[_country].unit[_unit].GetunitY()*50+100)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 void CUnitManager::Select(int _country,int _unit){
 	selectingC=_country;
 	selectingU=_unit;
+}
+
+void CUnitManager::ProductScr(bool open){
+	screen = open;
 }
 
 void CUnitManager::Setselecting(){
@@ -48,7 +62,7 @@ void CUnitManager::Setselecting(){
 		Select(-1,-1);
 		for(int i=0;i<COUNTRY_NUM;i++){
 			for(int n=0;n<UNIT_NUM;n++){
-				if(country[i].unit[n].GetunitX()==cursor.Getcx() && country[i].unit[n].GetunitY()==cursor.Getcy() && !country[i].unit[n].GetMoveEnd()){
+				if(CheckLCOn(i,n) && !country[i].unit[n].GetMoveEnd() && !screen){
 					Select(i,n);
 				}
 			}
@@ -160,15 +174,9 @@ void CUnitManager::MoveUnit(){
 	}
 
 	if(Selecting()){
-		for(int x=0;x<MAP_W;x++){
-			for(int y=0;y<MAP_H;y++){
-				for(int n=0;n<UNIT_NUM;n++){
-					for(int j=0;j<COUNTRY_NUM;j++){
-						if(country[j].unit[n].GetunitX()==x && country[j].unit[n].GetunitY()==y){
-								country[selectingC].unit[selectingU].SetObstacle(x,y);
-						}
-					}
-				}
+		for(int i=0;i<COUNTRY_NUM;i++){
+			for(int n=0;n<UNIT_NUM;n++){
+				country[selectingC].unit[selectingU].SetObstacle(country[i].unit[n].GetunitX(),country[i].unit[n].GetunitY());
 			}
 		}
 		if(country[selectingC].unit[selectingU].GetMoves()>0){
@@ -198,12 +206,8 @@ void CUnitManager::MoveUnit(){
 
 		onemove=false;
 	}
-	for(int i=0;i<COUNTRY_NUM;i++){
-		for(int n=0;n<UNIT_NUM;n++){
-			if(selectingC==i && selectingU==n && country[i].unit[n].GetMoveEnd()){
-				Select(-1,-1);
-			}
-		}
+	if(country[selectingC].unit[selectingU].GetMoveEnd()){
+		Select(-1,-1);
 	}
 }
 
@@ -225,7 +229,8 @@ void CUnitManager::PaintUnit(){
 		for(int x=0;x<MAP_W;x++){
 			for(int y=0;y<MAP_H;y++){
 				if(country[selectingC].unit[selectingU].GetRoute(x,y)==1){
-					DrawBox(x*GRID_L+102,y*GRID_L+52,GRID_L+x*GRID_L+99,GRID_L+y*GRID_L+49,LIGHTBLUE,true);
+					//DrawBox(x*GRID_L+102,y*GRID_L+52,GRID_L+x*GRID_L+99,GRID_L+y*GRID_L+49,LIGHTBLUE,true);
+					DrawGraph(x*GRID_L + 102, y*GRID_L + 52, picture.RangeBox, true);
 				}
 			}
 		}
@@ -235,8 +240,9 @@ void CUnitManager::PaintUnit(){
 
 	for(int i=0;i<COUNTRY_NUM;i++){
 		for(int n=0;n<UNIT_NUM;n++){
-			DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2-5+50,WHITE,"%d",country[i].unit[n].Gettype());
-			DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2+15+50,BLACK,"%d",country[i].unit[n].Gethp());
+			//DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2-5+50,WHITE,"%d",country[i].unit[n].Gettype());
+			//DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2+15+50,BLACK,"%d",country[i].unit[n].Gethp());
+			country[i].unit[n].DrawUnit();
 		}
 	}
 }

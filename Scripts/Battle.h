@@ -35,6 +35,7 @@ private:
 	void Damage(int _country,int _unit,int _damage);
 	bool Dead(int _country,int _unit);
 	bool Enemy(int _country); //“G‚È‚ç‚Îtrue
+	bool CheckRCOn(int _country,int _unit);
 
 public:
 	CCursorManager cursorm;

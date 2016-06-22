@@ -2,9 +2,11 @@
 
 #include"Suken.h"
 #include"General.h"
+#include"Picture.h"
 
 class CStage{
 private:
+	CPicture picture;
 	int type;
 	int MapHandle[2];
 	int TMapHandle[2];
@@ -22,15 +24,6 @@ public:
 	void CreateStage();
 	void DrawStage();
 	void Awake();
-};
-
-class CStageManager{
-public:
-	CStageManager();
-	~CStageManager();
-
-private:
-
 };
 
 //CStage* stage;

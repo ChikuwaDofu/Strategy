@@ -13,7 +13,6 @@ CScene Title,Stage;
 
 CTitle title;
 CBack back;
-CBattle battle;
 CProduct product;
 CCommon common;
 
@@ -51,7 +50,7 @@ void MoveUnit(){
 }
 
 void FightUnit(){
-	battle.Battle();
+	product.battle.Battle();
 	product.Product();
 }
 

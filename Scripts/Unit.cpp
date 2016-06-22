@@ -63,13 +63,29 @@ void CUnit::SetMoves(){
 	moves=2;
 }
 
-void CUnit::Awake(int _x,int _y,int _type,int _str,int _Rstr){
+void CUnit::Awake(int _x,int _y,int _type){
 	unitX=_x;
 	unitY=_y;
 	type=_type;
-	strength=_str;
-	shotstrength=_Rstr;
 
+	switch(type){
+	case 1:
+
+		strength=5;
+		shotstrength=0;
+
+		break;
+
+	case 2:
+
+		strength=3;
+		shotstrength=4;
+
+		break;
+	}
+	
+	picture.LoadUnitPic();
+	picture.LoadNumPic();
 }
 
 void CUnit::SkipTurn(){
@@ -154,7 +170,18 @@ void CUnit::Survive(){
 	}
 }
 
-void CUnit::Product(int _x,int _y){
-	unitX=_x;
-	unitY=_y;
+void CUnit::Product(int _x,int _y,int _type){
+	hp=100;
+	moves=0;
+	MoveEnd=true;
+	Awake(_x,_y,_type);
+}
+
+void CUnit::DrawUnit(){
+	DrawGraph(unitX*50+100,unitY*50+50,picture.unitPic[type-1],true);
+
+	if(hp < 100){
+		DrawGraph(unitX*50+102,unitY*50+77,picture.numPic[hp/10],true);
+		DrawGraph(unitX*50+112,unitY*50+77,picture.numPic[hp%10],true);
+	}
 }

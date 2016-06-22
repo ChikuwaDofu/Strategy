@@ -53,6 +53,14 @@ int CBattle::GetSStrength(int _country,int _unit){
 	return unitm.country[_country].unit[_unit].GetSstrength();
 }
 
+bool CBattle::CheckRCOn(int _country,int _unit){
+	if(Event.RMouse.GetClick(LocationX(_country,_unit)*50+100,LocationY(_country,_unit)*50+50,LocationX(_country,_unit)*50+150,LocationY(_country,_unit)*50+100)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 int CBattle::Attack(int base,int atkC,int atkU,int defC,int defU){
 	return (base+GetRand(6))*(1+pow(GetStrength(atkC,atkU)-GetStrength(defC,defU),index)/pow(GetStrength(defC,defU),index))*(GetHP(atkC,atkU)/2+50)/100;
 }
@@ -136,7 +144,7 @@ void CBattle::Battle(){
 void CBattle::Combat(){
 	for(int i=0;i<COUNTRY_NUM;i++){
 		for(int n=0;n<COUNTRY_NUM;n++){
-			if(common.GetOnRClick() && Ctarget[LocationX(i,n)][LocationY(i,n)] && cursorm.cursor.Getcx()==LocationX(i,n) && cursorm.cursor.Getcy()==LocationY(i,n) && Enemy(i)){
+			if(CheckRCOn(i,n)&& Ctarget[LocationX(i,n)][LocationY(i,n)]  && Enemy(i)){
 				DefDam=Attack(22,selectingC,selectingU,i,n);
 				AtkDam=Attack(22,i,n,selectingC,selectingU);
 
@@ -171,7 +179,7 @@ void CBattle::Shot(){
 
 		for(int i=0;i<COUNTRY_NUM;i++){
 			for(int n=0;n<UNIT_NUM;n++){
-				if(common.GetOnRClick() && Starget[LocationX(i,n)][LocationY(i,n)] && cursorm.cursor.Getcx()==LocationX(i,n) && cursorm.cursor.Getcy()==LocationY(i,n) && Enemy(i)){				
+				if(CheckRCOn(i,n) && Starget[LocationX(i,n)][LocationY(i,n)] && Enemy(i)){				
 					range_attack=true;
 
 					DefDam=Attack(12,selectingC,selectingU,i,n);

@@ -24,10 +24,12 @@ int Array2D(int x,int y);
 
 #include"Suken.h"
 #include"General.h"
+#include"Picture.h"
 
 class CUnit{
 private:
 	CTurn turn;
+	CPicture picture;
 	int type;
 	int unitX;
 	int unitY;
@@ -55,7 +57,7 @@ public:
 	bool GetMoveEnd();
 	void Move(int dir /*direction*/);
 	void SetObstacle(int _x,int _y);
-	void Awake(int _x,int _y,int type,int str /*strength*/,int Rstr);
+	void Awake(int _x,int _y,int type);
 	void CheckMoveable();
 	void SkipTurn();
 	int Gethp();
@@ -65,5 +67,6 @@ public:
 	void Damage(int d);
 	void Death();
 	void Survive(); //‹­§¶‘¶ˆ—
-	void Product(int _x,int _y);
+	void Product(int _x,int _y,int _type); //¶Y‚³‚ê‚½‚Æ‚«‚Ég‚¤
+	void DrawUnit();
 };

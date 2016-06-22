@@ -12,21 +12,13 @@ CStage::~CStage(){
 }
 
 void CStage::Awake(){
-	MapHandle[1]=LoadSoftImage("Kawachi2/TestMap.png");
-
-	TMapHandle[1]=LoadSoftImage("Kawachi2/TestMapTown.png");
-
-	TownGraph=LoadGraph("Kawachi2/Town.png");
-
-	TileGraph[NULL]=LoadGraph("Kawachi2/Void.png");
-	TileGraph[PLAIN]=LoadGraph("Kawachi2/Grass.png");
-	TileGraph[RIVER]=LoadGraph("Kawachi2/River.png");
+	picture.LoadMapPic();
 }
 
 void CStage::CreateMap(int _x,int _y){
 	int r=0,g=0,b=0,a=0;
 	tile[_x][_y]=NULL;
-	GetPixelSoftImage(MapHandle[type],_x,_y,&r,&g,&b,&a);
+	GetPixelSoftImage(picture.mapHandle,_x,_y,&r,&g,&b,&a);
 	if(r==128 && g==255 && b==0){
 		tile[_x][_y]=PLAIN;
 	}
@@ -40,7 +32,7 @@ void CStage::CreateMap(int _x,int _y){
 void CStage::CreateTown(int _x,int _y){
 	int r,g,b,a;
 	town[_x][_y]=-1;
-	GetPixelSoftImage(TMapHandle[type],_x,_y,&r,&g,&b,&a);
+	GetPixelSoftImage(picture.TmapHandle,_x,_y,&r,&g,&b,&a);
 	if(r==255 && g==0 && b==0){
 		town[_x][_y]=0;
 	}
@@ -65,19 +57,19 @@ void CStage::DrawStage(){
 		for(int y=0;y<MAP_H;y++){
 			switch(tile[x][y]){
 			case NULL:
-				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),TileGraph[NULL],true);
+				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),picture.tilePic[NONE],true);
 				break;
 
 			case PLAIN:
-				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),TileGraph[PLAIN],true);
+				DrawGraph(GRID_L*(x + 2), GRID_L*(y + 1), picture.tilePic[PLAIN], true);
 				break;
 
 			case RIVER:
-				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),TileGraph[RIVER],true);
+				DrawGraph(GRID_L*(x + 2), GRID_L*(y + 1), picture.tilePic[RIVER], true);
 				break;
 			}
 			if(town[x][y]!=-1){
-				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),TownGraph,true);
+				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),picture.townPic,true);
 			}
 		}
 	}

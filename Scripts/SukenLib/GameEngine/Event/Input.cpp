@@ -1,19 +1,24 @@
 #include "DxLib.h"
 #include"Input.h"
 #include"Event.h"
+#include"../Game.h"
 
-suken::CInput::CInput(){
+suken::CInput::CInput()
+{
 	useMouse = true;
 	useKey = true;
 }	
-void suken::CInput::AddEventListener( int inputCode , void func() ){
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::AddEventListener( int inputCode , void func() )
+{
 				
 	keyTemp.keyCode=inputCode;
 	keyTemp.pFuncVoid=func;
 	keyTask.push_back(keyTemp);
 
 }
-void suken::CInput::AddEventListener( int inputCode , void func(int) , int *pArgument ){
+void suken::CInput::AddEventListener( int inputCode , void func(int) , int *pArgument )
+{
 				
 	keyTemp.keyCode=inputCode;
 	keyTemp.pFuncInt=func;
@@ -21,7 +26,8 @@ void suken::CInput::AddEventListener( int inputCode , void func(int) , int *pArg
 	keyTask.push_back(keyTemp);
 
 }
-void suken::CInput::AddEventListener( int inputCode , void func(int) , int Argument ){
+void suken::CInput::AddEventListener( int inputCode , void func(int) , int Argument )
+{
 				
 	keyTemp.keyCode=inputCode;
 	keyTemp.pFuncInt=func;
@@ -29,7 +35,17 @@ void suken::CInput::AddEventListener( int inputCode , void func(int) , int Argum
 	keyTask.push_back(keyTemp);
 
 }
-void suken::CInput::RemoveEventListener( int inputCode , void func()  ){
+void suken::CInput::AddEventListener(int inputCode, CScene *_scene)
+{
+
+	keyTemp.keyCode = inputCode;
+	keyTemp.pScene = _scene;
+	keyTask.push_back(keyTemp);
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::RemoveEventListener( int inputCode , void func()  )
+{
 
 	for (auto it = keyTask.begin(); it != keyTask.end();it ++ ){
 		if( it->keyCode == inputCode && it->pFuncVoid == func  ){
@@ -38,7 +54,8 @@ void suken::CInput::RemoveEventListener( int inputCode , void func()  ){
 		}	
 	}	
 }
-void suken::CInput::RemoveEventListener( int inputCode , void func(int) , int *pArgument  ){
+void suken::CInput::RemoveEventListener( int inputCode , void func(int) , int *pArgument  )
+{
 	for(auto it = keyTask.begin(); it != keyTask.end(); it++){
 		if( it->keyCode == inputCode && it->pFuncInt == func && it->pInt == pArgument ){
 			keyTask.erase( it );
@@ -47,7 +64,8 @@ void suken::CInput::RemoveEventListener( int inputCode , void func(int) , int *p
 	}
 		
 }
-void suken::CInput::RemoveEventListener( int inputCode , void func(int) , int Argument  ){
+void suken::CInput::RemoveEventListener( int inputCode , void func(int) , int Argument  )
+{
 
 	for(auto it = keyTask.begin(); it != keyTask.end(); it++){
 		if( it->keyCode == inputCode && it->pFuncInt == func  && it->Int == Argument ){
@@ -57,14 +75,27 @@ void suken::CInput::RemoveEventListener( int inputCode , void func(int) , int Ar
 	}
 		
 }
-void suken::CInput::AddEventListener( CMouseIn input , void func()  ){
+void suken::CInput::RemoveEventListener(int inputCode, CScene *_scene)
+{
+
+	for (auto it = keyTask.begin(); it != keyTask.end(); it++) {
+		if (it->keyCode == inputCode && it->pScene == _scene) {
+			keyTask.erase(it);
+			break;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::AddEventListener( CMouseIn input , void func()  )
+{
 
 	mouseTemp=input;
 	mouseTemp.pFuncVoid=func;
 	mouseTask.push_back(mouseTemp);
 				
 }
-void suken::CInput::AddEventListener( CMouseIn input , void func(int) , int *pArgument  ){
+void suken::CInput::AddEventListener( CMouseIn input , void func(int) , int *pArgument  )
+{
 
 	mouseTemp=input;
 	mouseTemp.pFuncInt=func;
@@ -72,7 +103,8 @@ void suken::CInput::AddEventListener( CMouseIn input , void func(int) , int *pAr
 	mouseTask.push_back(mouseTemp);
 				
 }
-void suken::CInput::AddEventListener( CMouseIn input , void func(int) , int Argument  ){
+void suken::CInput::AddEventListener( CMouseIn input , void func(int) , int Argument  )
+{
 
 	mouseTemp=input;
 	mouseTemp.pFuncInt=func;
@@ -80,7 +112,17 @@ void suken::CInput::AddEventListener( CMouseIn input , void func(int) , int Argu
 	mouseTask.push_back(mouseTemp);
 				
 }
-void suken::CInput::RemoveEventListener( CMouseIn input , void func()  ){
+void suken::CInput::AddEventListener(CMouseIn input, CScene *_scene)
+{
+
+	mouseTemp = input;
+	mouseTemp.pScene = _scene;
+	mouseTask.push_back(mouseTemp);
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::RemoveEventListener( CMouseIn input , void func()  )
+{
 
 	for(auto it = mouseTask.begin(); it != mouseTask.end(); it++){
 		if( it->pFuncVoid == func && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2  ){
@@ -90,7 +132,8 @@ void suken::CInput::RemoveEventListener( CMouseIn input , void func()  ){
 	}
 		
 }
-void suken::CInput::RemoveEventListener( CMouseIn input , void func(int) , int *pArgument  ){
+void suken::CInput::RemoveEventListener( CMouseIn input , void func(int) , int *pArgument  )
+{
 
 	for(auto it = mouseTask.begin(); it != mouseTask.end(); it++){
 		if( it->pFuncInt == func && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2 && it->pInt == pArgument ){
@@ -100,7 +143,8 @@ void suken::CInput::RemoveEventListener( CMouseIn input , void func(int) , int *
 	}
 		
 }
-void suken::CInput::RemoveEventListener( CMouseIn input , void func(int) , int Argument  ){
+void suken::CInput::RemoveEventListener( CMouseIn input , void func(int) , int Argument  )
+{
 
 	for(auto it = mouseTask.begin(); it != mouseTask.end(); it++){
 		if( it->pFuncInt == func && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2  && it->Int == Argument ){
@@ -110,14 +154,28 @@ void suken::CInput::RemoveEventListener( CMouseIn input , void func(int) , int A
 	}
 		
 }
-void suken::CInput::AddEventListener( CpMouseIn input , void func()  ){
+void suken::CInput::RemoveEventListener(CMouseIn input, CScene *_scene)
+{
+
+	for (auto it = mouseTask.begin(); it != mouseTask.end(); it++) {
+		if (it->pScene == _scene && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2) {
+			mouseTask.erase(it);
+			break;
+		}
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::AddEventListener( CpMouseIn input , void func()  )
+{
 
 	pMouseTemp=input;
 	pMouseTemp.pFuncVoid=func;
 	pMouseTask.push_back(pMouseTemp);
 				
 }
-void suken::CInput::AddEventListener( CpMouseIn input , void func(int) , int *pArgument  ){
+void suken::CInput::AddEventListener( CpMouseIn input , void func(int) , int *pArgument  )
+{
 
 	pMouseTemp=input;
 	pMouseTemp.pFuncInt=func;
@@ -125,7 +183,8 @@ void suken::CInput::AddEventListener( CpMouseIn input , void func(int) , int *pA
 	pMouseTask.push_back(pMouseTemp);
 				
 }
-void suken::CInput::AddEventListener( CpMouseIn input , void func(int) , int Argument  ){
+void suken::CInput::AddEventListener( CpMouseIn input , void func(int) , int Argument  )
+{
 
 	pMouseTemp=input;
 	pMouseTemp.pFuncInt=func;
@@ -133,7 +192,17 @@ void suken::CInput::AddEventListener( CpMouseIn input , void func(int) , int Arg
 	pMouseTask.push_back(pMouseTemp);
 				
 }
-void suken::CInput::RemoveEventListener( CpMouseIn input , void func()  ){
+void suken::CInput::AddEventListener(CpMouseIn input, CScene *_scene)
+{
+
+	pMouseTemp = input;
+	pMouseTemp.pScene = _scene;
+	pMouseTask.push_back(pMouseTemp);
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::RemoveEventListener( CpMouseIn input , void func()  )
+{
 
 	for(auto it = pMouseTask.begin(); it != pMouseTask.end(); it++){
 		if( it->pFuncVoid == func && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2  ){
@@ -142,7 +211,8 @@ void suken::CInput::RemoveEventListener( CpMouseIn input , void func()  ){
 		}
 	}
 }
-void suken::CInput::RemoveEventListener( CpMouseIn input , void func(int) , int *pArgument  ){
+void suken::CInput::RemoveEventListener( CpMouseIn input , void func(int) , int *pArgument  )
+{
 
 	for(auto it = pMouseTask.begin(); it != pMouseTask.end(); it++){
 		if( it->pFuncInt == func && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2  && it->pInt == pArgument ){
@@ -151,7 +221,8 @@ void suken::CInput::RemoveEventListener( CpMouseIn input , void func(int) , int 
 		}
 	}
 }
-void suken::CInput::RemoveEventListener( CpMouseIn input , void func(int) , int Argument  ){
+void suken::CInput::RemoveEventListener( CpMouseIn input , void func(int) , int Argument  )
+{
 
 	for(auto it = pMouseTask.begin(); it != pMouseTask.end(); it++){
 		if( it->pFuncInt == func && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2  && it->Int == Argument ){
@@ -160,24 +231,46 @@ void suken::CInput::RemoveEventListener( CpMouseIn input , void func(int) , int 
 		}
 	}
 }
-void suken::CInput::AddEventListener( char input , void func()  ){
+void suken::CInput::RemoveEventListener(CpMouseIn input, CScene *_scene)
+{
+
+	for (auto it = pMouseTask.begin(); it != pMouseTask.end(); it++) {
+		if (it->pScene == _scene && it->type == input.type && it->x1 == input.x1 && it->x2 == input.x2 && it->y1 == input.y1 && it->y2 == input.y2) {
+			pMouseTask.erase(it);
+			break;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::AddEventListener( char input , void func()  )
+{
 	frameTemp.pFuncVoid=func;
 	frameTask.push_back(frameTemp);
 			
 }
-void suken::CInput::AddEventListener( char input , void func(int) , int *pArgument  ){
+void suken::CInput::AddEventListener( char input , void func(int) , int *pArgument  )
+{
 	frameTemp.pFuncInt=func;
 	frameTemp.pInt = pArgument;
 	frameTask.push_back(frameTemp);
 			
 }
-void suken::CInput::AddEventListener( char input , void func(int) , int Argument  ){
+void suken::CInput::AddEventListener( char input , void func(int) , int Argument  )
+{
 	frameTemp.pFuncInt=func;
 	frameTemp.Int = Argument;
 	frameTask.push_back(frameTemp);
 			
 }
-void suken::CInput::RemoveEventListener( char input , void func()  ){
+void suken::CInput::AddEventListener(char input, CScene *_scene)
+{
+	frameTemp.pScene = _scene;
+	frameTask.push_back(frameTemp);
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::RemoveEventListener( char input , void func()  )
+{
 	for(auto it = frameTask.begin(); it != frameTask.end(); it++){
 		if( it->pFuncVoid ==  func  ){
 			frameTask.erase( it );
@@ -185,7 +278,8 @@ void suken::CInput::RemoveEventListener( char input , void func()  ){
 		}
 	}		
 }
-void suken::CInput::RemoveEventListener( char input , void func(int) , int *pArgument  ){
+void suken::CInput::RemoveEventListener( char input , void func(int) , int *pArgument  )
+{
 	for(auto it = frameTask.begin(); it != frameTask.end(); it++){
 		if( it->pFuncInt ==  func  && it->pInt == pArgument ){
 			frameTask.erase( it );
@@ -194,7 +288,8 @@ void suken::CInput::RemoveEventListener( char input , void func(int) , int *pArg
 	}
 		
 }
-void suken::CInput::RemoveEventListener( char input , void func(int) , int Argument  ){
+void suken::CInput::RemoveEventListener( char input , void func(int) , int Argument  )
+{
 
 	for(auto it = frameTask.begin(); it != frameTask.end(); it++){
 		if( it->pFuncInt ==  func  && it->Int == Argument ){
@@ -203,27 +298,49 @@ void suken::CInput::RemoveEventListener( char input , void func(int) , int Argum
 		}
 	}		
 }
-void suken::CInput::AddEventListener( bool* input , void func()  ){
+void suken::CInput::RemoveEventListener(char input, CScene *_scene)
+{
+	for (auto it = frameTask.begin(); it != frameTask.end(); it++) {
+		if (it->pScene = _scene) {
+			frameTask.erase(it);
+			break;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::AddEventListener( bool* input , void func()  )
+{
 	boolTemp.pFuncVoid=func;
 	boolTemp.pBool=input;
 	boolTask.push_back(boolTemp);
 			
 }
-void suken::CInput::AddEventListener( bool* input , void func(int) , int *pArgument  ){
+void suken::CInput::AddEventListener( bool* input , void func(int) , int *pArgument  )
+{
 	boolTemp.pFuncInt=func;
 	boolTemp.pInt = pArgument;
 	boolTemp.pBool=input;
 	boolTask.push_back(boolTemp);
 			
 }
-void suken::CInput::AddEventListener( bool* input , void func(int) , int Argument  ){
+void suken::CInput::AddEventListener( bool* input , void func(int) , int Argument  )
+{
 	boolTemp.pFuncInt=func;
 	boolTemp.Int = Argument;
 	boolTemp.pBool=input;
 	boolTask.push_back(boolTemp);
 			
 }
-void suken::CInput::RemoveEventListener( bool* input , void func()  ){
+void suken::CInput::AddEventListener(bool* input, CScene *_scene)
+{
+	boolTemp.pScene = _scene;
+	boolTemp.pBool = input;
+	boolTask.push_back(boolTemp);
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::RemoveEventListener( bool* input , void func()  )
+{
 	for(auto it = boolTask.begin(); it != boolTask.end(); it++){
 		if( it->pBool == input && it->pFuncVoid == func  ){
 			boolTask.erase( it );
@@ -231,7 +348,8 @@ void suken::CInput::RemoveEventListener( bool* input , void func()  ){
 		}
 	}	
 }	
-void suken::CInput::RemoveEventListener( bool* input , void func(int) , int *pArgument  ){
+void suken::CInput::RemoveEventListener( bool* input , void func(int) , int *pArgument  )
+{
 
 	for(auto it = boolTask.begin(); it != boolTask.end(); it++){	
 		if( it->pBool == input && it->pFuncInt == func  && it->pInt == pArgument ){
@@ -240,7 +358,8 @@ void suken::CInput::RemoveEventListener( bool* input , void func(int) , int *pAr
 		}
 	}	
 }
-void suken::CInput::RemoveEventListener( bool* input , void func(int) , int Argument  ){
+void suken::CInput::RemoveEventListener( bool* input , void func(int) , int Argument  )
+{
 
 	for(auto it = boolTask.begin(); it != boolTask.end(); it++){
 		if( it->pBool == input && it->pFuncInt == func  && it->Int == Argument ){
@@ -250,7 +369,18 @@ void suken::CInput::RemoveEventListener( bool* input , void func(int) , int Argu
 	}
 	
 }
-void suken::CInput::Loop(){
+void suken::CInput::RemoveEventListener(bool* input, CScene *_scene)
+{
+	for (auto it = boolTask.begin(); it != boolTask.end(); it++) {
+		if (it->pBool == input && it->pScene == _scene) {
+			boolTask.erase(it);
+			break;
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void suken::CInput::Loop()
+{
 
 		
 	//KEY
@@ -266,10 +396,16 @@ void suken::CInput::Loop(){
 				if(temp.pFuncVoid != nullptr){
 					temp.pFuncVoid();
 				}else{
-					if(temp.pInt == nullptr){
-						temp.pFuncInt(temp.Int);
-					}else{
+					if(temp.pInt != nullptr){
 						temp.pFuncInt(*temp.pInt);
+					}else{
+						if (temp.pScene != nullptr) {
+							Game.AddChild(temp.pScene);
+						}
+						else {
+							temp.pFuncInt(temp.Int);
+						}
+						
 					}
 				}
 			}
@@ -299,10 +435,15 @@ void suken::CInput::Loop(){
 						if(temp.pFuncVoid != nullptr){
 							temp.pFuncVoid();
 						}else{
-							if(temp.pInt == nullptr){
-								temp.pFuncInt(temp.Int);
-							}else{
+							if(temp.pInt != nullptr){
 								temp.pFuncInt(*temp.pInt);
+							}else{
+								if (temp.pScene != nullptr) {
+									Game.AddChild(temp.pScene);
+								}
+								else {
+									temp.pFuncInt(temp.Int);
+								}
 							}
 						}
 						
@@ -313,13 +454,20 @@ void suken::CInput::Loop(){
 				if(temp.x1<mouseX && temp.x2>mouseX ){
 					if(temp.y1<mouseY && temp.y2>mouseY){
 						
-						if(temp.pFuncVoid != nullptr){
+						if (temp.pFuncVoid != nullptr) {
 							temp.pFuncVoid();
-						}else{
-							if(temp.pInt == nullptr){
-								temp.pFuncInt(temp.Int);
-							}else{
+						}
+						else {
+							if (temp.pInt != nullptr) {
 								temp.pFuncInt(*temp.pInt);
+							}
+							else {
+								if (temp.pScene != nullptr) {
+									Game.AddChild(temp.pScene);
+								}
+								else {
+									temp.pFuncInt(temp.Int);
+								}
 							}
 						}
 						
@@ -332,15 +480,22 @@ void suken::CInput::Loop(){
 					if(temp.y1<mouseY && temp.y2>mouseY){
 						if(mouseInput){
 							
-							if(temp.pFuncVoid != nullptr){
+							if (temp.pFuncVoid != nullptr) {
 								temp.pFuncVoid();
-							}else{
-								if(temp.pInt == nullptr){
-									temp.pFuncInt(temp.Int);
-								}else{
+							}
+							else {
+								if (temp.pInt != nullptr) {
 									temp.pFuncInt(*temp.pInt);
 								}
-							}							
+								else {
+									if (temp.pScene != nullptr) {
+										Game.AddChild(temp.pScene);
+									}
+									else {
+										temp.pFuncInt(temp.Int);
+									}
+								}
+							}
 						}
 					}
 				} 
@@ -350,15 +505,22 @@ void suken::CInput::Loop(){
 					if(temp.y1<mouseY && temp.y2>mouseY){
 						if(mouseInput && !preMouseInput ){
 							
-							if(temp.pFuncVoid != nullptr){
+							if (temp.pFuncVoid != nullptr) {
 								temp.pFuncVoid();
-							}else{
-								if(temp.pInt == nullptr){
-									temp.pFuncInt(temp.Int);
-								}else{
+							}
+							else {
+								if (temp.pInt != nullptr) {
 									temp.pFuncInt(*temp.pInt);
 								}
-							}			
+								else {
+									if (temp.pScene != nullptr) {
+										Game.AddChild(temp.pScene);
+									}
+									else {
+										temp.pFuncInt(temp.Int);
+									}
+								}
+							}
 						} 
 					}
 				}
@@ -368,15 +530,22 @@ void suken::CInput::Loop(){
 					if(temp.y1<mouseY && temp.y2>mouseY){
 						if( !mouseInput && preMouseInput ){
 								
-							if(temp.pFuncVoid != nullptr){
+							if (temp.pFuncVoid != nullptr) {
 								temp.pFuncVoid();
-							}else{
-								if(temp.pInt == nullptr){
-									temp.pFuncInt(temp.Int);
-								}else{
+							}
+							else {
+								if (temp.pInt != nullptr) {
 									temp.pFuncInt(*temp.pInt);
 								}
-							}	
+								else {
+									if (temp.pScene != nullptr) {
+										Game.AddChild(temp.pScene);
+									}
+									else {
+										temp.pFuncInt(temp.Int);
+									}
+								}
+							}
 						} 
 					}	
 				}
@@ -400,15 +569,22 @@ void suken::CInput::Loop(){
 					if( *(temp.x1) > mouseX && *(temp.x2) < mouseX ){
 						if( *(temp.y1) > mouseY && *(temp.y2) < mouseY ){
 								
-							if(temp.pFuncVoid != nullptr){
+							if (temp.pFuncVoid != nullptr) {
 								temp.pFuncVoid();
-							}else{
-								if(temp.pInt == nullptr){
-									temp.pFuncInt(temp.Int);
-								}else{
+							}
+							else {
+								if (temp.pInt != nullptr) {
 									temp.pFuncInt(*temp.pInt);
 								}
-							}				
+								else {
+									if (temp.pScene != nullptr) {
+										Game.AddChild(temp.pScene);
+									}
+									else {
+										temp.pFuncInt(temp.Int);
+									}
+								}
+							}
 						}
 					}
 					break;
@@ -416,15 +592,22 @@ void suken::CInput::Loop(){
 					if( *(temp.x1) < mouseX && *(temp.x2) > mouseX ){
 						if( *(temp.y1) < mouseY && *(temp.y2) > mouseY){
 								
-							if(temp.pFuncVoid != nullptr){
+							if (temp.pFuncVoid != nullptr) {
 								temp.pFuncVoid();
-							}else{
-								if(temp.pInt == nullptr){
-									temp.pFuncInt(temp.Int);
-								}else{
+							}
+							else {
+								if (temp.pInt != nullptr) {
 									temp.pFuncInt(*temp.pInt);
 								}
-							}			
+								else {
+									if (temp.pScene != nullptr) {
+										Game.AddChild(temp.pScene);
+									}
+									else {
+										temp.pFuncInt(temp.Int);
+									}
+								}
+							}
 						} 
 					} 
 					break;
@@ -433,15 +616,22 @@ void suken::CInput::Loop(){
 						if( *(temp.y1) < mouseY && *(temp.y2) > mouseY ){
 							if( mouseInput ){
 									
-								if(temp.pFuncVoid != nullptr){
+								if (temp.pFuncVoid != nullptr) {
 									temp.pFuncVoid();
-								}else{
-									if(temp.pInt == nullptr){
-										temp.pFuncInt(temp.Int);
-									}else{
+								}
+								else {
+									if (temp.pInt != nullptr) {
 										temp.pFuncInt(*temp.pInt);
 									}
-								}	
+									else {
+										if (temp.pScene != nullptr) {
+											Game.AddChild(temp.pScene);
+										}
+										else {
+											temp.pFuncInt(temp.Int);
+										}
+									}
+								}
 							} 
 						}
 					} 
@@ -451,15 +641,22 @@ void suken::CInput::Loop(){
 						if( *(temp.y1) < mouseY && *(temp.y2) > mouseY ){
 							if( mouseInput && !preMouseInput ){
 									
-								if(temp.pFuncVoid != nullptr){
+								if (temp.pFuncVoid != nullptr) {
 									temp.pFuncVoid();
-								}else{
-									if(temp.pInt == nullptr){
-										temp.pFuncInt(temp.Int);
-									}else{
+								}
+								else {
+									if (temp.pInt != nullptr) {
 										temp.pFuncInt(*temp.pInt);
 									}
-								}	
+									else {
+										if (temp.pScene != nullptr) {
+											Game.AddChild(temp.pScene);
+										}
+										else {
+											temp.pFuncInt(temp.Int);
+										}
+									}
+								}
 							} 
 						} 
 					} 
@@ -469,15 +666,22 @@ void suken::CInput::Loop(){
 						if( *(temp.y1) < mouseY && *(temp.y2) > mouseY ){
 							if( !mouseInput && preMouseInput ){
 									
-								if(temp.pFuncVoid != nullptr){
+								if (temp.pFuncVoid != nullptr) {
 									temp.pFuncVoid();
-								}else{
-									if(temp.pInt == nullptr){
-										temp.pFuncInt(temp.Int);
-									}else{
+								}
+								else {
+									if (temp.pInt != nullptr) {
 										temp.pFuncInt(*temp.pInt);
 									}
-								}									
+									else {
+										if (temp.pScene != nullptr) {
+											Game.AddChild(temp.pScene);
+										}
+										else {
+											temp.pFuncInt(temp.Int);
+										}
+									}
+								}
 							}	
 						} 
 					} 
@@ -495,13 +699,20 @@ void suken::CInput::Loop(){
 	while( it2 != frameTask.end() ) {
 		CFrame temp=*it2;
 
-		if(temp.pFuncVoid != nullptr){
+		if (temp.pFuncVoid != nullptr) {
 			temp.pFuncVoid();
-		}else{
-			if(temp.pInt == nullptr){
-				temp.pFuncInt(temp.Int);
-			}else{
+		}
+		else {
+			if (temp.pInt != nullptr) {
 				temp.pFuncInt(*temp.pInt);
+			}
+			else {
+				if (temp.pScene != nullptr) {
+					Game.AddChild(temp.pScene);
+				}
+				else {
+					temp.pFuncInt(temp.Int);
+				}
 			}
 		}
 		it2++;
@@ -515,13 +726,20 @@ void suken::CInput::Loop(){
 
 		if(*(temp.pBool)){
 			
-			if(temp.pFuncVoid != nullptr){
+			if (temp.pFuncVoid != nullptr) {
 				temp.pFuncVoid();
-			}else{
-				if(temp.pInt == nullptr){
-					temp.pFuncInt(temp.Int);
-				}else{
+			}
+			else {
+				if (temp.pInt != nullptr) {
 					temp.pFuncInt(*temp.pInt);
+				}
+				else {
+					if (temp.pScene != nullptr) {
+						Game.AddChild(temp.pScene);
+					}
+					else {
+						temp.pFuncInt(temp.Int);
+					}
 				}
 			}
 
@@ -531,7 +749,8 @@ void suken::CInput::Loop(){
 	}
 
 }//end of void Loop()
-void suken::CInput::DrawLoop(){
+void suken::CInput::DrawLoop()
+{
 	//KEY
 	if(useKey){
 

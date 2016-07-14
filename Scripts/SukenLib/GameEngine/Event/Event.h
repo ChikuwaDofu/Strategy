@@ -1,4 +1,5 @@
 #pragma once
+#include"../../Manager.h"
 #include"Key.h"
 #include"Mouse.h"
 
@@ -39,5 +40,6 @@ private:
 };
 
 }
-//Singleton
-extern suken::CEvent Event;///<  @brief à–¾
+
+extern suken::CEvent Event;
+

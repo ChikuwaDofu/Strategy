@@ -46,8 +46,11 @@ void CCursorManager::SetCursor(){
 }
 
 void CCursorManager::PaintCursor(){
-	if(cursor.Getcx()>=0 && cursor.Getcx()<MAP_W && cursor.Getcy()>=0 && cursor.Getcy()<MAP_H)
-	DrawBox((cursor.Getcx()+2)*GRID_L+2,(cursor.Getcy()+1)*GRID_L+2,(cursor.Getcx()+3)*GRID_L-1,(cursor.Getcy()+2)*GRID_L-1,RED,false);
+	if(cursor.Getcx()>=0 && cursor.Getcx()<MAP_W && cursor.Getcy()>=0 && cursor.Getcy()<MAP_H){
+		for(int i=0;i<=1;i++){
+			DrawBox((cursor.Getcx()+2)*GRID_L+1+i,(cursor.Getcy()+1)*GRID_L+1+i,(cursor.Getcx()+3)*GRID_L-i,(cursor.Getcy()+2)*GRID_L-i,RED,false);
+		}
+	}
 }
 
 void CCursorManager::DrawCursor(){

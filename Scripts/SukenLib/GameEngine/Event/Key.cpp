@@ -2,8 +2,13 @@
 #include "Event.h"
 #include <Utility\Debug.h>
 
-
-void suken::CKey::Loop(){
+suken::CKey::CKey() {
+	for (int i = 0; i < 256;i++) {
+		count[i] = 1.0f;
+	}
+}
+void suken::CKey::Loop()
+{
 	 //全てのキーの押下状態を取得
 	char buf[256];
 	GetHitKeyStateAll( buf ) ;
@@ -19,7 +24,8 @@ void suken::CKey::Loop(){
 		}
 	}
 }
-bool suken::CKey::GetPush(int keyCode){
+bool suken::CKey::GetPush(int keyCode)
+{
 	 //キーコードチェック
 	if( keyCode < 256 && keyCode >= 0 ){
 		if( count[keyCode] < 1.0f ){
@@ -32,7 +38,8 @@ bool suken::CKey::GetPush(int keyCode){
 		return false;
 	 }
  }
- bool suken::CKey::GetDown(int keyCode){
+ bool suken::CKey::GetDown(int keyCode)
+{
 	 //キーコードチェック
 	 if( keyCode < 256 && keyCode >= 0 ){
 		if( count[keyCode] == 0.0f ){
@@ -45,7 +52,8 @@ bool suken::CKey::GetPush(int keyCode){
 		return false;
 	 }
 }
- bool suken::CKey::GetUp(int keyCode){
+ bool suken::CKey::GetUp(int keyCode)
+{
 	//キーコードチェック
 	if( keyCode < 256 && keyCode >= 0 ){
 		if( count[keyCode] == 1.5f ){
@@ -58,7 +66,8 @@ bool suken::CKey::GetPush(int keyCode){
 		return false;
 	}
 }
-int suken::CKey::GetCount(int keyCode){
+int suken::CKey::GetCount(int keyCode)
+{
 	//キーコードチェック
 		if( keyCode < 256 && keyCode >= 0 ){
 		return (int)(count[keyCode]);

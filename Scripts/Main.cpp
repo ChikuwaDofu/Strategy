@@ -4,7 +4,7 @@
 
 
 int a[4];
-void Awake(){
+void suken::Awake(){
 	/*game.addChild(&Title);
 
 	for(int i=0;i<4;i++){
@@ -27,8 +27,8 @@ void Awake(){
 
 }
 
-void GameLoopEnter(){
+void suken::GameLoopEnter(){
 }
 
-void GameLoopExit(){
+void suken::GameLoopExit(){
 }

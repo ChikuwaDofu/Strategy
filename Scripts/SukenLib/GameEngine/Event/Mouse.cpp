@@ -1,8 +1,10 @@
 #include "DxLib.h"
 #include"Mouse.h"
 #include"Event.h"
+#include"../../System/System.h"
 
-suken::CMouseIn suken::CMouse::Off( int _x1 , int _y1 , int _x2 , int _y2 ){
+suken::CMouseIn suken::CMouse::Off( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 
 	CMouseIn temp;
 
@@ -15,7 +17,17 @@ suken::CMouseIn suken::CMouse::Off( int _x1 , int _y1 , int _x2 , int _y2 ){
 
 	return temp;
 }
-bool suken::CMouse::GetOff( int _x1 , int _y1 , int _x2 , int _y2 ){
+bool suken::CMouse::GetOff()
+{
+	if( 0 > mouseX &&  System.GetWindowX() < mouseX ){
+		if( 0 > mouseY && System.GetWindowY() < mouseY ){
+			return true;
+		}
+	}
+	return false;
+}
+bool suken::CMouse::GetOff( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 	if(_x1>mouseX && _x2<mouseX ){
 		if(_y1>mouseY && _y2<mouseY){
 			return true;
@@ -23,7 +35,8 @@ bool suken::CMouse::GetOff( int _x1 , int _y1 , int _x2 , int _y2 ){
 	}
 	return false;
 }
-suken::CpMouseIn suken::CMouse::Off( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+suken::CpMouseIn suken::CMouse::Off( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 
 	CpMouseIn temp;
 
@@ -36,7 +49,8 @@ suken::CpMouseIn suken::CMouse::Off( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
 
 	return temp;
 }
-bool suken::CMouse::GetOff( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+bool suken::CMouse::GetOff( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 	if(*_x1>mouseX && *_x2<mouseX ){
 		if(*_y1>mouseY && *_y2<mouseY){
 			return true;
@@ -44,7 +58,8 @@ bool suken::CMouse::GetOff( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
 	}
 	return false;
 }
-suken::CMouseIn suken::CMouse::On( int _x1 , int _y1 , int _x2 , int _y2 ){
+suken::CMouseIn suken::CMouse::On( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 	
 	CMouseIn temp;
 
@@ -58,7 +73,19 @@ suken::CMouseIn suken::CMouse::On( int _x1 , int _y1 , int _x2 , int _y2 ){
 	return temp;
 
 }
-bool suken::CMouse::GetOn( int _x1 , int _y1 , int _x2 , int _y2 ){
+bool suken::CMouse::GetOn()
+{
+	if( 0 < mouseX && System.GetWindowX() > mouseX ){
+		if( 0 < mouseY && System.GetWindowY() > mouseY ){
+			if( Event.GetValid() ){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+bool suken::CMouse::GetOn( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 	if(_x1<mouseX && _x2>mouseX ){
 		if(_y1<mouseY && _y2>mouseY){
 			if(Event.GetValid()){
@@ -68,7 +95,8 @@ bool suken::CMouse::GetOn( int _x1 , int _y1 , int _x2 , int _y2 ){
 	}
 	return false;
 }
-suken::CpMouseIn suken::CMouse::On( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+suken::CpMouseIn suken::CMouse::On( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 	
 	CpMouseIn temp;
 
@@ -82,7 +110,8 @@ suken::CpMouseIn suken::CMouse::On( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
 	return temp;
 
 }
-bool suken::CMouse::GetOn( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+bool suken::CMouse::GetOn( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 	if(*_x1<mouseX && *_x2>mouseX ){
 		if(*_y1<mouseY && *_y2>mouseY){
 			if(Event.GetValid()){
@@ -92,7 +121,8 @@ bool suken::CMouse::GetOn( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
 	}
 	return false;
 }
-suken::CMouseIn suken::CMouse::Click( int _x1 , int _y1 , int _x2 , int _y2 ){
+suken::CMouseIn suken::CMouse::Click( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 		
 	CMouseIn temp;
 
@@ -106,7 +136,21 @@ suken::CMouseIn suken::CMouse::Click( int _x1 , int _y1 , int _x2 , int _y2 ){
 	return temp;
 
 }
-bool suken::CMouse::GetClick( int _x1 , int _y1 , int _x2 , int _y2 ){
+bool suken::CMouse::GetClick()
+{
+	if( 0 < mouseX && System.GetWindowX() > mouseX ){
+		if( 0 < mouseY && System.GetWindowY() > mouseY ){
+			if( mouseInput && !preMouseInput ){
+				if( Event.GetValid() ){
+					return true;		
+				}
+			} 
+		}
+	}
+	return false;
+}
+bool suken::CMouse::GetClick( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 	if(_x1<mouseX && _x2>mouseX ){
 		if(_y1<mouseY && _y2>mouseY){
 			if(mouseInput && !preMouseInput ){
@@ -118,7 +162,8 @@ bool suken::CMouse::GetClick( int _x1 , int _y1 , int _x2 , int _y2 ){
 	}
 	return false;
 }
-suken::CpMouseIn suken::CMouse::Click( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+suken::CpMouseIn suken::CMouse::Click( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 		
 	CpMouseIn temp;
 
@@ -132,7 +177,8 @@ suken::CpMouseIn suken::CMouse::Click( int *_x1 , int *_y1 , int *_x2 , int *_y2
 	return temp;
 
 }
-bool suken::CMouse::GetClick( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+bool suken::CMouse::GetClick( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 	if(*_x1<mouseX && *_x2>mouseX ){
 		if(*_y1<mouseY && *_y2>mouseY){
 			if(mouseInput && !preMouseInput ){
@@ -144,7 +190,8 @@ bool suken::CMouse::GetClick( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
 	}
 	return false;
 }
-suken::CMouseIn suken::CMouse::Release( int _x1 , int _y1 , int _x2 , int _y2 ){
+suken::CMouseIn suken::CMouse::Release( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 		
 	CMouseIn temp;
 
@@ -157,7 +204,21 @@ suken::CMouseIn suken::CMouse::Release( int _x1 , int _y1 , int _x2 , int _y2 ){
 
 	return temp;
 }
-bool suken::CMouse::GetRelease( int _x1 , int _y1 , int _x2 , int _y2 ){
+bool suken::CMouse::GetRelease()
+{
+	if( 0 < mouseX && System.GetWindowX() > mouseX ){
+		if( 0 < mouseY && System.GetWindowY() > mouseY ){
+			if( !mouseInput && preMouseInput ){
+				if( Event.GetValid() ){
+					return true;
+				}
+			} 
+		}	
+	}
+	return false;
+}
+bool suken::CMouse::GetRelease( int _x1 , int _y1 , int _x2 , int _y2 )
+{
 	if(_x1<mouseX && _x2>mouseX ){
 		if(_y1<mouseY && _y2>mouseY){
 			if( !mouseInput && preMouseInput ){
@@ -169,7 +230,8 @@ bool suken::CMouse::GetRelease( int _x1 , int _y1 , int _x2 , int _y2 ){
 	}
 	return false;
 }
-suken::CpMouseIn suken::CMouse::Release( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+suken::CpMouseIn suken::CMouse::Release( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 		
 	CpMouseIn temp;
 
@@ -182,7 +244,8 @@ suken::CpMouseIn suken::CMouse::Release( int *_x1 , int *_y1 , int *_x2 , int *_
 
 	return temp;
 }
-bool suken::CMouse::GetRelease( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
+bool suken::CMouse::GetRelease( int *_x1 , int *_y1 , int *_x2 , int *_y2 )
+{
 	if(*_x1<mouseX && *_x2>mouseX ){
 		if(*_y1<mouseY && *_y2>mouseY){
 			if( !mouseInput && preMouseInput ){
@@ -194,7 +257,8 @@ bool suken::CMouse::GetRelease( int *_x1 , int *_y1 , int *_x2 , int *_y2 ){
 	}
 	return false;
 }
-void suken::CMouse::Loop(){
+void suken::CMouse::Loop()
+{
 	GetMousePoint( &mouseX, &mouseY );
 	preMouseInput = mouseInput;
 	if(IsLeft){
@@ -203,9 +267,23 @@ void suken::CMouse::Loop(){
 		mouseInput = (bool)( GetMouseInput() & MOUSE_INPUT_RIGHT );
 	}
 }
-void suken::CMouse::SetLeft(){
+void suken::CMouse::SetLeft()
+{
 	IsLeft = true;
 }
-void suken::CMouse::SetRight(){
+void suken::CMouse::SetRight()
+{
 	IsLeft = false;
+}
+int suken::CMouse::GetX(){
+	return this->mouseX;
+}
+int suken::CMouse::GetY(){
+	return this->mouseY;
+}
+bool suken::CMouse::GetInput(){
+	return this->mouseInput;
+}
+bool suken::CMouse::GetPreInput(){
+	return this->preMouseInput;
 }

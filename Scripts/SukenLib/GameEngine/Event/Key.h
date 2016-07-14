@@ -1,4 +1,5 @@
 #pragma once
+#include"../../Manager.h"
 #include "DxLib.h"
 namespace suken{
 
@@ -7,7 +8,7 @@ public:
 /**
 *	@brief ê‡ñæ
 */
-	CKey(){}
+	CKey();
 
 	static const int BACK = KEY_INPUT_BACK	;///<  @brief ê‡ñæ
     static const int TAB = KEY_INPUT_TAB	;///<  @brief ê‡ñæ

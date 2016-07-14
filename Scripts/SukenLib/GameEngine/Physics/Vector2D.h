@@ -1,4 +1,5 @@
 #pragma once
+#include"../../Manager.h"
 #include <vector>
 #include "DxLib.h"
 
@@ -129,7 +130,8 @@ private:
 *	@param value 引数
 * @return 戻り値
 */
-__inline Vector2D VGet(float _x,float _y){
+__inline Vector2D VGet(float _x,float _y)
+{
 	Vector2D temp;
 	temp.x=_x;
 	temp.y=_y;
@@ -140,7 +142,8 @@ __inline Vector2D VGet(float _x,float _y){
 *	@param value 引数
 * @return 戻り値
 */
-__inline Vector2D VAdd(Vector2D v1,Vector2D v2){
+__inline Vector2D VAdd(Vector2D v1,Vector2D v2)
+{
 	Vector2D temp;
 	temp.x=v1.x+v2.x;
 	temp.y=v1.y+v2.y;
@@ -151,7 +154,8 @@ __inline Vector2D VAdd(Vector2D v1,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline Vector2D VSub(Vector2D v1,Vector2D v2){
+__inline Vector2D VSub(Vector2D v1,Vector2D v2)
+{
 	Vector2D temp;
 	temp.x=v1.x-v2.x;
 	temp.y=v1.y-v2.y;
@@ -162,7 +166,8 @@ __inline Vector2D VSub(Vector2D v1,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline float VDot(Vector2D v1,Vector2D v2){
+__inline float VDot(Vector2D v1,Vector2D v2)
+{
 	return (v1.x*v2.x+v1.y*v2.y);
 }
 /**
@@ -170,7 +175,8 @@ __inline float VDot(Vector2D v1,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline VECTOR VCross(Vector2D v1,Vector2D v2){
+__inline VECTOR VCross(Vector2D v1,Vector2D v2)
+{
 	VECTOR temp;
 	temp.z=(float)v1.x*v2.y-v1.y*v2.x;
 	return temp;
@@ -180,7 +186,8 @@ __inline VECTOR VCross(Vector2D v1,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline float VCrossLength(Vector2D v1,Vector2D v2){
+__inline float VCrossLength(Vector2D v1,Vector2D v2)
+{
 	return ((v1.x*v2.y)-(v1.y*v2.x));
 }
 /**
@@ -188,7 +195,8 @@ __inline float VCrossLength(Vector2D v1,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline Vector2D VScale(Vector2D v1,float scale){
+__inline Vector2D VScale(Vector2D v1,float scale)
+{
 	Vector2D temp;
 	temp.x=v1.x*scale;
 	temp.y=v1.y*scale;
@@ -199,7 +207,8 @@ __inline Vector2D VScale(Vector2D v1,float scale){
 *	@param value 引数
 * @return 戻り値
 */
-__inline float VSize(Vector2D v1){
+__inline float VSize(Vector2D v1)
+{
 	return sqrt( (float)(v1.x * v1.x + v1.y * v1.y) ) ;
 }
 /**
@@ -207,7 +216,8 @@ __inline float VSize(Vector2D v1){
 *	@param value 引数
 * @return 戻り値
 */
-__inline float VSquareSize(Vector2D v1){
+__inline float VSquareSize(Vector2D v1)
+{
 	return  (v1.x * v1.x + v1.y * v1.y);
 }
 /**
@@ -215,7 +225,8 @@ __inline float VSquareSize(Vector2D v1){
 *	@param value 引数
 * @return 戻り値
 */
-__inline Vector2D VNorm(Vector2D v1){
+__inline Vector2D VNorm(Vector2D v1)
+{
 	float size=VSize(v1);
 	Vector2D temp;
 	temp.x=v1.x/size;
@@ -227,7 +238,8 @@ __inline Vector2D VNorm(Vector2D v1){
 *	@param value 引数
 * @return 戻り値
 */
-__inline float GetDistance(Vector2D v1 ,Vector2D v2){
+__inline float GetDistance(Vector2D v1 ,Vector2D v2)
+{
 	
 	return sqrt(pow(abs(v1.x-v2.x),2.0f)+pow(abs(v1.y-v2.y),2.0f));
 	
@@ -237,7 +249,8 @@ __inline float GetDistance(Vector2D v1 ,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline float GetSquareDistance(Vector2D v1 ,Vector2D v2){
+__inline float GetSquareDistance(Vector2D v1 ,Vector2D v2)
+{
 	
 	return pow(abs(v1.x-v2.x),2.0f)+pow(abs(v1.y-v2.y),2.0f);
 	
@@ -247,7 +260,8 @@ __inline float GetSquareDistance(Vector2D v1 ,Vector2D v2){
 *	@param value 引数
 * @return 戻り値
 */
-__inline int DrawLine(Vector2D &v1 , Vector2D &v2 ,int color){
+__inline int DrawLine(Vector2D &v1 , Vector2D &v2 ,int color)
+{
 	return DxLib::DrawLine((int)v1.x,(int)v1.y,(int)v2.x,(int)v2.y,color);
 }
 /**
@@ -255,7 +269,8 @@ __inline int DrawLine(Vector2D &v1 , Vector2D &v2 ,int color){
 *	@param value 引数
 * @return 戻り値
 */
-__inline int DrawCircle(Vector2D &v,int r,int color,bool fillFlag){
+__inline int DrawCircle(Vector2D &v,int r,int color,bool fillFlag)
+{
 	return DxLib::DrawCircle((int)v.x,(int)v.y,r,color,fillFlag);
 }
 /**
@@ -263,7 +278,8 @@ __inline int DrawCircle(Vector2D &v,int r,int color,bool fillFlag){
 *	@param value 引数
 * @return 戻り値
 */
-__inline int DrawBox(suken::Vector2D &v1,suken::Vector2D &v2,int color,bool fillFlag){
+__inline int DrawBox(suken::Vector2D &v1,suken::Vector2D &v2,int color,bool fillFlag)
+{
 	return DxLib::DrawBox((int)v1.x,(int)v1.y,(int)v2.x,(int)v2.y,color,fillFlag);
 }
 /**
@@ -271,7 +287,8 @@ __inline int DrawBox(suken::Vector2D &v1,suken::Vector2D &v2,int color,bool fill
 *	@param value 引数
 * @return 戻り値
 */
-_inline int DrawOval(suken::Vector2D &v,suken::Vector2D &r,int color,bool fillFlag){
+_inline int DrawOval(suken::Vector2D &v,suken::Vector2D &r,int color,bool fillFlag)
+{
 	return DxLib::DrawOval((int)v.x,(int)v.y,(int)r.x,(int)r.y,color,fillFlag);
 }
 /**
@@ -279,7 +296,8 @@ _inline int DrawOval(suken::Vector2D &v,suken::Vector2D &r,int color,bool fillFl
 *	@param value 引数
 * @return 戻り値
 */
-_inline int DrawOval(suken::Vector2D &v,int rx,int ry,int color,bool fillFlag){
+_inline int DrawOval(suken::Vector2D &v,int rx,int ry,int color,bool fillFlag)
+{
 	return DxLib::DrawOval((int)v.x,(int)v.y,rx,ry,color,fillFlag);
 }
 /**
@@ -287,7 +305,8 @@ _inline int DrawOval(suken::Vector2D &v,int rx,int ry,int color,bool fillFlag){
 *	@param value 引数
 * @return 戻り値
 */
-_inline int DrawTriangle(suken::Vector2D &v1,suken::Vector2D &v2,suken::Vector2D &v3,int color,bool fillFlag){
+_inline int DrawTriangle(suken::Vector2D &v1,suken::Vector2D &v2,suken::Vector2D &v3,int color,bool fillFlag)
+{
 	return DxLib::DrawTriangle((int)v1.x,(int)v1.y,(int)v2.x,(int)v2.y,(int)v3.x,(int)v3.y,color,fillFlag);
 }
 /**
@@ -295,7 +314,8 @@ _inline int DrawTriangle(suken::Vector2D &v1,suken::Vector2D &v2,suken::Vector2D
 *	@param value 引数
 * @return 戻り値
 */
-_inline int DrawPixel(suken::Vector2D &v,int color){
+_inline int DrawPixel(suken::Vector2D &v,int color)
+{
 	return DxLib::DrawPixel((int)v.x,(int)v.y,color);
 }
 

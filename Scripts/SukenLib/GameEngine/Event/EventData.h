@@ -1,5 +1,5 @@
 #pragma once
-
+#include"../../Manager.h"
 namespace suken{
 
 
@@ -9,23 +9,28 @@ public:
 /**
 *	@brief ê‡ñæ
 */
-	CKeyIn(){
+	CKeyIn()
+{
 		pFuncVoid = nullptr;
 		pFuncInt = nullptr;
 		pInt = nullptr;
 	}
+	
 	int keyCode;///<  @brief ê‡ñæ
 	void (*pFuncVoid)();///<  @brief ê‡ñæ
 	void (*pFuncInt)(int);///<  @brief ê‡ñæ
 	int *pInt;///<  @brief ê‡ñæ
 	int Int;///<  @brief ê‡ñæ
+	CScene *pScene;///<  @brief ê‡ñæ
+	
 };
 class CMouseIn{
 public:
 /**
 *	@brief ê‡ñæ
 */
-	CMouseIn(){
+	CMouseIn()
+{
 		pFuncVoid = nullptr;
 		pFuncInt = nullptr;
 		pInt = nullptr;
@@ -35,6 +40,7 @@ public:
 	void (*pFuncInt)(int);///<  @brief ê‡ñæ
 	int *pInt;///<  @brief ê‡ñæ
 	int Int;///<  @brief ê‡ñæ
+	CScene *pScene;///<  @brief ê‡ñæ
 	int type;///<  @brief ê‡ñæ
 	
 };
@@ -43,7 +49,8 @@ public:
 /**
 *	@brief ê‡ñæ
 */
-	CpMouseIn(){
+	CpMouseIn()
+{
 		pFuncVoid = nullptr;
 		pFuncInt = nullptr;
 		pInt = nullptr;
@@ -53,6 +60,7 @@ public:
 	void (*pFuncInt)(int);///<  @brief ê‡ñæ
 	int *pInt;///<  @brief ê‡ñæ
 	int Int;///<  @brief ê‡ñæ
+	CScene *pScene;///<  @brief ê‡ñæ
 	int type;///<  @brief ê‡ñæ
 	
 };
@@ -81,7 +89,8 @@ public:
 /**
 *	@brief ê‡ñæ
 */
-	CFrame(){
+	CFrame()
+{
 		pFuncVoid = nullptr;
 		pFuncInt = nullptr;
 		pInt = nullptr;
@@ -90,13 +99,15 @@ public:
 	void (*pFuncInt)(int);///<  @brief ê‡ñæ
 	int *pInt;///<  @brief ê‡ñæ
 	int Int;///<  @brief ê‡ñæ
+	CScene *pScene;///<  @brief ê‡ñæ
 };
 class CBoolean{
 public:
 /**
 *	@brief ê‡ñæ
 */
-	CBoolean(){
+	CBoolean()
+{
 		pFuncVoid = nullptr;
 		pFuncInt = nullptr;
 		pInt = nullptr;
@@ -105,6 +116,7 @@ public:
 	void (*pFuncInt)(int);///<  @brief ê‡ñæ
 	int *pInt;///<  @brief ê‡ñæ
 	int Int;///<  @brief ê‡ñæ
+	CScene *pScene;///<  @brief ê‡ñæ
 	bool* pBool;///<  @brief ê‡ñæ
 };
 

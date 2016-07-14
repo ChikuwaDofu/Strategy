@@ -82,11 +82,23 @@
     <ClCompile Include="SukenLib\GameEngine\Physics\Primitive\Primitive.cpp">
       <Filter>SukenLib\GameEngine\Physics\Primitive</Filter>
     </ClCompile>
-    <ClCompile Include="Midi.cpp">
+    <ClCompile Include="Main.cpp">
+      <Filter>ソース　フォルダ</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>ソース　フォルダ</Filter>
+    </ClCompile>
+    <ClCompile Include="SukenLib\Windows\Midi.cpp">
       <Filter>SukenLib\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Back.cpp">
-      <Filter>ソース　フォルダ</Filter>
+    <ClCompile Include="SukenLib\GameEngine\Event\KeyInputString.cpp">
+      <Filter>SukenLib\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="SukenLib\Utility\Debug.cpp">
+      <Filter>SukenLib\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="SukenLib\Utility\Array.cpp">
+      <Filter>SukenLib\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Battle.cpp">
       <Filter>ソース　フォルダ</Filter>
@@ -100,10 +112,10 @@
     <ClCompile Include="General.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="MyScene.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
-    <ClCompile Include="MyScene.cpp">
+    <ClCompile Include="Picture.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
     <ClCompile Include="Product.cpp">
@@ -112,19 +124,16 @@
     <ClCompile Include="Stage.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
+    <ClCompile Include="Unit.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
     <ClCompile Include="UnitManager.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
-    <ClCompile Include="WinMain.cpp">
+    <ClCompile Include="Title.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>ソース　フォルダ</Filter>
-    </ClCompile>
-    <ClCompile Include="Picture.cpp">
+    <ClCompile Include="Back.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
   </ItemGroup>
@@ -180,14 +189,20 @@
     <ClInclude Include="SukenLib\Utility\Data.h">
       <Filter>SukenLib\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Midi.h">
-      <Filter>SukenLib\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="SukenLib\GameEngine\Physics\Primitive\Rect.h">
       <Filter>SukenLib\GameEngine\Physics\Primitive</Filter>
     </ClInclude>
-    <ClInclude Include="Back.h">
+    <ClInclude Include="Suken.h">
       <Filter>ヘッダー　フォルダ</Filter>
+    </ClInclude>
+    <ClInclude Include="SukenLib\Windows\Midi.h">
+      <Filter>SukenLib\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="SukenLib\GameEngine\Event\KeyInputString.h">
+      <Filter>SukenLib\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="SukenLib\Utility\Array.h">
+      <Filter>SukenLib\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Battle.h">
       <Filter>ヘッダー　フォルダ</Filter>
@@ -204,25 +219,25 @@
     <ClInclude Include="MyScene.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>ヘッダー　フォルダ</Filter>
+    </ClInclude>
     <ClInclude Include="Product.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
-    <ClInclude Include="Suken.h">
-      <Filter>ヘッダー　フォルダ</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
+    <ClInclude Include="Unit.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
     <ClInclude Include="UnitManager.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
+    <ClInclude Include="Title.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
-    <ClInclude Include="Picture.h">
+    <ClInclude Include="Back.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,6 +10,7 @@ class CBattle{
 private:
 	CCal cal;
 	CCommon common;
+	CTurn turn;
 	int checkx[4];
 	int checky[4];
 	bool target[MAP_W][MAP_H];
@@ -35,6 +36,7 @@ private:
 	void Damage(int _country,int _unit,int _damage);
 	bool Dead(int _country,int _unit);
 	bool Enemy(int _country); //“G‚È‚ç‚Îtrue
+	bool CheckRCOn(int _country,int _unit);
 
 public:
 	CCursorManager cursorm;

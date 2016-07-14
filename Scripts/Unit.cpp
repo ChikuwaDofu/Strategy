@@ -54,8 +54,8 @@ bool CUnit::GetMoveEnd(){
 }
 
 void CUnit::Setunit(){
-	unitX=0;
-	unitY=0;
+	unitX=-100;
+	unitY=-100;
 }
 
 void CUnit::SetMoves(){
@@ -63,17 +63,43 @@ void CUnit::SetMoves(){
 	moves=2;
 }
 
-void CUnit::Awake(int _x,int _y,int _type,int _str,int _Rstr){
+void CUnit::Awake(int _x,int _y,int _type){
 	unitX=_x;
 	unitY=_y;
 	type=_type;
-	strength=_str;
-	shotstrength=_Rstr;
 
+	switch(type){
+	case 1:
+
+		strength=5;
+		shotstrength=0;
+
+		break;
+
+	case 2:
+
+		strength=3;
+		shotstrength=4;
+
+		break;
+	}
+	
+	picture.LoadUnitPic();
+	picture.LoadNumPic();
+	picture.LoadFlagPic();
 }
 
 void CUnit::SkipTurn(){
+	if(moves==2){
+		if(hp<=90){
+			Recover(10);
+		}else{
+			hp=100;
+		}
+	}
+
 	SetMoves();
+
 }
 
 void CUnit::CheckMoveable(){
@@ -143,6 +169,10 @@ void CUnit::Damage(int d){
 	hp-=d;
 }
 
+void CUnit::Recover(int r){
+	hp+=r;
+}
+
 void CUnit::Death(){
 	unitX=-100;
 	unitY=-100;
@@ -154,7 +184,19 @@ void CUnit::Survive(){
 	}
 }
 
-void CUnit::Product(int _x,int _y){
-	unitX=_x;
-	unitY=_y;
+void CUnit::Product(int _x,int _y,int _type){
+	hp=100;
+	moves=0;
+	MoveEnd=true;
+	Awake(_x,_y,_type);
+}
+
+void CUnit::DrawUnit(int _country){
+	DrawGraph(unitX*50+100,unitY*50+50,picture.unitPic[type-1],true);
+	DrawGraph(unitX*50+125,unitY*50+75,picture.flagPic[_country],true);
+
+	if(hp < 100){
+		DrawGraph(unitX*50+102,unitY*50+77,picture.numPic[hp/10],true);
+		DrawGraph(unitX*50+112,unitY*50+77,picture.numPic[hp%10],true);
+	}
 }

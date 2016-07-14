@@ -13,7 +13,6 @@ CScene Title,Stage;
 
 CTitle title;
 CBack back;
-CBattle battle;
 CProduct product;
 CCommon common;
 
@@ -37,7 +36,6 @@ void DrawTitle(){
 }
 
 void DrawStage(){
-	product.stage.CreateStage();
 	product.stage.DrawStage();
 	product.battle.unitm.DrawUnit();
 	back.DrawLine();
@@ -45,19 +43,18 @@ void DrawStage(){
 }
 
 void MoveUnit(){
-	//if(unitm.GetselectingC()==-1 && unitm.GetselectingU()==-1){
-	//}
 	product.battle.unitm.MoveUnit();
 }
 
 void FightUnit(){
-	battle.Battle();
+	product.battle.Battle();
 	product.Product();
 }
 
 void StageEnter(){
 	product.battle.unitm.Awake();
 	product.stage.Awake();
+	product.stage.CreateStage();
 	product.Awake();
 	Game.AddChild(&Stage);
 //	stage = new CStage(1);

@@ -2,22 +2,44 @@
 #include"Suken.h"
 #include"General.h"
 
+CTurn::CTurn(){
+	country=1;
+	turn=1;
+}
+
 void CTurn::SkipTurn(){
-	if(skip){
-		DrawFormatString(5,200,GetColor(255,255,255),"%d",turn);
-	}else DrawFormatString(5,220,GetColor(255,255,255),"turn");
+	if(turn<10){
+		DrawFormatString(810,25,GetColor(255,255,255),"  %d",turn);
+	}
+
+	if(turn>=10 && turn<100){
+		DrawFormatString(810,25,GetColor(255,255,255)," %d",turn);
+	}
+
+	if(turn>=100){
+		DrawFormatString(810,25,GetColor(255,255,255),"%d",turn);
+	}
 
 	skip=false;
 
 	if(Event.key.GetDown(Event.key.RETURN)){
-		turn++;
+		if(country==COUNTRY_NUM){
+			turn++;
+			country=1;
+		}else{
+			country++;
+		}
+
 		skip=true;
 	}
-	
 }
 
 bool CTurn::Getskip(){
 	return skip;
+}
+
+int CTurn::GetCountry(){
+	return country;
 }
 
 int CCal::Absolute(int a){

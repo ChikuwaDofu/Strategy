@@ -22,9 +22,6 @@ void suken::Awake(){
 	Stage.input.AddEventListener(Event.EVERY_FRAME,MoveUnit);
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME,FightUnit);
-	
-	Stage.input.AddEventListener(Event.EVERY_FRAME,StageSystem);
-
 }
 
 void suken::GameLoopEnter(){

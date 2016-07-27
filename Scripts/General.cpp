@@ -50,21 +50,6 @@ int CCal::Absolute(int a){
 	}
 }
 
-void CCommon::CheckRClick(){
-	rclick=false;
-	if(GetMouseInput()&MOUSE_INPUT_RIGHT){
-		rclick=true;
-	}
-}
-
-bool CCommon::GetOnRClick(){
-	if(GetMouseInput()&MOUSE_INPUT_RIGHT && !rclick){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 int CCommon::GetNumKey(){
 	if(Event.key.GetDown(Event.key.NUM0)){
 		return 0;

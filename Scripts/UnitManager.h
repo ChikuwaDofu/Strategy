@@ -17,8 +17,8 @@ private:
 	CCommon common;
 	int selectingC;
 	int selectingU;
-	int GetX(int _country,int _unit);
-	int GetY(int _country,int _unit);
+	int Getx(int _country,int _unit);
+	int Gety(int _country,int _unit);
 	int GetRoute(int _country,int _unit,int _x,int _y);
 	bool screen;
 	bool Moveable(int dir /*direction*/);

@@ -29,11 +29,11 @@ void CUnitManager::SetUnit(){
 	}
 }
 
-int CUnitManager::GetX(int _country,int _unit){
+int CUnitManager::Getx(int _country,int _unit){
 	return country[_country].unit[_unit].GetunitX();
 }
 
-int CUnitManager::GetY(int _country,int _unit){
+int CUnitManager::Gety(int _country,int _unit){
 	return country[_country].unit[_unit].GetunitY();
 }
 
@@ -42,7 +42,7 @@ int CUnitManager::GetRoute(int _country,int _unit,int _x,int _y){
 }
 
 bool CUnitManager::CheckLCOn(int _country,int _unit){
-	if(Event.LMouse.GetClick(GetX(_country,_unit)*50+100,GetY(_country,_unit)*50+50,GetX(_country,_unit)*50+150,GetY(_country,_unit)*50+100)){
+	if(Event.LMouse.GetClick(Getx(_country,_unit)*50+100,Gety(_country,_unit)*50+50,Getx(_country,_unit)*50+150,Gety(_country,_unit)*50+100)){
 		return true;
 	}else{
 		return false;
@@ -50,7 +50,7 @@ bool CUnitManager::CheckLCOn(int _country,int _unit){
 }
 
 bool CUnitManager::CheckRCOn(int _country, int _unit){
-	if (Event.RMouse.GetClick(GetX(_country, _unit) * 50 + 100, GetY(_country, _unit) * 50 + 50, GetX(_country, _unit) * 50 + 150, GetY(_country, _unit) * 50 + 100)){
+	if (Event.RMouse.GetClick(Getx(_country, _unit) * 50 + 100, Gety(_country, _unit) * 50 + 50, Getx(_country, _unit) * 50 + 150, Gety(_country, _unit) * 50 + 100)){
 		return true;
 	}
 	else{
@@ -88,7 +88,7 @@ void CUnitManager::Setselecting(){
 bool CUnitManager::Moveable(int dir){
 	switch(dir){
 	case UP:
-		if(GetY(selectingC,selectingU)>0 && GetRoute(selectingC,selectingU,GetX(selectingC,selectingU),GetY(selectingC,selectingU)-1)==1){
+		if(Gety(selectingC,selectingU)>0 && GetRoute(selectingC,selectingU,Getx(selectingC,selectingU),Gety(selectingC,selectingU)-1)==1){
 			return true;
 		}else{
 			return false;
@@ -97,7 +97,7 @@ bool CUnitManager::Moveable(int dir){
 		break;
 
 	case DOWN:
-		if(GetY(selectingC,selectingU)<MAP_H && GetRoute(selectingC,selectingU,GetX(selectingC,selectingU),GetY(selectingC,selectingU)+1)==1){
+		if(Gety(selectingC,selectingU)<MAP_H && GetRoute(selectingC,selectingU,Getx(selectingC,selectingU),Gety(selectingC,selectingU)+1)==1){
 			return true;
 		}else{
 			return false;
@@ -106,7 +106,7 @@ bool CUnitManager::Moveable(int dir){
 		break;
 
 	case LEFT:
-		if(GetX(selectingC,selectingU)>0 && GetRoute(selectingC,selectingU,GetX(selectingC,selectingU)-1,GetY(selectingC,selectingU))==1){
+		if(Getx(selectingC,selectingU)>0 && GetRoute(selectingC,selectingU,Getx(selectingC,selectingU)-1,Gety(selectingC,selectingU))==1){
 			return true;
 		}else{
 			return false;
@@ -115,7 +115,7 @@ bool CUnitManager::Moveable(int dir){
 		break;
 
 	case RIGHT:
-		if(GetX(selectingC,selectingU)<MAP_W && GetRoute(selectingC,selectingU,GetX(selectingC,selectingU)+1,GetY(selectingC,selectingU))==1){
+		if(Getx(selectingC,selectingU)<MAP_W && GetRoute(selectingC,selectingU,Getx(selectingC,selectingU)+1,Gety(selectingC,selectingU))==1){
 			return true;
 		}else{
 			return false;
@@ -191,14 +191,14 @@ void CUnitManager::MoveUnit(){
 	if(Selecting()){
 		for(int i=1;i<=COUNTRY_NUM;i++){
 			for(int n=1;n<=UNIT_NUM;n++){
-				country[selectingC].unit[selectingU].SetObstacle(GetX(i,n),GetY(i,n));
+				country[selectingC].unit[selectingU].SetObstacle(Getx(i,n),Gety(i,n));
 			}
 		}
 		if(country[selectingC].unit[selectingU].GetMoves()>0){
 			for(int j=1;j<=COUNTRY_NUM;j++){
 				for(int n=1;n<=UNIT_NUM;n++){
 					if(selectingU!=n){
-						country[selectingC].unit[selectingU].SetObstacle(GetX(j,n),GetY(j,n));
+						country[selectingC].unit[selectingU].SetObstacle(Getx(j,n),Gety(j,n));
 					}
 					for(int x=0;x<MAP_W;x++){
 						for(int y=0;y<MAP_H;y++){
@@ -237,9 +237,9 @@ void CUnitManager::PaintUnit(){
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		for(int n=1;n<=UNIT_NUM;n++){
 			if(country[i].unit[n].GetMoveEnd()){
-				DrawBox(GetX(i,n)*GRID_L+100,GetY(i,n)*GRID_L+50,(GetX(i,n)+1)*GRID_L+100,(GetY(i,n)+1)*GRID_L+50,YELLOW,true);
+				DrawBox(Getx(i,n)*GRID_L+100,Gety(i,n)*GRID_L+50,(Getx(i,n)+1)*GRID_L+100,(Gety(i,n)+1)*GRID_L+50,YELLOW,true);
 			}else{
-				DrawBox(GetX(i,n)*GRID_L+100,GetY(i,n)*GRID_L+50,(GetX(i,n)+1)*GRID_L+100,(GetY(i,n)+1)*GRID_L+50,BLUE,true);
+				DrawBox(Getx(i,n)*GRID_L+100,Gety(i,n)*GRID_L+50,(Getx(i,n)+1)*GRID_L+100,(Gety(i,n)+1)*GRID_L+50,BLUE,true);
 			}
 		}
 	}
@@ -255,7 +255,7 @@ void CUnitManager::PaintUnit(){
 			}
 		}
 
-		DrawBox(GetX(selectingC,selectingU)*GRID_L+100,GetY(selectingC,selectingU)*GRID_L+50,GRID_L+GetX(selectingC,selectingU)*GRID_L+100,GRID_L+GetY(selectingC,selectingU)*GRID_L+50,GREEN,true);
+		DrawBox(Getx(selectingC,selectingU)*GRID_L+100,Gety(selectingC,selectingU)*GRID_L+50,GRID_L+Getx(selectingC,selectingU)*GRID_L+100,GRID_L+Gety(selectingC,selectingU)*GRID_L+50,GREEN,true);
 	}
 	
 	for(int n=1;n<=UNIT_NUM;n++){

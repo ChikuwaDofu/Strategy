@@ -21,7 +21,8 @@ void CCursor::Setc(){
 }
 
 void CCursor::Setm(){
-	GetMousePoint(&mousex,&mousey);
+	mousex = Event.RMouse.GetX();
+	mousey = Event.RMouse.GetY();
 }
 
 int CCursor::Getcx(){

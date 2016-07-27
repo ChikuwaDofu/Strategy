@@ -43,8 +43,6 @@ private:
 	bool rclick;
 
 public:
-	void CheckRClick();
-	bool GetOnRClick();
 	int GetNumKey();
 	int CheckArrow();
 }; 

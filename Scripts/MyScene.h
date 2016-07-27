@@ -13,4 +13,3 @@ void DrawStage();
 void MoveUnit();
 void FightUnit();
 void StageEnter();
-void StageSystem();

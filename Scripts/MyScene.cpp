@@ -59,7 +59,3 @@ void StageEnter(){
 	Game.AddChild(&Stage);
 //	stage = new CStage(1);
 }
-
-void StageSystem(){
-	common.CheckRClick();
-}

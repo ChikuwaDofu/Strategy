@@ -186,8 +186,14 @@ void CBattle::Shot(){
 				if(CheckRCOn(i,n) && Starget[LocationX(i,n)][LocationY(i,n)] && Enemy(i)){				
 					range_attack=true;
 
+					if (cal.Absolute(LocationX(selectingC, selectingU) - LocationX(i, n))+cal.Absolute(LocationY(selectingC, selectingU) - LocationY(i, n)) == 1){
+						AtkDam = Attack(22, i, n, selectingC, selectingU);
+					}
+
 					DefDam=Attack(12,selectingC,selectingU,i,n);
-					Damage(i,n,DefDam);
+
+					Damage(i, n, DefDam);
+					Damage(selectingC, selectingU, AtkDam);
 
 					if(Dead(i,n)){
 						unitm.country[i].unit[n].Death();

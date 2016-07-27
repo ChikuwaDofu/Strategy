@@ -92,14 +92,14 @@ void CUnit::Awake(int _x,int _y,int _type){
 	case 2:
 
 		strength=5;
-		shotstrength=7;
+		shotstrength=10;
 
 		break;
 
 	case 4:
 
 		strength = 4;
-		shotstrength = 12;
+		shotstrength = 15;
 		siege = true;
 		prepared = false;
 

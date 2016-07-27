@@ -6,7 +6,7 @@
 #include<math.h>
 
 CBattle::CBattle(){
-	index=3;
+	index=2;
 	checkx[0]=0;
 	checkx[1]=1;
 	checkx[2]=0;
@@ -135,10 +135,12 @@ void CBattle::Battle(){
 	if(Selecting()){
 		SetTarget();
 
-		Shot();
+		if (unitm.country[selectingC].unit[selectingU].GetPrepared()){
+			Shot();
 
-		if(!range_attack){
-			Combat();
+			if (!range_attack){
+				Combat();
+			}
 		}
 	}
 }

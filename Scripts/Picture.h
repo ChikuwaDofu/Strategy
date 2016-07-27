@@ -12,12 +12,14 @@ public:
 	int unitPic[5];
 	int flagPic[5];
 	int productScr;//¶Y‰æ–Ê‚Ì”wŒi
-	int cannot[2];
+	int cannot[5];
 	int close;
 	int ok;
 	int mapHandle;
 	int TmapHandle;//“ss‚Ìƒ}ƒbƒvƒ`ƒbƒv
 	int RangeBox;
+	int move[10];
+	int siegepic[5];
 	void LoadUnitPic();
 	void LoadFlagPic();
 	void LoadProductPic();

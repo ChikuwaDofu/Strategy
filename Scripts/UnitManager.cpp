@@ -10,6 +10,7 @@ void CUnitManager::Awake(){
 	SetUnit();
 	country[1].unit[1].Awake(6,4,1);
 	country[1].unit[2].Awake(5,3,2);
+	country[1].unit[4].Awake(4,4,4);
 	country[2].unit[1].Awake(7,5,1);
 	country[2].unit[2].Awake(8,6,2);
 
@@ -44,6 +45,15 @@ bool CUnitManager::CheckLCOn(int _country,int _unit){
 	if(Event.LMouse.GetClick(GetX(_country,_unit)*50+100,GetY(_country,_unit)*50+50,GetX(_country,_unit)*50+150,GetY(_country,_unit)*50+100)){
 		return true;
 	}else{
+		return false;
+	}
+}
+
+bool CUnitManager::CheckRCOn(int _country, int _unit){
+	if (Event.RMouse.GetClick(GetX(_country, _unit) * 50 + 100, GetY(_country, _unit) * 50 + 50, GetX(_country, _unit) * 50 + 150, GetY(_country, _unit) * 50 + 100)){
+		return true;
+	}
+	else{
 		return false;
 	}
 }
@@ -141,6 +151,8 @@ void CUnitManager::Move(){
 	break;
 	}
 
+	country[selectingC].unit[selectingU].SetPrepared(false);
+
 	if(common.CheckArrow()!=0){
 		onemove=true;
 	}
@@ -163,11 +175,11 @@ void CUnitManager::MoveUnit(){
 	if(Event.key.GetDown(Event.key.RETURN)){
 		DrawString(5,300,"pass",RED);
 
-			for(int n=1;n<=UNIT_NUM;n++){
-				country[selectingC].unit[n].SkipTurn();
+		for(int n=1;n<=UNIT_NUM;n++){
+			country[selectingC].unit[n].SkipTurn();
 
-				Select(0);
-			}
+			Select(0);
+		}
 	}
 	
 	turn.SkipTurn();
@@ -209,8 +221,14 @@ void CUnitManager::MoveUnit(){
 
 		onemove=false;
 	}
+
 	if(country[selectingC].unit[selectingU].GetMoveEnd()){
 		Select(0);
+	}
+
+	if (CheckRCOn(selectingC, selectingU)){
+		country[selectingC].unit[selectingU].SetPrepared(true);
+		country[selectingC].unit[selectingU].Move(0);
 	}
 }
 
@@ -239,13 +257,15 @@ void CUnitManager::PaintUnit(){
 
 		DrawBox(GetX(selectingC,selectingU)*GRID_L+100,GetY(selectingC,selectingU)*GRID_L+50,GRID_L+GetX(selectingC,selectingU)*GRID_L+100,GRID_L+GetY(selectingC,selectingU)*GRID_L+50,GREEN,true);
 	}
-
-	for(int i=1;i<=COUNTRY_NUM;i++){
-		for(int n=1;n<=UNIT_NUM;n++){
+	
+	for(int n=1;n<=UNIT_NUM;n++){
+		for(int i=1;i<=COUNTRY_NUM;i++){
 			//DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2-5+50,WHITE,"%d",country[i].unit[n].Gettype());
 			//DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2+15+50,BLACK,"%d",country[i].unit[n].Gethp());
 			country[i].unit[n].DrawUnit(i);
 		}
+
+		country[turn.GetCountry()].unit[n].DrawMoves();
 	}
 }
 

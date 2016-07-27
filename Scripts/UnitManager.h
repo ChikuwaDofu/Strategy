@@ -29,7 +29,8 @@ private:
 	void Move();
 	void SetUnit();
 	void PaintUnit();
-	bool CheckLCOn(int _country,int _unit);
+	bool CheckLCOn(int _country, int _unit);
+	bool CheckRCOn(int _country, int _unit);
 
 public:
 	CCountry country[COUNTRY_NUM+1];

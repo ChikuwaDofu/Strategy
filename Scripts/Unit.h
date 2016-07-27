@@ -31,10 +31,13 @@ private:
 	CTurn turn;
 	CPicture picture;
 	int type;
+	bool siege; //攻城兵器か否か
+	bool prepared;
 	int unitX;
 	int unitY;
 	int moves;
 	int route[20][20]; //マスの状態（通行可能か＞route）
+	bool moved;//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで
 	bool MoveEnd;
 	int hp;
 	int strength;
@@ -47,6 +50,8 @@ public:
 	void SetMoves();
 	void SetMoveEnd();
 	void MakeMoveEnd(); //移動を強制的に停止（戦闘後に呼び出し）
+	void SetPrepared(bool prepare);
+	bool GetPrepared();
 	int Getx();
 	int Gety();
 	int Gettype();
@@ -70,4 +75,5 @@ public:
 	void Recover(int r);
 	void Product(int _x,int _y,int _type); //生産されたときに使う
 	void DrawUnit(int _country);
+	void DrawMoves();
 };

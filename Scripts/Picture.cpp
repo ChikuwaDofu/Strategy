@@ -6,6 +6,16 @@
 void CPicture::LoadUnitPic(){
 	unitPic[0] = LoadGraph("Kawachi2/Spear.png");
 	unitPic[1] = LoadGraph("Kawachi2/Bow.png");
+
+	unitPic[3] = LoadGraph("Kawachi2/Artillery.png");
+
+	move[1] = LoadGraph("Kawachi2/move1.png");
+	move[2] = LoadGraph("Kawachi2/move2.png");
+	move[3] = LoadGraph("Kawachi2/move3.png");
+	move[4] = LoadGraph("Kawachi2/move4.png");
+
+	siegepic[0] = LoadGraph("Kawachi2/SiegeNG.png");
+	siegepic[1] = LoadGraph("Kawachi2/SiegeOK.png");
 }
 
 void CPicture::LoadFlagPic(){

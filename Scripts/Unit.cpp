@@ -16,6 +16,8 @@ CUnit::CUnit(){
 	type=1;
 	hp=100;
 	strength=5;
+	siege = false;
+	prepared = true;
 
 	unitX=-100;
 	unitY=-100;
@@ -53,14 +55,25 @@ bool CUnit::GetMoveEnd(){
 	return MoveEnd;
 }
 
+bool CUnit::GetPrepared(){
+	return prepared;
+}
+
 void CUnit::Setunit(){
 	unitX=-100;
 	unitY=-100;
 }
 
 void CUnit::SetMoves(){
+	moved=false;
 	MoveEnd=false;
 	moves=2;
+}
+
+void CUnit::SetPrepared(bool prepare){
+	if (type == 4){
+		prepared = prepare;
+	}
 }
 
 void CUnit::Awake(int _x,int _y,int _type){
@@ -71,15 +84,24 @@ void CUnit::Awake(int _x,int _y,int _type){
 	switch(type){
 	case 1:
 
-		strength=5;
+		strength=9;
 		shotstrength=0;
 
 		break;
 
 	case 2:
 
-		strength=3;
-		shotstrength=4;
+		strength=5;
+		shotstrength=7;
+
+		break;
+
+	case 4:
+
+		strength = 4;
+		shotstrength = 12;
+		siege = true;
+		prepared = false;
 
 		break;
 	}
@@ -90,7 +112,7 @@ void CUnit::Awake(int _x,int _y,int _type){
 }
 
 void CUnit::SkipTurn(){
-	if(moves==2){
+	if(!moved && !MoveEnd){
 		if(hp<=90){
 			Recover(10);
 		}else{
@@ -141,7 +163,10 @@ int CUnit::GetRoute(int _x,int _y){
 }
 
 void CUnit::Move(int dir){
+	moved=true;
+
 	moves--;
+
 	if(dir==RIGHT){
 		unitX++;
 	}
@@ -192,11 +217,28 @@ void CUnit::Product(int _x,int _y,int _type){
 }
 
 void CUnit::DrawUnit(int _country){
-	DrawGraph(unitX*50+100,unitY*50+50,picture.unitPic[type-1],true);
-	DrawGraph(unitX*50+125,unitY*50+75,picture.flagPic[_country],true);
+	DrawGraph(unitX * 50 + 100, unitY * 50 + 50, picture.unitPic[type - 1], true);
+	DrawGraph(unitX * 50 + 125, unitY * 50 + 75, picture.flagPic[_country], true);
 
-	if(hp < 100){
-		DrawGraph(unitX*50+102,unitY*50+77,picture.numPic[hp/10],true);
-		DrawGraph(unitX*50+112,unitY*50+77,picture.numPic[hp%10],true);
+	if (hp < 100){
+		DrawGraph(unitX * 50 + 102, unitY * 50 + 77, picture.numPic[hp / 10], true);
+		DrawGraph(unitX * 50 + 112, unitY * 50 + 77, picture.numPic[hp % 10], true);
+	}
+
+	if (type == 4){
+		if (prepared){
+			DrawGraph(unitX * 50 + 125, unitY * 50 + 50, picture.siegepic[1],true);
+		}
+		else{
+			DrawGraph(unitX * 50 + 125, unitY * 50 + 50, picture.siegepic[0], true);
+		}
+	}
+}
+
+void CUnit::DrawMoves(){
+	for (int i = 1; i <= 4; i++){
+		if (moves >= i){
+			DrawGraph(unitX * 50 + 140, unitY * 50 + 51 + (i - 1) * 4, picture.move[i], true);
+		}
 	}
 }

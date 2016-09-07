@@ -29,6 +29,18 @@ void CProduct::Awake(){
 		battle.unitm.country[i].Awake();
 	}
 
+	for (int x = 0; x < MAP_W; x++){
+		for (int y = 0; y < MAP_H; y++){
+			for (int i = 1; i <= COUNTRY_NUM; i++){
+				if (stage.GetTownOwner(x, y) != i && stage.GetTownOwner(x, y) != 0){
+					for (int n = 1; n <= UNIT_NUM; n++){
+						battle.unitm.country[i].unit[n].SetObstacle(x, y, 2);
+					}
+				}
+			}
+		}
+	}
+
 	battle.unitm.country[1].Income(stage.GetTNum(1)*10);
 }
 
@@ -44,11 +56,17 @@ bool CProduct::UnitOnTown(){
 	return false;
 }
 
+void CProduct::SetTownOwner(){
+	for (int x = 0; x < MAP_W; x++){
+		for (int y = 0; y < MAP_H; y++){
+			battle.SetTownOwner(x, y, stage.GetTownOwner(x, y));
+		}
+	}
+}
+
 void CProduct::Product(){
 	//debug.Print("%",);
 	//DEBUG_PRINT_VALUE();
-
-	turn.SkipTurn();
 
 	cursor.Setm();
 	cursor.Setc();
@@ -112,11 +130,9 @@ void CProduct::Product(){
 
 		DrawString(150, 150, "Type2", BLACK);
 
-		DrawGraph(250, 95, picture.unitPic[0], true);
-		
-		DrawGraph(250, 145, picture.unitPic[1], true);
-
 		for(int i=0;i<2;i++){
+			DrawGraph(250, 95+50*i, picture.unitPic[i], true);
+
 			if(cursor.Getmx()>145 && cursor.Getmx()<305 && cursor.Getmy()>95+i*50 && cursor.Getmy()<125+i*50){
 				DrawBox(140,90+i*50,305,125+i*50,RED,false);
 			}
@@ -124,7 +140,7 @@ void CProduct::Product(){
 			if(Event.LMouse.GetClick(145,95+i*50,305,125+i*50) && !openednow){
 				for(int n=1;n<=UNIT_NUM;n++){
 					if(battle.unitm.country[turn.GetCountry()].unit[n].GetunitX()==-100 && !produced){
-						if(battle.unitm.country[turn.GetCountry()].CanPay(50)){
+						if(battle.unitm.country[turn.GetCountry()].CanPay(5)){
 							battle.unitm.country[turn.GetCountry()].unit[n].Product(locationX,locationY,i+1);
 							battle.unitm.country[turn.GetCountry()].Pay(50);
 						}else{
@@ -164,10 +180,40 @@ void CProduct::Product(){
 	}
 
 	Income();
+
+	if(Event.RMouse.GetClick(100,50,100+GRID_L*(MAP_W-1),50+GRID_L*(MAP_H-1))){
+		DamageTown(cursor.Getcx(),cursor.Getcy(),battle.GetTDamage(),turn.GetCountry());
+	}
+
+	if(Event.key.GetDown(Event.key.RETURN)){
+		for(int x=0;x<MAP_W;x++){
+			for(int y=0;y<MAP_H;y++){
+				if(stage.GetTownOwner(x,y)==turn.GetCountry()){
+					if(stage.GetTownHp(x,y)<=90){
+						stage.DamageTown(x,y,-10,0);
+					}
+					else if(stage.GetTownHp(x,y)<100){
+						stage.DamageTown(x,y,stage.GetTownHp(x,y)-100,0);
+					}
+				}
+			}
+		}
+	}
+
+	SetTownOwner();
+
+	turn.SkipTurn();
+
 }
 
 void CProduct::Income(){
 	if(turn.Getskip()){
 		battle.unitm.country[turn.GetCountry()].Income(stage.GetTNum(turn.GetCountry())*10);
+	}
+}
+
+void CProduct::DamageTown(int x,int y,int damage,int attacker){
+	if(battle.GetBesiege()){
+		stage.DamageTown(x, y, damage, attacker);
 	}
 }

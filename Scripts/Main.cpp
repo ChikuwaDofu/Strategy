@@ -15,10 +15,10 @@ void suken::Awake(){
 	Title.SetButton(400,500,500,550,YELLOW,"êÏì‡",BLACK,null);
 	Title.SetButton(&a[0],&a[1],&a[2],&a[3],YELLOW,"êÏì‡",BLACK,null);*/
 
+	Stage.input.AddEventListener(Event.EVERY_FRAME,DrawStage);
+
 	StageEnter();
 
-	Stage.input.AddEventListener(Event.EVERY_FRAME,DrawStage);
-	
 	Stage.input.AddEventListener(Event.EVERY_FRAME,MoveUnit);
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME,FightUnit);

@@ -13,7 +13,9 @@ int Array2D(int x,int y){
 }
 
 CUnit::CUnit(){
-	type=1;
+	file.LoadUnitFile();
+
+	unitType = 1;
 	hp=100;
 	strength=5;
 	siege = false;
@@ -21,10 +23,17 @@ CUnit::CUnit(){
 
 	unitX=-100;
 	unitY=-100;
+
+	for (int x = 0; x < MAP_W; x++){
+		for (int y = 0; y < MAP_H; y++){
+			route[x][y] = true;
+			obstacle[x][y] = 0;
+		}
+	}
 }
 
 int CUnit::Gettype(){
-	return type;
+	return unitType;
 }
 
 int CUnit::GetunitX(){
@@ -39,12 +48,20 @@ int CUnit::GetMoves(){
 	return moves;
 }
 
+int CUnit::GetRange(){
+	return range;
+}
+
 int CUnit::Getstrength(){
 	return strength;
 }
 
+int CUnit::GetRstrength(){
+	return r_strength;
+}
+
 int CUnit::GetSstrength(){
-	return shotstrength;
+	return s_strength;
 }
 
 int CUnit::Gethp(){
@@ -53,6 +70,10 @@ int CUnit::Gethp(){
 
 bool CUnit::GetMoveEnd(){
 	return MoveEnd;
+}
+
+bool CUnit::IsSiege(){
+	return siege;
 }
 
 bool CUnit::GetPrepared(){
@@ -67,44 +88,51 @@ void CUnit::Setunit(){
 void CUnit::SetMoves(){
 	moved=false;
 	MoveEnd=false;
-	moves=2;
+	moves = file.move[unitType];
 }
 
 void CUnit::SetPrepared(bool prepare){
-	if (type == 4){
+	if (unitType == 3){
 		prepared = prepare;
 	}
 }
 
-void CUnit::Awake(int _x,int _y,int _type){
-	unitX=_x;
-	unitY=_y;
-	type=_type;
+void CUnit::Awake(int x,int y,int type){
+	unitX=x;
+	unitY=y;
+	unitType=type;
 
-	switch(type){
+	strength = file.strength[type];
+	r_strength = file.rangedStrength[type];
+	s_strength = file.siegeStrength[type];
+	siege = file.siege[type];
+	moves = file.move[type];
+	range = file.range[type];
+
+	/*switch(type){
 	case 1:
 
 		strength=9;
-		shotstrength=0;
+		r_strength=0;
 
 		break;
 
 	case 2:
 
 		strength=5;
-		shotstrength=10;
+		r_strength=10;
 
 		break;
 
-	case 4:
+	case 3:
 
 		strength = 4;
-		shotstrength = 15;
+		r_strength = 15;
 		siege = true;
 		prepared = false;
 
 		break;
-	}
+	}*/
 	
 	picture.LoadUnitPic();
 	picture.LoadNumPic();
@@ -127,9 +155,10 @@ void CUnit::SkipTurn(){
 void CUnit::CheckMoveable(){
 	for(int x=0;x<MAP_W;x++){
 		for(int y=0;y<MAP_H;y++){
-			route[x][y]=0;
+			route[x][y]=false;
+
 			if(moves >= table[Array2D(unitX-x+9,unitY-y+9)] && Array2D(unitX-x+9,unitY-y+9) > 0 && Array2D(unitX-x+9,unitY-y+9)<361 ){
-				route[x][y]=1;
+				route[x][y]=true;
 			}
 		}
 	}
@@ -154,12 +183,16 @@ void CUnit::CheckMoveable(){
 	}*/
 }
 
-void CUnit::SetObstacle(int _x,int _y){
-	route[_x][_y]=2;
+void CUnit::SetObstacle(int x,int y,int type){
+	obstacle[x][y] = type;
 }
 
-int CUnit::GetRoute(int _x,int _y){
-	return route[_x][_y];
+bool CUnit::GetRoute(int x,int y){
+	return route[x][y];
+}
+
+int CUnit::GetObstacle(int x, int y){
+	return obstacle[x][y];
 }
 
 void CUnit::Move(int dir){
@@ -209,28 +242,28 @@ void CUnit::Survive(){
 	}
 }
 
-void CUnit::Product(int _x,int _y,int _type){
+void CUnit::Product(int x,int y,int type){
 	hp=100;
 	moves=0;
 	MoveEnd=true;
-	Awake(_x,_y,_type);
+	Awake(x,y,type);
 }
 
-void CUnit::DrawUnit(int _country){
-	DrawGraph(unitX * 50 + 100, unitY * 50 + 50, picture.unitPic[type - 1], true);
-	DrawGraph(unitX * 50 + 125, unitY * 50 + 75, picture.flagPic[_country], true);
+void CUnit::DrawUnit(int country){
+	DrawGraph(unitX * 50 + 100, unitY * 50 + 50, picture.unitPic[unitType - 1], true);
+	DrawGraph(unitX * 50 + 125, unitY * 50 + 75, picture.flagPic[country], true);
 
 	if (hp < 100){
 		DrawGraph(unitX * 50 + 102, unitY * 50 + 77, picture.numPic[hp / 10], true);
 		DrawGraph(unitX * 50 + 112, unitY * 50 + 77, picture.numPic[hp % 10], true);
 	}
 
-	if (type == 4){
+	if (unitType == 3){
 		if (prepared){
-			DrawGraph(unitX * 50 + 125, unitY * 50 + 50, picture.siegepic[1],true);
+			DrawGraph(unitX * 50 + 125, unitY * 50 + 60, picture.siegepic[1],true);
 		}
 		else{
-			DrawGraph(unitX * 50 + 125, unitY * 50 + 50, picture.siegepic[0], true);
+			DrawGraph(unitX * 50 + 125, unitY * 50 + 60, picture.siegepic[0], true);
 		}
 	}
 }
@@ -240,5 +273,11 @@ void CUnit::DrawMoves(){
 		if (moves >= i){
 			DrawGraph(unitX * 50 + 140, unitY * 50 + 51 + (i - 1) * 4, picture.move[i], true);
 		}
+	}
+}
+
+void CUnit::DrawHeal(){
+	if (!moved && !MoveEnd){
+		DrawGraph(unitX * 50 + 125, unitY * 50 + 50, picture.heal, true);
 	}
 }

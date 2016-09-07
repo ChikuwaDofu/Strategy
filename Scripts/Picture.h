@@ -20,6 +20,7 @@ public:
 	int RangeBox;
 	int move[10];
 	int siegepic[5];
+	int heal;
 	void LoadUnitPic();
 	void LoadFlagPic();
 	void LoadProductPic();

@@ -24,5 +24,5 @@ bool CCountry::CanPay(int require){
 }
 
 void CCountry::ShowMoney(int num){
-	DrawFormatString(850,25+num*25,YELLOW,"%d",money);
+	DrawFormatString(870,25+num*25,YELLOW,"%d",money);
 }

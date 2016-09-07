@@ -17,20 +17,24 @@ private:
 	CCommon common;
 	int selectingC;
 	int selectingU;
-	int Getx(int _country,int _unit);
-	int Gety(int _country,int _unit);
-	int GetRoute(int _country,int _unit,int _x,int _y);
+	bool NotPrepared();
+	int Getx(int nation,int unit);
+	int Gety(int nation,int unit);
+	bool GetRoute(int nation,int unit,int x,int y);
+	int GetObstacle(int nation, int unit, int x, int y);
+	void ChangeObstacle(int x, int y,int type);
 	bool screen;
 	bool Moveable(int dir /*direction*/);
+	bool IsFair(int x,int y);
 	bool onemove; //一マス動いた
-	void Select(int _unit);
+	void Select(int unit);
 	void Setselecting();
 	bool Selecting(); //ユニットのいずれかを選んでいるか
 	void Move();
 	void SetUnit();
 	void PaintUnit();
-	bool CheckLCOn(int _country, int _unit);
-	bool CheckRCOn(int _country, int _unit);
+	bool CheckLCOn(int nation, int unit);
+	bool CheckRCOn(int nation, int unit);
 
 public:
 	CCountry country[COUNTRY_NUM+1];
@@ -39,7 +43,7 @@ public:
 	void ProductScr(bool open1,bool open2);//生産画面が開いているか
 	void DrawUnit();
 	void MoveUnit();
-	void Moveend();
+	void CheckMoveend();
 	void Awake();
 
 };

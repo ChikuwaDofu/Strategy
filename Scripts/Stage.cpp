@@ -18,33 +18,36 @@ CStage::~CStage(){
 void CStage::Awake(){
 	picture.LoadMapPic();
 	picture.LoadFlagPic();
+	picture.LoadNumPic();
 }
 
-void CStage::CreateMap(int _x,int _y){
+void CStage::CreateMap(int x,int y){
 	int r=0,g=0,b=0,a=0;
-	tile[_x][_y]=NULL;
-	GetPixelSoftImage(picture.mapHandle,_x,_y,&r,&g,&b,&a);
+	tile[x][y]=NULL;
+	GetPixelSoftImage(picture.mapHandle,x,y,&r,&g,&b,&a);
 	if(r==128 && g==255 && b==0){
-		tile[_x][_y]=PLAIN;
+		tile[x][y]=PLAIN;
 	}
 	if(r==0 && g==255 && b==255){
-		tile[_x][_y]=RIVER;
+		tile[x][y]=RIVER;
 	}
 
 
 }
 
-void CStage::CreateTown(int _x,int _y){
+void CStage::CreateTown(int x,int y){
 	int r,g,b,a;
-	town[_x][_y]=0;
-	GetPixelSoftImage(picture.TmapHandle,_x,_y,&r,&g,&b,&a);
+	town[x][y]=0;
+	GetPixelSoftImage(picture.TmapHandle,x,y,&r,&g,&b,&a);
 	if(r==255 && g==0 && b==0){
-		town[_x][_y]=1;
+		town[x][y]=1;
 		townNum[1]++;
+		townHp[x][y] = 100;
 	}
 	if(r==0 && g==0 && b==255){
-		town[_x][_y]=2;
+		town[x][y]=2;
 		townNum[2]++;
+		townHp[x][y] = 100;
 	}
 }
 
@@ -56,6 +59,14 @@ void CStage::CreateStage(){
 			CreateMap(x,y);
 			CreateTown(x,y);
 		}
+	}
+}
+
+void CStage::DamageTown(int x, int y, int damage, int attacker){
+	townHp[x][y] -= damage;
+
+	if (townHp[x][y] <= 0){
+		town[x][y] = attacker;
 	}
 }
 
@@ -89,6 +100,11 @@ void CStage::DrawStage(){
 			if(town[x][y]!=0){
 				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),picture.townPic,true);
 				DrawGraph(GRID_L*(x+2)+25,GRID_L*(y+1)+25,picture.flagPic[town[x][y]],true);
+
+				if(townHp[x][y]<100){
+					DrawGraph(x * 50 + 102, y * 50 + 77, picture.numPic[townHp[x][y] / 10], true);
+					DrawGraph(x * 50 + 112, y * 50 + 77, picture.numPic[townHp[x][y] % 10], true);
+				}
 			}
 
 			if(town[x][y]==turn.GetCountry()){
@@ -96,20 +112,29 @@ void CStage::DrawStage(){
 					DrawBox(GRID_L*(x+2)+2+i,GRID_L*(y+1)+2+i,GRID_L*(x+3)-1-i,GRID_L*(y+2)-1-i,M_PINK,false);
 				}
 			}
+
+			if (townHp[x][y] <= 0 && town[x][y] != 0){
+				town[x][y] = turn.GetCountry();
+				townHp[x][y] = 50;
+			}
 		}
 	}
 }
 
-int CStage::GetTownOwner(int _x,int _y){
-	if (0<=_x && _x<MAP_W && 0<=_y && _y<MAP_H){
-		return town[_x][_y];
+int CStage::GetTownOwner(int x,int y){
+	if (0<=x && x<MAP_W && 0<=y && y<MAP_H){
+		return town[x][y];
 	}else{
 		return -1;
 	}
 }
 
-int CStage::GetTNum(int _country){
-	return townNum[_country];
+int CStage::GetTNum(int country){
+	return townNum[country];
+}
+
+int CStage::GetTownHp(int x,int y){
+	return townHp[x][y];
 }
 
 //void AwakeStage(int type){

@@ -27,6 +27,8 @@ private:
 	bool produced;
 	bool UnitOnTown();
 	void Income();
+	void SetTownOwner();
+	void DamageTown(int x, int y, int damage, int attacker);
 
 public:
 	CProduct(); 

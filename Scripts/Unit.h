@@ -25,23 +25,27 @@ int Array2D(int x,int y);
 #include"Suken.h"
 #include"General.h"
 #include"Picture.h"
+#include"Files.h"
 
 class CUnit{
 private:
 	CTurn turn;
 	CPicture picture;
-	int type;
+	CFiles file;
+	int unitType;
 	bool siege; //攻城兵器か否か
 	bool prepared;
 	int unitX;
 	int unitY;
 	int moves;
-	int route[20][20]; //マスの状態（通行可能か＞route）
+	bool route[20][20]; //マスの状態（通行可能か＞route）
+	int obstacle[20][20];
 	bool moved;//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで
 	bool MoveEnd;
 	int hp;
 	int strength;
-	int shotstrength;
+	int r_strength;
+	int s_strength;
 	int range;
 
 public:
@@ -49,31 +53,35 @@ public:
 	void Setunit();
 	void SetMoves();
 	void SetMoveEnd();
-	void MakeMoveEnd(); //移動を強制的に停止（戦闘後に呼び出し）
+	void MakeMoveEnd(); //移動停止判定
 	void SetPrepared(bool prepare);
 	bool GetPrepared();
 	int Getx();
 	int Gety();
 	int Gettype();
+	bool IsSiege();
 	int GetunitX();
 	int GetunitY();
 	int GetMoves();
-	int GetRoute(int _x,int _y);
+	bool GetRoute(int x,int y);
+	int GetObstacle(int x, int y);
 	bool GetMoveEnd();
 	void Move(int dir /*direction*/);
-	void SetObstacle(int _x,int _y);
-	void Awake(int _x,int _y,int type);
+	void SetObstacle(int x,int y,int type);
+	void Awake(int x,int y,int type);
 	void CheckMoveable();
 	void SkipTurn();
 	int Gethp();
 	int Getstrength();
+	int GetRstrength();
 	int GetSstrength();
 	int GetRange();
 	void Damage(int d);
 	void Death();
 	void Survive(); //強制生存処理
 	void Recover(int r);
-	void Product(int _x,int _y,int _type); //生産されたときに使う
-	void DrawUnit(int _country);
+	void Product(int x,int y,int type); //生産されたときに使う
+	void DrawUnit(int country);
 	void DrawMoves();
+	void DrawHeal();
 };

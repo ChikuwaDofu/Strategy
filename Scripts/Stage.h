@@ -14,17 +14,20 @@ private:
 	int TownGraph;
 	int TileGraph[3];
 	int town[MAP_W][MAP_H];
+	int townHp[MAP_W][MAP_H];
 	int tile[MAP_W][MAP_H];
 	int townNum[COUNTRY_NUM+1];
 
 public:
 	CStage(/*int _type*/);
 	~CStage();
-	int GetTNum(int _country);
-	int GetTownOwner(int _x,int _y); 
-	void CreateMap(int _x,int _y);
-	void CreateTown(int _x,int _y);
+	int GetTNum(int country);
+	int GetTownOwner(int x,int y);
+	int GetTownHp(int x,int y);
+	void CreateMap(int x,int y);
+	void CreateTown(int x,int y);
 	void CreateStage();
+	void DamageTown(int x, int y, int damage, int attacker);
 	void DrawStage();
 	void Awake();
 };

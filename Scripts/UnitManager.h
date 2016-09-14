@@ -4,6 +4,7 @@
 #include"Unit.h"
 #include"Country.h"
 #include"Picture.h"
+#include"Files.h"
 #include"Cursor.h"
 #include"General.h"
 
@@ -15,12 +16,14 @@ private:
 	CPicture picture;
 	CTurn turn;
 	CCommon common;
+	int moveCost[20][20];
 	int selectingC;
 	int selectingU;
 	bool NotPrepared();
 	int Getx(int nation,int unit);
 	int Gety(int nation,int unit);
-	bool GetRoute(int nation,int unit,int x,int y);
+	int GetMoves(int nation, int unit);
+	int route[20][20];
 	int GetObstacle(int nation, int unit, int x, int y);
 	void ChangeObstacle(int x, int y,int type);
 	bool screen;
@@ -30,6 +33,7 @@ private:
 	void Select(int unit);
 	void Setselecting();
 	bool Selecting(); //ユニットのいずれかを選んでいるか
+	void CheckRoute();
 	void Move();
 	void SetUnit();
 	void PaintUnit();
@@ -40,6 +44,7 @@ public:
 	CCountry country[COUNTRY_NUM+1];
 	CUnitManager();
 	int GetselectingU();
+	void SetMoveCost(int x, int y, int cost);
 	void ProductScr(bool open1,bool open2);//生産画面が開いているか
 	void DrawUnit();
 	void MoveUnit();

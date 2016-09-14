@@ -38,7 +38,6 @@ private:
 	int unitX;
 	int unitY;
 	int moves;
-	bool route[20][20]; //マスの状態（通行可能か＞route）
 	int obstacle[20][20];
 	bool moved;//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで
 	bool MoveEnd;
@@ -63,13 +62,11 @@ public:
 	int GetunitX();
 	int GetunitY();
 	int GetMoves();
-	bool GetRoute(int x,int y);
 	int GetObstacle(int x, int y);
 	bool GetMoveEnd();
-	void Move(int dir /*direction*/);
+	void Move(int dir /*direction*/, int cost);
 	void SetObstacle(int x,int y,int type);
 	void Awake(int x,int y,int type);
-	void CheckMoveable();
 	void SkipTurn();
 	int Gethp();
 	int Getstrength();

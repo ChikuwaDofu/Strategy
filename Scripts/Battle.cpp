@@ -142,6 +142,7 @@ void CBattle::SetTarget(){
 			target[x][y]=false;
 			Ctarget[x][y]=false;
 			Rtarget[x][y]=false;
+			town[x][y]=false;
 			SCtarget[x][y] = false;
 			SRtarget[x][y] = false;
 		}
@@ -183,7 +184,7 @@ void CBattle::SetTarget(){
 
 	for (int x = 0; x < MAP_W; x++){
 		for (int y = 0; y < MAP_H; y++){
-			if (townOwner[x][y] != selectingC){
+			if (townOwner[x][y] != selectingC && !target[x][y] && townOwner[x][y] != 0){
 				for (int a = 0; a < 4; a++){
 					if (town[LocationX(selectingC, selectingU) + checkx[a]][LocationY(selectingC, selectingU) + checky[a]]){
 						SCtarget[x][y] = true;
@@ -245,7 +246,7 @@ void CBattle::Combat(){
 					}
 				}
 
-				unitm.country[selectingC].unit[selectingU].Move(0);
+				unitm.country[selectingC].unit[selectingU].Move(0, 1);
 			}
 		}
 	}
@@ -280,7 +281,7 @@ void CBattle::Ranged(){
 						unitm.country[i].unit[n].Death();
 					}
 
-					unitm.country[selectingC].unit[selectingU].Move(0);
+					unitm.country[selectingC].unit[selectingU].Move(0, 1);
 				}
 			}
 		}
@@ -293,7 +294,7 @@ void CBattle::Siege(){
 
 		tDamage=FightTown(ATTACK,10,unitm.country[selectingC].unit[selectingU].GetSstrength(),selectingC,selectingU);
 
-		unitm.country[selectingC].unit[selectingU].Move(0);
+		unitm.country[selectingC].unit[selectingU].Move(0, 1);
 	}
 	else if(CheckRCOnTown(1)){
 		besiege=true;
@@ -307,7 +308,7 @@ void CBattle::Siege(){
 			unitm.country[selectingC].unit[selectingU].Death();
 		}
 		
-		unitm.country[selectingC].unit[selectingU].Move(0);
+		unitm.country[selectingC].unit[selectingU].Move(0, 1);
 	}
 
 }

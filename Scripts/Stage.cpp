@@ -31,8 +31,12 @@ void CStage::CreateMap(int x,int y){
 	if(r==0 && g==255 && b==255){
 		tile[x][y]=RIVER;
 	}
-
-
+	if(r==0 && g==0 && b==255){
+		tile[x][y]=BRIDGE_T;
+	}
+	if(r==0 && g==0 && b==128){
+		tile[x][y]=BRIDGE_Y;
+	}
 }
 
 void CStage::CreateTown(int x,int y){
@@ -83,19 +87,8 @@ void CStage::DrawStage(){
 
 	for(int x=0;x<MAP_W;x++){
 		for(int y=0;y<MAP_H;y++){
-			switch(tile[x][y]){
-			case NULL:
-				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),picture.tilePic[BBOX],true);
-				break;
 
-			case PLAIN:
-				DrawGraph(GRID_L*(x + 2), GRID_L*(y + 1), picture.tilePic[PLAIN], true);
-				break;
-
-			case RIVER:
-				DrawGraph(GRID_L*(x + 2), GRID_L*(y + 1), picture.tilePic[RIVER], true);
-				break;
-			}
+			DrawGraph(GRID_L*(x+2),GRID_L*(y+1),picture.tilePic[tile[x][y]],true);
 
 			if(town[x][y]!=0){
 				DrawGraph(GRID_L*(x+2),GRID_L*(y+1),picture.townPic,true);
@@ -119,6 +112,10 @@ void CStage::DrawStage(){
 			}
 		}
 	}
+}
+
+int CStage::GetTerrain(int x, int y){
+	return tile[x][y];
 }
 
 int CStage::GetTownOwner(int x,int y){

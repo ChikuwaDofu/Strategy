@@ -4,6 +4,7 @@
 #include"General.h"
 #include"Picture.h"
 #include"Stage.h"
+#include"Files.h"
 #include"Cursor.h"
 #include"Battle.h"
 
@@ -11,6 +12,7 @@ class CProduct{
 private:
 	CCursor cursor;
 	CPicture picture;
+	CFiles file;
 	CTurn turn;
 	int forcheck;//ユニット枠確認用
 	int Getcx();
@@ -18,7 +20,6 @@ private:
 	int window;
 	int cannot[2];
 	int close;
-	int unitpic[2];
 	int locationX;
 	int locationY;
 	bool openwin;//生産画面が開いているか

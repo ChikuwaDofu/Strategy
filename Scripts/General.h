@@ -17,6 +17,8 @@ const int SHOT = 12;
 const int BBOX = 0;//âΩÇ‡Ç»Ç¢É}ÉX
 const int PLAIN = 1;
 const int RIVER = 2;
+const int BRIDGE_T = 3;
+const int BRIDGE_Y = 4;
 
 class CTurn{
 private:

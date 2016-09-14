@@ -13,14 +13,15 @@ private:
 	int TMapHandle[2];
 	int TownGraph;
 	int TileGraph[3];
-	int town[MAP_W][MAP_H];
-	int townHp[MAP_W][MAP_H];
-	int tile[MAP_W][MAP_H];
+	int town[20][20];
+	int townHp[20][20];
+	int tile[20][20];
 	int townNum[COUNTRY_NUM+1];
 
 public:
 	CStage(/*int _type*/);
 	~CStage();
+	int GetTerrain(int x, int y);
 	int GetTNum(int country);
 	int GetTownOwner(int x,int y);
 	int GetTownHp(int x,int y);

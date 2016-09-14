@@ -1,5 +1,12 @@
 #include"DxLib.h"
 #include"UnitManager.h"
+#include<queue>
+using namespace std;
+typedef pair<int,int>P;
+queue<P>Q;
+P now,Next;
+int Dx[4]={0,1,0,-1};
+int Dy[4]={1,0,-1,0};
 
 CUnitManager::CUnitManager(){
 	selectingC=0;
@@ -29,6 +36,10 @@ void CUnitManager::SetUnit(){
 	}
 }
 
+void CUnitManager::SetMoveCost(int x, int y, int cost){
+	moveCost[x][y] = cost;
+}
+
 int CUnitManager::Getx(int nation,int unit){
 	return country[nation].unit[unit].GetunitX();
 }
@@ -37,8 +48,8 @@ int CUnitManager::Gety(int nation,int unit){
 	return country[nation].unit[unit].GetunitY();
 }
 
-bool CUnitManager::GetRoute(int nation,int unit,int x,int y){
-	return country[nation].unit[unit].GetRoute(x,y);
+int CUnitManager::GetMoves(int nation,int unit){
+	return country[nation].unit[unit].GetMoves();
 }
 
 int CUnitManager::GetObstacle(int nation, int unit, int x, int y){
@@ -98,7 +109,7 @@ void CUnitManager::Setselecting(){
 }
 
 bool CUnitManager::IsFair(int x,int y){
-	if (GetRoute(selectingC, selectingU, Getx(selectingC, selectingU) + x, Gety(selectingC, selectingU) + y) && GetObstacle(selectingC, selectingU, Getx(selectingC, selectingU) + x, Gety(selectingC, selectingU) + y) == 0){
+	if (route[Getx(selectingC,selectingU)+x][Gety(selectingC,selectingU)+y]<10 && route[Getx(selectingC,selectingU)+x][Gety(selectingC,selectingU)+y]>0){
 		return true;
 	}
 	else{
@@ -152,22 +163,22 @@ bool CUnitManager::Moveable(int dir){
 void CUnitManager::Move(){
 	switch(common.CheckArrow()){
 	case UP:
-		country[selectingC].unit[selectingU].Move(UP);
+		country[selectingC].unit[selectingU].Move(UP, moveCost[Getx(selectingC, selectingU)][Gety(selectingC, selectingU) - 1]);
 
 	break;
 
 	case DOWN:
-		country[selectingC].unit[selectingU].Move(DOWN);
+		country[selectingC].unit[selectingU].Move(DOWN, moveCost[Getx(selectingC, selectingU)][Gety(selectingC, selectingU) + 1]);
 
 	break;
 
 	case LEFT:
-		country[selectingC].unit[selectingU].Move(LEFT);
+		country[selectingC].unit[selectingU].Move(LEFT, moveCost[Getx(selectingC, selectingU) - 1][Gety(selectingC, selectingU)]);
 
 	break;
 
 	case RIGHT:
-		country[selectingC].unit[selectingU].Move(RIGHT);
+		country[selectingC].unit[selectingU].Move(RIGHT, moveCost[Getx(selectingC, selectingU) + 1][Gety(selectingC, selectingU)]);
 
 	break;
 	}
@@ -259,7 +270,42 @@ void CUnitManager::MoveUnit(){
 
 	if (CheckRCOn(selectingC, selectingU) && NotPrepared()){
 		country[selectingC].unit[selectingU].SetPrepared(true);
-		country[selectingC].unit[selectingU].Move(0);
+		country[selectingC].unit[selectingU].Move(0, 1);
+	}
+}
+
+void CUnitManager::CheckRoute(){
+	for(int x=0;x<MAP_W;x++){
+		for(int y=0;y<MAP_H;y++){
+			route[x][y]=100000;
+
+			/*if(moves >= table[Array2D(unitX-x+9,unitY-y+9)] && Array2D(unitX-x+9,unitY-y+9) > 0 && Array2D(unitX-x+9,unitY-y+9)<361 ){
+				route[x][y]=true;
+			}*/
+		}
+	}
+
+	now.first=Getx(selectingC,selectingU);
+	now.second=Gety(selectingC,selectingU);
+	route[now.first][now.second]=GetMoves(selectingC,selectingU)+1;
+
+	
+	Q.push(now);
+
+	while(!Q.empty()){
+		now=Q.front();
+		Q.pop();
+		if(route[now.first][now.second]<10 && route[now.first][now.second]>0){
+			for(int i=0; i<4; i++){
+				Next.first=now.first+Dx[i];
+				Next.second=now.second+Dy[i];
+
+				if (Next.first>-1 && Next.first<MAP_W && Next.second>-1 && Next.second<MAP_H && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[Next.first][Next.second] > 500 || route[Next.first][Next.second]<=0)){
+					route[Next.first][Next.second]=route[now.first][now.second]-moveCost[Next.first][Next.second];
+					Q.push(Next);
+				}
+			}
+		}
 	}
 }
 
@@ -276,11 +322,9 @@ void CUnitManager::PaintUnit(){
 	}
 
 	if(Selecting()){
-		country[selectingC].unit[selectingU].CheckMoveable();
-
 		for(int x=0;x<MAP_W;x++){
 			for(int y=0;y<MAP_H;y++){
-				if(country[selectingC].unit[selectingU].GetRoute(x,y)){
+				if(route[x][y]<10 && route[x][y]>0){
 					DrawGraph(x*GRID_L + 102, y*GRID_L + 52, picture.RangeBox, true);
 				}
 			}
@@ -291,8 +335,6 @@ void CUnitManager::PaintUnit(){
 	
 	for(int n=1;n<=UNIT_NUM;n++){
 		for(int i=1;i<=COUNTRY_NUM;i++){
-			//DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2-5+50,WHITE,"%d",country[i].unit[n].Gettype());
-			//DrawFormatString(country[i].unit[n].GetunitX()*GRID_L+GRID_L/2-2+100,country[i].unit[n].GetunitY()*GRID_L+GRID_L/2+15+50,BLACK,"%d",country[i].unit[n].Gethp());
 			country[i].unit[n].DrawUnit(i);
 		}
 
@@ -312,6 +354,9 @@ void CUnitManager::CheckMoveend(){
 void CUnitManager::DrawUnit(){
 
 	Setselecting();
+	if(Selecting()){
+		CheckRoute();
+	}
 	PaintUnit();
 	
 	DrawFormatString(30,30,GREEN,"%d %d",cursor.Getcx(),cursor.Getcy());

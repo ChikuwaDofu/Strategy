@@ -25,12 +25,17 @@ void CProduct::Awake(){
 	picture.LoadProductPic();
 	picture.LoadUnitPic();
 
+	file.LoadUnitFile();
+	file.LoadTerrainFile();
+
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		battle.unitm.country[i].Awake();
 	}
 
 	for (int x = 0; x < MAP_W; x++){
 		for (int y = 0; y < MAP_H; y++){
+			battle.unitm.SetMoveCost(x, y, file.moveCost[stage.GetTerrain(x, y)]);
+
 			for (int i = 1; i <= COUNTRY_NUM; i++){
 				if (stage.GetTownOwner(x, y) != i && stage.GetTownOwner(x, y) != 0){
 					for (int n = 1; n <= UNIT_NUM; n++){
@@ -126,11 +131,9 @@ void CProduct::Product(){
 	if (openwin){
 		DrawGraph(100, 50, picture.productScr, true);
 
-		DrawString(150, 100, "Type1", BLACK);
+		for(int i=0;i<3;i++){
+			DrawFormatString(150, 100+50*i, BLACK, file.name[i+1]);
 
-		DrawString(150, 150, "Type2", BLACK);
-
-		for(int i=0;i<2;i++){
 			DrawGraph(250, 95+50*i, picture.unitPic[i], true);
 
 			if(cursor.Getmx()>145 && cursor.Getmx()<305 && cursor.Getmy()>95+i*50 && cursor.Getmy()<125+i*50){

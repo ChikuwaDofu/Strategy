@@ -11,6 +11,7 @@ private:
 public:
 	void LoadUnitFile();
 	int types;
+	char name[5][10];
 	int strength[5];
 	int rangedStrength[5];
 	int siegeStrength[5];

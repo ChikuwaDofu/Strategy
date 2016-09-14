@@ -25,9 +25,11 @@ void CPicture::LoadFlagPic(){
 }
 
 void CPicture::LoadMapPic(){
-	tilePic[0] = LoadGraph("Kawachi2/Void.png");
-	tilePic[1] = LoadGraph("Kawachi2/Grass.png");
-	tilePic[2] = LoadGraph("Kawachi2/River.png");
+	tilePic[BBOX] = LoadGraph("Kawachi2/Void.png");
+	tilePic[PLAIN] = LoadGraph("Kawachi2/Grass.png");
+	tilePic[RIVER] = LoadGraph("Kawachi2/River.png");
+	tilePic[BRIDGE_T] = LoadGraph("Kawachi2/BridgeV.png");
+	tilePic[BRIDGE_Y] = LoadGraph("Kawachi2/BridgeH.png");
 	townPic = LoadGraph("Kawachi2/Town.png");
 
 	mapHandle = LoadSoftImage("Kawachi2/TestMap.png");

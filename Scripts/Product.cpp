@@ -32,8 +32,8 @@ void CProduct::Awake(){
 		battle.unitm.country[i].Awake();
 	}
 
-	for (int x = 0; x < MAP_W; x++){
-		for (int y = 0; y < MAP_H; y++){
+	for (int x = 0; x < MAP_W+1; x++){
+		for (int y = 0; y < MAP_H+1; y++){
 			battle.unitm.SetMoveCost(x, y, file.moveCost[stage.GetTerrain(x, y)]);
 
 			for (int i = 1; i <= COUNTRY_NUM; i++){
@@ -52,7 +52,7 @@ void CProduct::Awake(){
 bool CProduct::UnitOnTown(){
 	for (int i = 1; i <= COUNTRY_NUM; i++){
 		for (int n = 1; n <= UNIT_NUM ; n++){
-			if (cursor.Getcx() == battle.unitm.country[i].unit[n].GetunitX() && cursor.Getcy() == battle.unitm.country[i].unit[n].GetunitY()){
+			if (cursor.Getcx() + screen.adjX == battle.unitm.country[i].unit[n].GetunitX() && cursor.Getcy() + screen.adjY == battle.unitm.country[i].unit[n].GetunitY()){
 				return true;
 			}
 		}
@@ -62,8 +62,8 @@ bool CProduct::UnitOnTown(){
 }
 
 void CProduct::SetTownOwner(){
-	for (int x = 0; x < MAP_W; x++){
-		for (int y = 0; y < MAP_H; y++){
+	for (int x = 0; x < MAP_W+1; x++){
+		for (int y = 0; y < MAP_H+1; y++){
 			battle.SetTownOwner(x, y, stage.GetTownOwner(x, y));
 		}
 	}
@@ -75,35 +75,34 @@ void CProduct::Product(){
 
 	cursor.Setm();
 	cursor.Setc();
+	screen.MoveAdj();
 
 	openednow = false;
 
 	produced = false;
 
-	for (int x = 0; x < MAP_W; x++){
-		for (int y = 0; y < MAP_H; y++){
-			if (Event.LMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H) && stage.GetTownOwner(cursor.Getcx(), cursor.Getcy()) == turn.GetCountry() && !(openwin || cant[0] || cant[1]) && !UnitOnTown()){
+	
+	if (Event.LMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H) && stage.GetTownOwner(cursor.Getcx() + screen.adjX, cursor.Getcy() + screen.adjY) == turn.GetCountry() && !(openwin || cant[0] || cant[1]) && !UnitOnTown()){
 
-				forcheck = 1;
+		forcheck = 1;
 
-				while(forcheck <= UNIT_NUM){
-					if (battle.unitm.country[turn.GetCountry()].unit[forcheck].GetunitX() == -100){
-						openwin = true;
-						openednow = true;
-						locationX = cursor.Getcx();
-						locationY = cursor.Getcy();
+		while (forcheck <= UNIT_NUM){
+			if (battle.unitm.country[turn.GetCountry()].unit[forcheck].GetunitX() == -100){
+				openwin = true;
+				openednow = true;
+				locationX = cursor.Getcx() + screen.adjX;
+				locationY = cursor.Getcy() + screen.adjY;
 
-						forcheck = UNIT_NUM+100;
-					} else {
-						forcheck++;
-					}
-				}
-
-				if(forcheck != UNIT_NUM + 100){
-					cant[0] = true;
-					openednow = true;
-				}
+				forcheck = UNIT_NUM + 100;
 			}
+			else {
+				forcheck++;
+			}
+		}
+
+		if (forcheck != UNIT_NUM + 100){
+			cant[0] = true;
+			openednow = true;
 		}
 	}
 
@@ -131,21 +130,29 @@ void CProduct::Product(){
 	if (openwin){
 		DrawGraph(100, 50, picture.productScr, true);
 
-		for(int i=0;i<3;i++){
-			DrawFormatString(150, 100+50*i, BLACK, file.name[i+1]);
+		for(int i=0;i<UTYPE_NUM;i++){
+			DrawGraph(150, 95+50*i, picture.unitPic[i], true);
 
-			DrawGraph(250, 95+50*i, picture.unitPic[i], true);
+			DrawFormatString(180, 100+50*i, BLACK, file.name[i+1]);
 
-			if(cursor.Getmx()>145 && cursor.Getmx()<305 && cursor.Getmy()>95+i*50 && cursor.Getmy()<125+i*50){
-				DrawBox(140,90+i*50,305,125+i*50,RED,false);
+			draw.DrawNumber(245, 100+50*i, GRAY, file.cost[i+1]);
+			
+			draw.DrawNumber(270, 100+50*i, RED, file.strength[i+1]);
+			
+			draw.DrawNumber(290, 100+50*i, GREEN, file.rangedStrength[i+1]);
+			
+			draw.DrawNumber(310, 100+50*i, BLUE, file.siegeStrength[i+1]);
+			
+			if(cursor.Getmx()>140 && cursor.Getmx()<350 && cursor.Getmy()>95+i*50 && cursor.Getmy()<125+i*50){
+				DrawBox(140,90+i*50,350,125+i*50,RED,false);
 			}
 			
 			if(Event.LMouse.GetClick(145,95+i*50,305,125+i*50) && !openednow){
 				for(int n=1;n<=UNIT_NUM;n++){
 					if(battle.unitm.country[turn.GetCountry()].unit[n].GetunitX()==-100 && !produced){
-						if(battle.unitm.country[turn.GetCountry()].CanPay(5)){
+						if (battle.unitm.country[turn.GetCountry()].CanPay(file.cost[i + 1])){
 							battle.unitm.country[turn.GetCountry()].unit[n].Product(locationX,locationY,i+1);
-							battle.unitm.country[turn.GetCountry()].Pay(50);
+							battle.unitm.country[turn.GetCountry()].Pay(file.cost[i+1]);
 						}else{
 							cant[1]=true;
 						}
@@ -189,8 +196,8 @@ void CProduct::Product(){
 	}
 
 	if(Event.key.GetDown(Event.key.RETURN)){
-		for(int x=0;x<MAP_W;x++){
-			for(int y=0;y<MAP_H;y++){
+		for(int x=0;x<MAP_W+1;x++){
+			for(int y=0;y<MAP_H+1;y++){
 				if(stage.GetTownOwner(x,y)==turn.GetCountry()){
 					if(stage.GetTownHp(x,y)<=90){
 						stage.DamageTown(x,y,-10,0);

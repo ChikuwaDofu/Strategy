@@ -7,8 +7,9 @@ private:
 
 public:
 	int numPic[10];
-	int tilePic[5];
+	int tilePic[10];
 	int townPic;
+	int arrowPic[4];
 	int unitPic[5];
 	int flagPic[5];
 	int productScr;//ê∂éYâÊñ ÇÃîwåi

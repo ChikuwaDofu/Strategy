@@ -18,6 +18,7 @@ public:
 	bool siege[5];
 	int move[5];
 	int range[5];
+	int cost[5];
 
 	void LoadTerrainFile();
 	int terrains;

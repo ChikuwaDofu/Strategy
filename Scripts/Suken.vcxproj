@@ -95,6 +95,7 @@
     <ClCompile Include="MyScene.cpp" />
     <ClCompile Include="Picture.cpp" />
     <ClCompile Include="Product.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="SukenLib\GameEngine\Event\Event.cpp" />
     <ClCompile Include="SukenLib\GameEngine\Event\Input.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="MyScene.h" />
     <ClInclude Include="Picture.h" />
     <ClInclude Include="Product.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Suken.h" />
     <ClInclude Include="SukenLib\GameEngine\Event\Event.h" />

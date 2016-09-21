@@ -57,7 +57,7 @@ int CUnitManager::GetObstacle(int nation, int unit, int x, int y){
 }
 
 bool CUnitManager::CheckLCOn(int nation,int unit){
-	if(Event.LMouse.GetClick(Getx(nation,unit)*50+100,Gety(nation,unit)*50+50,Getx(nation,unit)*50+150,Gety(nation,unit)*50+100)){
+	if(Event.LMouse.GetClick((Getx(nation,unit)-cscreen.adjX)*50+100,(Gety(nation,unit)-cscreen.adjY)*50+50,(Getx(nation,unit)-cscreen.adjX)*50+150,(Gety(nation,unit)-cscreen.adjY)*50+100)){
 		return true;
 	}else{
 		return false;
@@ -120,7 +120,7 @@ bool CUnitManager::IsFair(int x,int y){
 bool CUnitManager::Moveable(int dir){
 	switch(dir){
 	case UP:
-		if (Gety(selectingC, selectingU)>0 && IsFair(0,-1)){
+		if (Gety(selectingC, selectingU)>cscreen.adjY && IsFair(0,-1)){
 			return true;
 		}else{
 			return false;
@@ -129,7 +129,7 @@ bool CUnitManager::Moveable(int dir){
 		break;
 
 	case DOWN:
-		if (Gety(selectingC, selectingU)<MAP_H && IsFair(0,1)){
+		if (Gety(selectingC, selectingU)<MAP_H+cscreen.adjY-1 && IsFair(0,1)){
 			return true;
 		}else{
 			return false;
@@ -138,7 +138,7 @@ bool CUnitManager::Moveable(int dir){
 		break;
 
 	case LEFT:
-		if (Getx(selectingC, selectingU)>0 && IsFair(-1,0)){
+		if (Getx(selectingC, selectingU)>cscreen.adjX && IsFair(-1,0)){
 			return true;
 		}else{
 			return false;
@@ -147,7 +147,7 @@ bool CUnitManager::Moveable(int dir){
 		break;
 
 	case RIGHT:
-		if (Getx(selectingC, selectingU)<MAP_W && IsFair(1,0)){
+		if (Getx(selectingC, selectingU)<MAP_W+cscreen.adjX-1 && IsFair(1,0)){
 			return true;
 		}else{
 			return false;
@@ -227,8 +227,8 @@ void CUnitManager::MoveUnit(){
 	}
 
 	if(Selecting()){
-		for (int x = 0; x < MAP_W; x++){
-			for (int y = 0; y < MAP_H; y++){
+		for (int x = 0; x < MAP_W+1; x++){
+			for (int y = 0; y < MAP_H+1; y++){
 				ChangeObstacle(x, y, 0);
 			}
 		}
@@ -275,8 +275,8 @@ void CUnitManager::MoveUnit(){
 }
 
 void CUnitManager::CheckRoute(){
-	for(int x=0;x<MAP_W;x++){
-		for(int y=0;y<MAP_H;y++){
+	for(int x=0;x<MAP_W+1;x++){
+		for(int y=0;y<MAP_H+1;y++){
 			route[x][y]=100000;
 
 			/*if(moves >= table[Array2D(unitX-x+9,unitY-y+9)] && Array2D(unitX-x+9,unitY-y+9) > 0 && Array2D(unitX-x+9,unitY-y+9)<361 ){
@@ -300,7 +300,7 @@ void CUnitManager::CheckRoute(){
 				Next.first=now.first+Dx[i];
 				Next.second=now.second+Dy[i];
 
-				if (Next.first>-1 && Next.first<MAP_W && Next.second>-1 && Next.second<MAP_H && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[Next.first][Next.second] > 500 || route[Next.first][Next.second]<=0)){
+				if (Next.first>-1 && Next.first<MAP_W+1 && Next.second>-1 && Next.second<MAP_H+1 && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[Next.first][Next.second] > 500 || route[Next.first][Next.second]<=0)){
 					route[Next.first][Next.second]=route[now.first][now.second]-moveCost[Next.first][Next.second];
 					Q.push(Next);
 				}
@@ -310,27 +310,38 @@ void CUnitManager::CheckRoute(){
 }
 
 void CUnitManager::PaintUnit(){
+	cscreen.MoveAdj();
 
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		for(int n=1;n<=UNIT_NUM;n++){
-			if(country[i].unit[n].GetMoveEnd()){
-				DrawBox(Getx(i,n)*GRID_L+100,Gety(i,n)*GRID_L+50,(Getx(i,n)+1)*GRID_L+100,(Gety(i,n)+1)*GRID_L+50,YELLOW,true);
-			}else{
-				DrawBox(Getx(i,n)*GRID_L+100,Gety(i,n)*GRID_L+50,(Getx(i,n)+1)*GRID_L+100,(Gety(i,n)+1)*GRID_L+50,BLUE,true);
+			displayX = Getx(i, n) - cscreen.adjX;
+			displayY = Gety(i, n) - cscreen.adjY;
+			if (displayX >= 0 && displayX < MAP_W && displayY >= 0 && displayY < MAP_H){
+				if (country[i].unit[n].GetMoveEnd()){
+					DrawBox(displayX * GRID_L + 100, displayY * GRID_L + 50, (displayX + 1) * GRID_L + 100, (displayY + 1) * GRID_L + 50, YELLOW, true);
+				}
+				else{
+					DrawBox(displayX * GRID_L + 100, displayY * GRID_L + 50, (displayX + 1) * GRID_L + 100, (displayY + 1) * GRID_L + 50, BLUE, true);
+				}
 			}
 		}
 	}
 
 	if(Selecting()){
-		for(int x=0;x<MAP_W;x++){
-			for(int y=0;y<MAP_H;y++){
-				if(route[x][y]<10 && route[x][y]>0){
-					DrawGraph(x*GRID_L + 102, y*GRID_L + 52, picture.RangeBox, true);
+		for (int x = cscreen.adjX; x<MAP_W + cscreen.adjX; x++){
+			for (int y = cscreen.adjY; y<MAP_H + cscreen.adjY; y++){
+				displayX = x - cscreen.adjX;
+				displayY = y - cscreen.adjY;
+
+				if (route[x][y]<10 && route[x][y]>0){
+					DrawGraph(displayX*GRID_L + 102, displayY*GRID_L + 52, picture.RangeBox, true);
 				}
 			}
 		}
+		displayX = Getx(selectingC, selectingU) - cscreen.adjX;
+		displayY = Gety(selectingC, selectingU) - cscreen.adjY;
 
-		DrawBox(Getx(selectingC,selectingU)*GRID_L+100,Gety(selectingC,selectingU)*GRID_L+50,GRID_L+Getx(selectingC,selectingU)*GRID_L+100,GRID_L+Gety(selectingC,selectingU)*GRID_L+50,GREEN,true);
+		DrawBox(displayX * GRID_L + 100, displayY * GRID_L + 50, GRID_L + displayX * GRID_L + 100, GRID_L + displayY * GRID_L + 50, GREEN, true);
 	}
 	
 	for(int n=1;n<=UNIT_NUM;n++){

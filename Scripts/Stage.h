@@ -3,11 +3,14 @@
 #include"Suken.h"
 #include"General.h"
 #include"Picture.h"
+#include"Screen.h"
 
 class CStage{
 private:
+
 	CPicture picture;
 	CTurn turn;
+	CScreen screen;
 	int type;
 	int MapHandle[2];
 	int TMapHandle[2];
@@ -17,6 +20,8 @@ private:
 	int townHp[20][20];
 	int tile[20][20];
 	int townNum[COUNTRY_NUM+1];
+	int displayX;
+	int displayY;
 
 public:
 	CStage(/*int _type*/);

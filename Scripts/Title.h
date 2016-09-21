@@ -5,6 +5,7 @@
 class CTitle{
 private:
 	
+
 	
 public:
 

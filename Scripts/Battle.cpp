@@ -61,7 +61,10 @@ int CBattle::GetRange(int country, int unit){
 }
 
 bool CBattle::CheckRCOnUnit(int country,int unit){
-	if(Event.RMouse.GetClick(LocationX(country,unit)*50+100,LocationY(country,unit)*50+50,LocationX(country,unit)*50+150,LocationY(country,unit)*50+100)){
+	displayX = LocationX(country, unit) - screen.adjX;
+	displayY = LocationY(country, unit) - screen.adjY;
+
+	if(Event.RMouse.GetClick(displayX*50+100,displayY*50+50,displayX*50+150,displayY*50+100)){
 		return true;
 	}else{
 		return false;
@@ -72,12 +75,12 @@ bool CBattle::CheckRCOnTown(int type){
 	if(Event.RMouse.GetClick(100,50,100+GRID_L*(MAP_W-1),50+GRID_L*(MAP_H-1))){
 		switch (type){
 		case 1:
-			return SCtarget[cursorX][cursorY];
+			return SCtarget[cursorX+screen.adjX][cursorY+screen.adjY];
 
 			break;
 	
 		case 2:
-			return SRtarget[cursorX][cursorY];
+			return SRtarget[cursorX+screen.adjX][cursorY+screen.adjY];
 
 			break;
 		}
@@ -137,8 +140,8 @@ void CBattle::SetTarget(){
 	cursorX=cursorm.cursor.Getcx();
 	cursorY=cursorm.cursor.Getcy();
 
-	for(int x=0;x<MAP_W;x++){
-		for(int y=0;y<MAP_H;y++){
+	for(int x=0;x<MAP_W+1;x++){
+		for(int y=0;y<MAP_H+1;y++){
 			target[x][y]=false;
 			Ctarget[x][y]=false;
 			Rtarget[x][y]=false;
@@ -164,8 +167,8 @@ void CBattle::SetTarget(){
 				}
 			}
 
-			for(int x=0;x<MAP_W;x++){
-				for(int y=0;y<MAP_H;y++){
+			for(int x=0;x<MAP_W+1;x++){
+				for(int y=0;y<MAP_H+1;y++){
 					if(cal.Absolute(LocationX(selectingC,selectingU)-x)+cal.Absolute(LocationY(selectingC,selectingU)-y)<=GetRange(selectingC,selectingU) && target[x][y] && GetRStrength(selectingC,selectingU)>0){
 						Rtarget[x][y]=true;
 					}
@@ -174,16 +177,16 @@ void CBattle::SetTarget(){
 		}
 	}
 
-	for (int x = 0; x < MAP_W; x++){
-		for (int y = 0; y < MAP_H; y++){
+	for (int x = 0; x < MAP_W+1; x++){
+		for (int y = 0; y < MAP_H+1; y++){
 			if (unitm.country[selectingC].unit[selectingU].GetObstacle(x, y) == 2){
 				town[x][y] = true;
 			}
 		}
 	}
 
-	for (int x = 0; x < MAP_W; x++){
-		for (int y = 0; y < MAP_H; y++){
+	for (int x = 0; x < MAP_W+1; x++){
+		for (int y = 0; y < MAP_H+1; y++){
 			if (townOwner[x][y] != selectingC && !target[x][y] && townOwner[x][y] != 0){
 				for (int a = 0; a < 4; a++){
 					if (town[LocationX(selectingC, selectingU) + checkx[a]][LocationY(selectingC, selectingU) + checky[a]]){
@@ -202,11 +205,10 @@ void CBattle::SetTarget(){
 void CBattle::Battle(){
 
 	turn.SkipTurn();
-
+	screen.MoveAdj();
 	CheckSelecting();
 
 	range_attack=false;
-
 	besiege = false;
 
 	AtkDam=0;
@@ -253,11 +255,10 @@ void CBattle::Combat(){
 }
 
 void CBattle::Ranged(){
-	
 	if(GetRStrength(selectingC,selectingU)!=0){
 		for(int x=0;x<MAP_W;x++){
 			for(int y=0;y<MAP_H;y++){
-				if(Rtarget[x][y]){
+				if(Rtarget[x+screen.adjX][y+screen.adjY]){
 					DrawCircle((x+2)*GRID_L+25,(y+1)*GRID_L+25,25,RED,false);
 				}
 			}
@@ -310,7 +311,6 @@ void CBattle::Siege(){
 		
 		unitm.country[selectingC].unit[selectingU].Move(0, 1);
 	}
-
 }
 
 int CBattle::GetTDamage(){

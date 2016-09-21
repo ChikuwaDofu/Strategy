@@ -26,17 +26,21 @@ int Array2D(int x,int y);
 #include"General.h"
 #include"Picture.h"
 #include"Files.h"
+#include"Screen.h"
 
 class CUnit{
 private:
 	CTurn turn;
 	CPicture picture;
 	CFiles file;
+	CScreen screen;
 	int unitType;
 	bool siege; //攻城兵器か否か
 	bool prepared;
 	int unitX;
 	int unitY;
+	int displayX;
+	int displayY;
 	int moves;
 	int obstacle[20][20];
 	bool moved;//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで

@@ -6,9 +6,10 @@
 extern CScene Title;
 extern CScene Stage;
 
-void Gotitle();
-void GoStage();
+void Start();
+void GoTitle();
 void DrawTitle();
+void GoStage();
 void DrawStage();
 void MoveUnit();
 void FightUnit();

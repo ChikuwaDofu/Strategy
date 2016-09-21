@@ -19,20 +19,25 @@ CCommon common;
 //CStage *stage;
 //CStage s;
 
-
-
-void GoOpen(){
+void Start(){
 	Game.AddChild(&Title);
-	
 }
 
-void GoStage(){
+void GoTitle(){
 	Game.RemoveChild();
-	Game.AddChild(&Stage);
+	Game.AddChild(&Title);
 }
 
 void DrawTitle(){
 	title.DrawTitle();
+}
+
+void GoStage(){
+	if(Event.key.GetDown(Event.key.RETURN)){
+		Game.RemoveChild();
+		Game.AddChild(&Stage);
+		StageEnter();
+	}
 }
 
 void DrawStage(){
@@ -56,6 +61,6 @@ void StageEnter(){
 	product.stage.Awake();
 	product.stage.CreateStage();
 	product.Awake();
-	Game.AddChild(&Stage);
+
 //	stage = new CStage(1);
 }

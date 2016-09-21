@@ -7,6 +7,7 @@ const int GRID_L = 50;
 const int MAP_W = 700/GRID_L;//700‚Æ500‚ÌŒö–ñ”
 const int MAP_H = 500/GRID_L;//2,2,5,5‚ğ‘g‚İ‡‚í‚¹‚é
 const int UNIT_NUM = 4;
+const int UTYPE_NUM = 4;
 const int COUNTRY_NUM = 2;
 const int RIGHT = 1;
 const int LEFT = 2;
@@ -40,11 +41,14 @@ public:
 
 };
 
-class CCommon{
-private:
-	bool rclick;
-
+class CDraw{
 public:
-	int GetNumKey();
+	void DrawNumber(int x,int y,int color,int num);
+
+};
+
+class CCommon{
+public:
 	int CheckArrow();
+
 }; 

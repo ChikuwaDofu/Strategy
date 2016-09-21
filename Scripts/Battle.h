@@ -3,11 +3,13 @@
 #include"Suken.h"
 #include"Unit.h"
 #include"Cursor.h"
+#include"Screen.h"
 #include"Country.h"
 #include"UnitManager.h"
 
 class CBattle{
 private:
+	CScreen screen;
 	CCal cal;
 	CCommon common;
 	CTurn turn;
@@ -15,6 +17,8 @@ private:
 	int cursorY;
 	int checkx[4];
 	int checky[4];
+	int displayX;
+	int displayY;
 	bool target[20][20];
 	bool Ctarget[20][20];
 	bool Rtarget[20][20];

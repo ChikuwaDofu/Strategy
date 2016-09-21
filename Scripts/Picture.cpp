@@ -7,6 +7,7 @@ void CPicture::LoadUnitPic(){
 	unitPic[0] = LoadGraph("Kawachi2/Spear.png");
 	unitPic[1] = LoadGraph("Kawachi2/Bow.png");
 	unitPic[2] = LoadGraph("Kawachi2/Artillery.png");
+	unitPic[3] = LoadGraph("Kawachi2/Horseman.png");
 
 	move[1] = LoadGraph("Kawachi2/move1.png");
 	move[2] = LoadGraph("Kawachi2/move2.png");
@@ -25,12 +26,17 @@ void CPicture::LoadFlagPic(){
 }
 
 void CPicture::LoadMapPic(){
-	tilePic[BBOX] = LoadGraph("Kawachi2/Void.png");
-	tilePic[PLAIN] = LoadGraph("Kawachi2/Grass.png");
-	tilePic[RIVER] = LoadGraph("Kawachi2/River.png");
-	tilePic[BRIDGE_T] = LoadGraph("Kawachi2/BridgeV.png");
-	tilePic[BRIDGE_Y] = LoadGraph("Kawachi2/BridgeH.png");
+	tilePic[0] = LoadGraph("Kawachi2/Void.png");
+	tilePic[1] = LoadGraph("Kawachi2/Grass.png");
+	tilePic[2] = LoadGraph("Kawachi2/River.png");
+	tilePic[3] = LoadGraph("Kawachi2/BridgeV.png");
+	tilePic[4] = LoadGraph("Kawachi2/BridgeH.png");
 	townPic = LoadGraph("Kawachi2/Town.png");
+
+	arrowPic[0] = LoadGraph("Kawachi2/ArrowUp.png");
+	arrowPic[1] = LoadGraph("Kawachi2/ArrowDown.png");
+	arrowPic[2] = LoadGraph("Kawachi2/ArrowLeft.png");
+	arrowPic[3] = LoadGraph("Kawachi2/ArrowRight.png");
 
 	mapHandle = LoadSoftImage("Kawachi2/TestMap.png");
 	TmapHandle = LoadSoftImage("Kawachi2/TestMapTown.png");

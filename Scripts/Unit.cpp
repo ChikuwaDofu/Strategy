@@ -180,41 +180,55 @@ void CUnit::Survive(){
 }
 
 void CUnit::Product(int x,int y,int type){
-	hp=100;
-	moves=0;
-	MoveEnd=true;
-	Awake(x,y,type);
+	Awake(x, y, type);
+	hp = 100;
+	moves = 0;
+	MoveEnd = true;
 }
 
 void CUnit::DrawUnit(int country){
-	DrawGraph(unitX * 50 + 100, unitY * 50 + 50, picture.unitPic[unitType - 1], true);
-	DrawGraph(unitX * 50 + 125, unitY * 50 + 75, picture.flagPic[country], true);
 
-	if (hp < 100){
-		DrawGraph(unitX * 50 + 102, unitY * 50 + 77, picture.numPic[hp / 10], true);
-		DrawGraph(unitX * 50 + 112, unitY * 50 + 77, picture.numPic[hp % 10], true);
-	}
+	screen.MoveAdj();
 
-	if (unitType == 3){
-		if (prepared){
-			DrawGraph(unitX * 50 + 125, unitY * 50 + 60, picture.siegepic[1],true);
+	displayX = unitX - screen.adjX;
+	displayY = unitY - screen.adjY;
+
+	if (displayX >= 0 && displayX < MAP_W && displayY >= 0 && displayY < MAP_H){
+		screen.MoveAdj();
+
+		DrawGraph(displayX * 50 + 100, displayY * 50 + 50, picture.unitPic[unitType - 1], true);
+		DrawGraph(displayX * 50 + 125, displayY * 50 + 75, picture.flagPic[country], true);
+
+		if (hp < 100){
+			DrawGraph(displayX * 50 + 102, displayY * 50 + 77, picture.numPic[hp / 10], true);
+			DrawGraph(displayX * 50 + 112, displayY * 50 + 77, picture.numPic[hp % 10], true);
 		}
-		else{
-			DrawGraph(unitX * 50 + 125, unitY * 50 + 60, picture.siegepic[0], true);
+
+		if (unitType == 3){
+			if (prepared){
+				DrawGraph(displayX * 50 + 125, displayY * 50 + 60, picture.siegepic[1], true);
+			}
+			else{
+				DrawGraph(displayX * 50 + 125, displayY * 50 + 60, picture.siegepic[0], true);
+			}
 		}
 	}
 }
 
 void CUnit::DrawMoves(){
-	for (int i = 1; i <= 4; i++){
-		if (moves >= i){
-			DrawGraph(unitX * 50 + 140, unitY * 50 + 51 + (i - 1) * 4, picture.move[i], true);
+	if (displayX >= 0 && displayX < MAP_W && displayY >= 0 && displayY < MAP_H){
+		for (int i = 1; i <= 4; i++){
+			if (moves >= i){
+				DrawGraph(displayX * 50 + 140, displayY * 50 + 51 + (i - 1) * 4, picture.move[i], true);
+			}
 		}
 	}
 }
 
 void CUnit::DrawHeal(){
-	if (!moved && !MoveEnd){
-		DrawGraph(unitX * 50 + 125, unitY * 50 + 50, picture.heal, true);
+	if (displayX >= 0 && displayX < MAP_W && displayY >= 0 && displayY < MAP_H){
+		if (!moved && !MoveEnd){
+			DrawGraph(displayX * 50 + 125, displayY * 50 + 50, picture.heal, true);
+		}
 	}
 }

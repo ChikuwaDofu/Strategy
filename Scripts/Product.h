@@ -6,6 +6,7 @@
 #include"Stage.h"
 #include"Files.h"
 #include"Cursor.h"
+#include"Screen.h"
 #include"Battle.h"
 
 class CProduct{
@@ -13,7 +14,9 @@ private:
 	CCursor cursor;
 	CPicture picture;
 	CFiles file;
+	CDraw draw;
 	CTurn turn;
+	CScreen screen;
 	int forcheck;//ユニット枠確認用
 	int Getcx();
 	int Getcy();

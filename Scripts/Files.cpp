@@ -9,7 +9,7 @@ void CFiles::LoadUnitFile(){
 	fscanf(funit,"%d",&types);
 
 	for (int i = 1; i <= types; i++){
-		fscanf(funit, "%s %d %d %d %d %d %d", &name[i], &strength[i], &rangedStrength[i], &siegeStrength[i], &siege[i], &move[i], &range[i]);
+		fscanf(funit, "%s %d %d %d %d %d %d %d", &name[i], &strength[i], &rangedStrength[i], &siegeStrength[i], &siege[i], &move[i], &range[i], &cost[i]);
 	}
 
 	fclose(funit);

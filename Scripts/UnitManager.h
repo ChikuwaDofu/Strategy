@@ -3,6 +3,7 @@
 #include"Suken.h"
 #include"Unit.h"
 #include"Country.h"
+#include"Screen.h"
 #include"Picture.h"
 #include"Files.h"
 #include"Cursor.h"
@@ -13,9 +14,12 @@ private:
 	CUnit unit[UNIT_NUM+1];
 	CCal cal;
 	CCursor cursor;
+	CScreen cscreen;
 	CPicture picture;
 	CTurn turn;
 	CCommon common;
+	int displayX;
+	int displayY;
 	int moveCost[20][20];
 	int selectingC;
 	int selectingU;

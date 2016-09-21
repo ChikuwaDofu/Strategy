@@ -50,17 +50,14 @@ int CCal::Absolute(int a){
 	}
 }
 
-int CCommon::GetNumKey(){
-	if(Event.key.GetDown(Event.key.NUM0)){
-		return 0;
+void CDraw::DrawNumber(int x,int y,int color,int num){
+	if(num>=100){
+	DrawFormatString(x,y,color,"%d",num);
+	}else if(num>=10){
+		DrawFormatString(x,y,color," %d",num);
 	}else{
-		if(Event.key.GetDown(Event.key.NUM1)){
-			return 1;
-		}else{
-			return -1;
-		}
+		DrawFormatString(x,y,color,"  %d",num);
 	}
-
 }
 
 int CCommon::CheckArrow(){

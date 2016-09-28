@@ -16,8 +16,8 @@ public:
 	int cannot[5];
 	int close;
 	int ok;
-	int mapHandle;
-	int TmapHandle;//都市のマップチップ
+	int mapHandle[5];
+	int TmapHandle[5];//都市のマップチップ
 	int RangeBox;
 	int move[10];
 	int siegepic[5];
@@ -28,4 +28,10 @@ public:
 	void LoadMapPic();
 	void LoadNumPic();
 	void LoadUnitmPic();
+
+	int stageSelect;
+	int smallTile[10];
+	int howTo[10];
+	void LoadTitlePic();
+	void LoadHowToPic();
 };

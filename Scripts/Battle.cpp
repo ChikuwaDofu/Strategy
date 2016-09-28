@@ -20,6 +20,10 @@ CBattle::CBattle(){
 	checky[3]=0;
 }
 
+void CBattle::Awake(){
+	turn.Awake();
+}
+
 int CBattle::LocationX(int country,int unit){
 	return unitm.country[country].unit[unit].GetunitX();
 }

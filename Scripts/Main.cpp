@@ -3,6 +3,7 @@
 #include"General.h"
 
 int cross = 0;
+int howButton = 0;
 
 void suken::Awake(){
 	/*game.addChild(&Title);
@@ -16,11 +17,19 @@ void suken::Awake(){
 
 	cross = LoadGraph("Kawachi2/Close.PNG", true);
 
+	howButton = LoadGraph("Kawachi2/HowToButton.png", true);
+
 	Start();
 
 	Title.input.AddEventListener(Event.EVERY_FRAME,DrawTitle);
 
 	Title.input.AddEventListener(Event.EVERY_FRAME,GoStage);
+
+	Title.SetButton(350, 0, 550, 50, howButton,GoHowTo);
+
+	HowTo.input.AddEventListener(Event.EVERY_FRAME, DrawHowTo);
+
+	HowTo.SetButton(870, 0, 900, 30, cross, GoTitle);
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME,DrawStage);
 	

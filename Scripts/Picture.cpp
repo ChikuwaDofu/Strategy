@@ -23,6 +23,7 @@ void CPicture::LoadUnitPic(){
 void CPicture::LoadFlagPic(){
 	flagPic[1] = LoadGraph("Kawachi2/country1.png");
 	flagPic[2] = LoadGraph("Kawachi2/country2.png");
+	flagPic[3] = LoadGraph("Kawachi2/country3.png");
 }
 
 void CPicture::LoadMapPic(){
@@ -31,6 +32,7 @@ void CPicture::LoadMapPic(){
 	tilePic[2] = LoadGraph("Kawachi2/River.png");
 	tilePic[3] = LoadGraph("Kawachi2/BridgeV.png");
 	tilePic[4] = LoadGraph("Kawachi2/BridgeH.png");
+	tilePic[5] = LoadGraph("Kawachi2/Mountain.png");
 	townPic = LoadGraph("Kawachi2/Town.png");
 
 	arrowPic[0] = LoadGraph("Kawachi2/ArrowUp.png");
@@ -38,8 +40,10 @@ void CPicture::LoadMapPic(){
 	arrowPic[2] = LoadGraph("Kawachi2/ArrowLeft.png");
 	arrowPic[3] = LoadGraph("Kawachi2/ArrowRight.png");
 
-	mapHandle = LoadSoftImage("Kawachi2/TestMap.png");
-	TmapHandle = LoadSoftImage("Kawachi2/TestMapTown.png");
+	mapHandle[1] = LoadSoftImage("Kawachi2/TestMap.png");
+	mapHandle[2] = LoadSoftImage("Kawachi2/TestMap2.png");
+	TmapHandle[1] = LoadSoftImage("Kawachi2/TestMapTown.png");
+	TmapHandle[2] = LoadSoftImage("Kawachi2/TestMap2Town.png");
 }
 
 void CPicture::LoadProductPic(){
@@ -65,4 +69,21 @@ void CPicture::LoadNumPic(){
 
 void CPicture::LoadUnitmPic(){
 	RangeBox = LoadGraph("Kawachi2/Range.png");
+}
+
+void CPicture::LoadTitlePic(){
+	stageSelect = LoadGraph("Kawachi2/StageSelect.png");
+
+	smallTile[1] = LoadGraph("Kawachi2/SGrass.png");
+	smallTile[2] = LoadGraph("Kawachi2/SRiver.png");
+	smallTile[3] = LoadGraph("Kawachi2/SBridge.png");
+	smallTile[4] = LoadGraph("Kawachi2/SBridge.png");
+	smallTile[5] = LoadGraph("Kawachi2/SMountain.png");
+}
+
+void CPicture::LoadHowToPic(){
+	howTo[0] = LoadGraph("Kawachi2/HowTo1.png");
+	howTo[1] = LoadGraph("Kawachi2/HowTo2.png");
+	howTo[2] = LoadGraph("Kawachi2/HowTo3.png");
+	howTo[3] = LoadGraph("Kawachi2/HowTo4.png");
 }

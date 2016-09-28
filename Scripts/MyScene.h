@@ -4,13 +4,16 @@
 #include"Manager.h"
 //ÉVÅ[Éì
 extern CScene Title;
+extern CScene HowTo;
 extern CScene Stage;
 
 void Start();
 void GoTitle();
 void DrawTitle();
+void GoHowTo();
+void DrawHowTo();
 void GoStage();
 void DrawStage();
 void MoveUnit();
 void FightUnit();
-void StageEnter();
+void StageEnter(int stage);

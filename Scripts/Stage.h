@@ -12,10 +12,8 @@ private:
 	CTurn turn;
 	CScreen screen;
 	int type;
-	int MapHandle[2];
-	int TMapHandle[2];
-	int TownGraph;
-	int TileGraph[3];
+	int MapHandle[5];
+	int TMapHandle[5];
 	int town[20][20];
 	int townHp[20][20];
 	int tile[20][20];
@@ -24,15 +22,13 @@ private:
 	int displayY;
 
 public:
-	CStage(/*int _type*/);
-	~CStage();
 	int GetTerrain(int x, int y);
 	int GetTNum(int country);
 	int GetTownOwner(int x,int y);
 	int GetTownHp(int x,int y);
-	void CreateMap(int x,int y);
-	void CreateTown(int x,int y);
-	void CreateStage();
+	void CreateMap(int x,int y,int stage);
+	void CreateTown(int x,int y,int stage);
+	void CreateStage(int stage);
 	void DamageTown(int x, int y, int damage, int attacker);
 	void DrawStage();
 	void Awake();

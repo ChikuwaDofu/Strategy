@@ -2,7 +2,7 @@
 #include"Suken.h"
 #include"General.h"
 
-CTurn::CTurn(){
+void CTurn::Awake(){
 	country=1;
 	turn=1;
 }

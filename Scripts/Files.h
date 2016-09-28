@@ -22,6 +22,6 @@ public:
 
 	void LoadTerrainFile();
 	int terrains;
-	int moveCost[5];
+	int moveCost[10];
 
 };

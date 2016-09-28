@@ -58,6 +58,7 @@ public:
 	CCursorManager cursorm;
 	CUnitManager unitm;
 	CBattle();
+	void Awake();
 	bool GetBesiege();
 	int GetTDamage();
 	void SetTownOwner(int x,int y,int owner);

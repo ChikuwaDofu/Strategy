@@ -28,6 +28,8 @@ void CProduct::Awake(){
 	file.LoadUnitFile();
 	file.LoadTerrainFile();
 
+	turn.Awake();
+
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		battle.unitm.country[i].Awake();
 	}

@@ -15,14 +15,16 @@ CUnitManager::CUnitManager(){
 
 void CUnitManager::Awake(){
 	SetUnit();
-	country[1].unit[1].Awake(6,4,1);
+	/*country[1].unit[1].Awake(6,4,1);
 	country[1].unit[2].Awake(5,3,2);
 	country[1].unit[4].Awake(4,4,3);
 	country[2].unit[1].Awake(7,5,1);
-	country[2].unit[2].Awake(8,6,2);
+	country[2].unit[2].Awake(8,6,2);*/
 
 	picture.LoadUnitmPic();
 	picture.LoadFlagPic();
+
+	turn.Awake();
 
 	selectingC=1;
 }
@@ -277,7 +279,7 @@ void CUnitManager::MoveUnit(){
 void CUnitManager::CheckRoute(){
 	for(int x=0;x<MAP_W+1;x++){
 		for(int y=0;y<MAP_H+1;y++){
-			route[x][y]=100000;
+			route[x][y]=-100;
 
 			/*if(moves >= table[Array2D(unitX-x+9,unitY-y+9)] && Array2D(unitX-x+9,unitY-y+9) > 0 && Array2D(unitX-x+9,unitY-y+9)<361 ){
 				route[x][y]=true;
@@ -300,7 +302,7 @@ void CUnitManager::CheckRoute(){
 				Next.first=now.first+Dx[i];
 				Next.second=now.second+Dy[i];
 
-				if (Next.first>-1 && Next.first<MAP_W+1 && Next.second>-1 && Next.second<MAP_H+1 && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[Next.first][Next.second] > 500 || route[Next.first][Next.second]<=0)){
+				if (Next.first>-1 && Next.first<MAP_W+1 && Next.second>-1 && Next.second<MAP_H+1 && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[now.first][now.second]-moveCost[Next.first][Next.second]>route[Next.first][Next.second] || route[Next.first][Next.second]<=0)){
 					route[Next.first][Next.second]=route[now.first][now.second]-moveCost[Next.first][Next.second];
 					Q.push(Next);
 				}

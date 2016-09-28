@@ -5,29 +5,22 @@
 
 int Ax[4] = { 400, 400, 75, 800 };
 int Ay[4] = { 25, 550, 225, 225 };
-
-CStage::CStage(/*int _type*/){
-	type = /*_type*/1;
-
-	for(int i=1;i<=COUNTRY_NUM;i++){
-		townNum[i]=0;
-	}
-}
-
-CStage::~CStage(){
-	
-}
-
 void CStage::Awake(){
 	picture.LoadMapPic();
 	picture.LoadFlagPic();
 	picture.LoadNumPic();
+
+	turn.Awake();
+
+	for (int i = 1; i <= COUNTRY_NUM; i++){
+		townNum[i] = 0;
+	}
 }
 
-void CStage::CreateMap(int x,int y){
+void CStage::CreateMap(int x,int y,int stage){
 	int r=0,g=0,b=0,a=0;
 	tile[x][y]=NULL;
-	GetPixelSoftImage(picture.mapHandle,x,y,&r,&g,&b,&a);
+	GetPixelSoftImage(picture.mapHandle[stage],x,y,&r,&g,&b,&a);
 	if(r==128 && g==255 && b==0){
 		tile[x][y]=PLAIN;
 	}
@@ -40,12 +33,15 @@ void CStage::CreateMap(int x,int y){
 	if(r==0 && g==0 && b==128){
 		tile[x][y]=BRIDGE_Y;
 	}
+	if (r == 128 && g == 128 && b == 128){
+		tile[x][y] = MOUNTAIN;
+	}
 }
 
-void CStage::CreateTown(int x,int y){
+void CStage::CreateTown(int x,int y,int stage){
 	int r,g,b,a;
 	town[x][y]=0;
-	GetPixelSoftImage(picture.TmapHandle,x,y,&r,&g,&b,&a);
+	GetPixelSoftImage(picture.TmapHandle[stage],x,y,&r,&g,&b,&a);
 	if(r==255 && g==0 && b==0){
 		town[x][y]=1;
 		townNum[1]++;
@@ -56,15 +52,21 @@ void CStage::CreateTown(int x,int y){
 		townNum[2]++;
 		townHp[x][y] = 100;
 	}
+	if (r == 0 && g == 255 && b == 0){
+		town[x][y] = 3;
+		townNum[3]++;
+		townHp[x][y] = 100;
+
+	}
 }
 
-void CStage::CreateStage(){
+void CStage::CreateStage(int stage){
 	for(int x=0;x<MAP_W+1;x++){
 		for(int y=0;y<MAP_H+1;y++){
 			town[x][y]=-1;
 
-			CreateMap(x,y);
-			CreateTown(x,y);
+			CreateMap(x,y,stage);
+			CreateTown(x,y,stage);
 		}
 	}
 }

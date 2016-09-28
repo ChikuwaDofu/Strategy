@@ -105,6 +105,8 @@ void CUnit::Awake(int x,int y,int type){
 	picture.LoadUnitPic();
 	picture.LoadNumPic();
 	picture.LoadFlagPic();
+
+	turn.Awake();
 }
 
 void CUnit::SkipTurn(){

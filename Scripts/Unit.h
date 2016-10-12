@@ -33,7 +33,6 @@ private:
 	CTurn turn;
 	CPicture picture;
 	CFiles file;
-	CScreen screen;
 	int unitType;
 	bool siege; //Ué•ºŠí‚©”Û‚©
 	bool prepared;
@@ -50,6 +49,7 @@ private:
 	int r_strength;
 	int s_strength;
 	int range;
+	bool attacked;
 
 public:
 	CUnit();
@@ -58,6 +58,7 @@ public:
 	void SetMoveEnd();
 	void MakeMoveEnd(); //ˆÚ“®’â~”»’è
 	void SetPrepared(bool prepare);
+	void SetAttacked(bool hadAttacked);
 	bool GetPrepared();
 	int Getx();
 	int Gety();
@@ -68,6 +69,7 @@ public:
 	int GetMoves();
 	int GetObstacle(int x, int y);
 	bool GetMoveEnd();
+	bool GetAttacked();
 	void Move(int dir /*direction*/, int cost);
 	void SetObstacle(int x,int y,int type);
 	void Awake(int x,int y,int type);
@@ -82,7 +84,7 @@ public:
 	void Survive(); //‹­§¶‘¶ˆ—
 	void Recover(int r);
 	void Product(int x,int y,int type); //¶Y‚³‚ê‚½‚Æ‚«‚Ég‚¤
-	void DrawUnit(int country);
+	void DrawUnit(int country, int stage, int adjX, int adjY);
 	void DrawMoves();
 	void DrawHeal();
 };

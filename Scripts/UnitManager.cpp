@@ -13,7 +13,7 @@ CUnitManager::CUnitManager(){
 	selectingU=0;
 }
 
-void CUnitManager::Awake(){
+void CUnitManager::Awake(int stage){
 	SetUnit();
 	/*country[1].unit[1].Awake(6,4,1);
 	country[1].unit[2].Awake(5,3,2);
@@ -24,9 +24,17 @@ void CUnitManager::Awake(){
 	picture.LoadUnitmPic();
 	picture.LoadFlagPic();
 
+	file.LoadMapSize();
+
 	turn.Awake();
 
+	cscreen.SetStage();
+
 	selectingC=1;
+
+	sNum=stage;
+	mapW = file.mapX[stage];
+	mapH = file.mapY[stage];
 }
 
 void CUnitManager::SetUnit(){
@@ -229,8 +237,8 @@ void CUnitManager::MoveUnit(){
 	}
 
 	if(Selecting()){
-		for (int x = 0; x < MAP_W+1; x++){
-			for (int y = 0; y < MAP_H+1; y++){
+		for (int x = 0; x < mapW; x++){
+			for (int y = 0; y < mapH; y++){
 				ChangeObstacle(x, y, 0);
 			}
 		}
@@ -244,23 +252,20 @@ void CUnitManager::MoveUnit(){
 		if(country[selectingC].unit[selectingU].GetMoves()>0){
 			for(int j=1;j<=COUNTRY_NUM;j++){
 				for(int n=1;n<=UNIT_NUM;n++){
-					if(selectingU!=n){
+					if(selectingC!=j || selectingU!=n){
 						ChangeObstacle(Getx(j, n), Gety(j, n), 1);
 					}
-					for(int x=0;x<MAP_W;x++){
-						for(int y=0;y<MAP_H;y++){
-							if(!onemove){
-								if(Moveable(common.CheckArrow())){
-									Move();
-								}
 
-								if(country[selectingC].unit[selectingU].GetMoves()==0){
-									country[selectingC].unit[selectingU].SetMoveEnd();
-								}
-								//
-								DrawFormatString(5,30+selectingU*30,RED,"%d",country[selectingC].unit[selectingU].GetMoves());
-							}
+					if(!onemove){
+						if(Moveable(common.CheckArrow())){
+							Move();
 						}
+
+						if(country[selectingC].unit[selectingU].GetMoves()==0){
+							country[selectingC].unit[selectingU].SetMoveEnd();
+						}
+						//
+						DrawFormatString(5,30+selectingU*30,RED,"%d",country[selectingC].unit[selectingU].GetMoves());
 					}
 				}
 			}
@@ -277,8 +282,8 @@ void CUnitManager::MoveUnit(){
 }
 
 void CUnitManager::CheckRoute(){
-	for(int x=0;x<MAP_W+1;x++){
-		for(int y=0;y<MAP_H+1;y++){
+	for(int x=0;x<mapW;x++){
+		for(int y=0;y<mapH;y++){
 			route[x][y]=-100;
 
 			/*if(moves >= table[Array2D(unitX-x+9,unitY-y+9)] && Array2D(unitX-x+9,unitY-y+9) > 0 && Array2D(unitX-x+9,unitY-y+9)<361 ){
@@ -302,7 +307,7 @@ void CUnitManager::CheckRoute(){
 				Next.first=now.first+Dx[i];
 				Next.second=now.second+Dy[i];
 
-				if (Next.first>-1 && Next.first<MAP_W+1 && Next.second>-1 && Next.second<MAP_H+1 && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[now.first][now.second]-moveCost[Next.first][Next.second]>route[Next.first][Next.second] || route[Next.first][Next.second]<=0)){
+				if (Next.first>-1 && Next.first<mapW && Next.second>-1 && Next.second<mapH && !GetObstacle(selectingC, selectingU, Next.first, Next.second) && (route[now.first][now.second]-moveCost[Next.first][Next.second]>route[Next.first][Next.second] || route[Next.first][Next.second]<=0)){
 					route[Next.first][Next.second]=route[now.first][now.second]-moveCost[Next.first][Next.second];
 					Q.push(Next);
 				}
@@ -312,7 +317,7 @@ void CUnitManager::CheckRoute(){
 }
 
 void CUnitManager::PaintUnit(){
-	cscreen.MoveAdj();
+	cscreen.MoveAdj(sNum);
 
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		for(int n=1;n<=UNIT_NUM;n++){
@@ -348,7 +353,7 @@ void CUnitManager::PaintUnit(){
 	
 	for(int n=1;n<=UNIT_NUM;n++){
 		for(int i=1;i<=COUNTRY_NUM;i++){
-			country[i].unit[n].DrawUnit(i);
+			country[i].unit[n].DrawUnit(i, sNum, cscreen.adjX, cscreen.adjY);
 		}
 
 		country[turn.GetCountry()].unit[n].DrawMoves();

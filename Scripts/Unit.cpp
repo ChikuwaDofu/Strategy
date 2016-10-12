@@ -65,6 +65,10 @@ bool CUnit::GetMoveEnd(){
 	return MoveEnd;
 }
 
+bool CUnit::GetAttacked(){
+	return attacked;
+}
+
 bool CUnit::IsSiege(){
 	return siege;
 }
@@ -90,6 +94,10 @@ void CUnit::SetPrepared(bool prepare){
 	}
 }
 
+void CUnit::SetAttacked(bool hadAttacked){
+	attacked = hadAttacked;
+}
+
 void CUnit::Awake(int x,int y,int type){
 	unitX=x;
 	unitY=y;
@@ -101,6 +109,8 @@ void CUnit::Awake(int x,int y,int type){
 	siege = file.siege[type];
 	moves = file.move[type];
 	range = file.range[type];
+
+	attacked = false;
 	
 	picture.LoadUnitPic();
 	picture.LoadNumPic();
@@ -120,6 +130,7 @@ void CUnit::SkipTurn(){
 
 	SetMoves();
 
+	SetAttacked(false);
 }
 
 void CUnit::SetObstacle(int x,int y,int type){
@@ -188,15 +199,12 @@ void CUnit::Product(int x,int y,int type){
 	MoveEnd = true;
 }
 
-void CUnit::DrawUnit(int country){
+void CUnit::DrawUnit(int country, int stage, int adjX, int adjY){
 
-	screen.MoveAdj();
-
-	displayX = unitX - screen.adjX;
-	displayY = unitY - screen.adjY;
+	displayX = unitX - adjX;
+	displayY = unitY - adjY;
 
 	if (displayX >= 0 && displayX < MAP_W && displayY >= 0 && displayY < MAP_H){
-		screen.MoveAdj();
 
 		DrawGraph(displayX * 50 + 100, displayY * 50 + 50, picture.unitPic[unitType - 1], true);
 		DrawGraph(displayX * 50 + 125, displayY * 50 + 75, picture.flagPic[country], true);

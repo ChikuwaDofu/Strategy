@@ -9,15 +9,16 @@ public:
 	int numPic[10];
 	int tilePic[10];
 	int townPic;
+	int coin;
 	int arrowPic[4];
-	int unitPic[5];
+	int unitPic[10];
 	int flagPic[5];
 	int productScr;//生産画面の背景
 	int cannot[5];
 	int close;
 	int ok;
-	int mapHandle[5];
-	int TmapHandle[5];//都市のマップチップ
+	int mapHandle[10];
+	int TmapHandle[10];//都市のマップチップ
 	int RangeBox;
 	int move[10];
 	int siegepic[5];
@@ -34,4 +35,8 @@ public:
 	int howTo[10];
 	void LoadTitlePic();
 	void LoadHowToPic();
+
+	int result;
+	int lFlag[5];
+	void LoadResultPic();
 };

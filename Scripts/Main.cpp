@@ -31,13 +31,19 @@ void suken::Awake(){
 
 	HowTo.SetButton(870, 0, 900, 30, cross, GoTitle);
 
+	Stage.input.AddEventListener(Event.EVERY_FRAME, SkipTurn);
+
 	Stage.input.AddEventListener(Event.EVERY_FRAME,DrawStage);
 	
 	Stage.input.AddEventListener(Event.EVERY_FRAME,MoveUnit);
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME,FightUnit);
 
+	Stage.input.AddEventListener(Event.EVERY_FRAME, GameOver);
+
 	Stage.SetButton(870, 0, 900, 30, cross, GoTitle);
+
+	Result.input.AddEventListener(Event.EVERY_FRAME, DrawResult);
 }
 
 void suken::GameLoopEnter(){

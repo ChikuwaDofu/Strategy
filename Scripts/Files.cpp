@@ -26,3 +26,13 @@ void CFiles::LoadTerrainFile(){
 
 	fclose(fterrain);
 }
+
+void CFiles::LoadMapSize(){
+	fmap = fopen("Kawachi2/Data_MapSize.txt", "r");
+
+	for (int i = 1; i <= STAGE_NUM; i++){
+		fscanf(fmap, "%d %d", &mapX[i], &mapY[i]);
+	}
+
+	fclose(fmap);
+}

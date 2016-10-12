@@ -16,8 +16,11 @@ private:
 	CCursor cursor;
 	CScreen cscreen;
 	CPicture picture;
-	CTurn turn;
+	CFiles file;
 	CCommon common;
+	int sNum;
+	int mapW;
+	int mapH;
 	int displayX;
 	int displayY;
 	int moveCost[20][20];
@@ -45,7 +48,8 @@ private:
 	bool CheckRCOn(int nation, int unit);
 
 public:
-	CCountry country[COUNTRY_NUM+1];
+	CCountry country[COUNTRY_NUM + 1];
+	CTurn turn;
 	CUnitManager();
 	int GetselectingU();
 	void SetMoveCost(int x, int y, int cost);
@@ -53,6 +57,6 @@ public:
 	void DrawUnit();
 	void MoveUnit();
 	void CheckMoveend();
-	void Awake();
+	void Awake(int stage);
 
 };

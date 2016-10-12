@@ -142,6 +142,9 @@
     <ClCompile Include="Screen.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>ソース　フォルダ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SukenLib\GameEngine\Physics\Primitive\Circle.h">
@@ -250,6 +253,9 @@
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
     <ClInclude Include="Screen.h">
+      <Filter>ヘッダー　フォルダ</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,8 +15,10 @@ private:
 	CPicture picture;
 	CFiles file;
 	CDraw draw;
-	CTurn turn;
 	CScreen screen;
+	int sNum;
+	int mapW;
+	int mapH;
 	int forcheck;//ユニット枠確認用
 	int Getcx();
 	int Getcy();
@@ -38,6 +40,7 @@ public:
 	CProduct(); 
 	CBattle battle;
 	CStage stage;
-	void Awake();
+	CTurn turn;
+	void Awake(int stageNum);
 	void Product();
 };

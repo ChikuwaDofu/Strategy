@@ -21,21 +21,27 @@ int CProduct::Getcy(){
 	return cursor.Getcy();
 }
 
-void CProduct::Awake(){
+void CProduct::Awake(int stageNum){
 	picture.LoadProductPic();
 	picture.LoadUnitPic();
 
 	file.LoadUnitFile();
 	file.LoadTerrainFile();
+	file.LoadMapSize();
+
+	mapW = file.mapX[stageNum];
+	mapH = file.mapY[stageNum];
 
 	turn.Awake();
+
+	screen.SetStage();
 
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		battle.unitm.country[i].Awake();
 	}
 
-	for (int x = 0; x < MAP_W+1; x++){
-		for (int y = 0; y < MAP_H+1; y++){
+	for (int x = 0; x < mapW; x++){
+		for (int y = 0; y < mapH; y++){
 			battle.unitm.SetMoveCost(x, y, file.moveCost[stage.GetTerrain(x, y)]);
 
 			for (int i = 1; i <= COUNTRY_NUM; i++){
@@ -49,6 +55,9 @@ void CProduct::Awake(){
 	}
 
 	battle.unitm.country[1].Income(stage.GetTNum(1)*10);
+
+	sNum=stageNum;
+
 }
 
 bool CProduct::UnitOnTown(){
@@ -64,8 +73,8 @@ bool CProduct::UnitOnTown(){
 }
 
 void CProduct::SetTownOwner(){
-	for (int x = 0; x < MAP_W+1; x++){
-		for (int y = 0; y < MAP_H+1; y++){
+	for (int x = 0; x < mapW; x++){
+		for (int y = 0; y < mapH; y++){
 			battle.SetTownOwner(x, y, stage.GetTownOwner(x, y));
 		}
 	}
@@ -77,7 +86,7 @@ void CProduct::Product(){
 
 	cursor.Setm();
 	cursor.Setc();
-	screen.MoveAdj();
+	screen.MoveAdj(sNum);
 
 	openednow = false;
 
@@ -149,7 +158,7 @@ void CProduct::Product(){
 				DrawBox(140,90+i*50,350,125+i*50,RED,false);
 			}
 			
-			if(Event.LMouse.GetClick(145,95+i*50,305,125+i*50) && !openednow){
+			if(Event.LMouse.GetClick(145,95+i*50,350,125+i*50) && !openednow){
 				for(int n=1;n<=UNIT_NUM;n++){
 					if(battle.unitm.country[turn.GetCountry()].unit[n].GetunitX()==-100 && !produced){
 						if (battle.unitm.country[turn.GetCountry()].CanPay(file.cost[i + 1])){
@@ -187,19 +196,21 @@ void CProduct::Product(){
 		cant[1]=false;
 	}
 
-	for(int i=1;i<=COUNTRY_NUM;i++){
-		battle.unitm.country[i].ShowMoney(i);
+	for (int i = 1; i <= COUNTRY_NUM; i++){
+		if (stage.GetTNum(i) != 0){
+			battle.unitm.country[i].ShowMoney(i);
+		}
 	}
 
 	Income();
 
-	if(Event.RMouse.GetClick(100,50,100+GRID_L*(MAP_W-1),50+GRID_L*(MAP_H-1))){
-		DamageTown(cursor.Getcx(),cursor.Getcy(),battle.GetTDamage(),turn.GetCountry());
+	if (Event.RMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H)){
+		DamageTown(cursor.Getcx() + screen.adjX, cursor.Getcy() + screen.adjY, battle.GetTDamage(), turn.GetCountry());
 	}
 
 	if(Event.key.GetDown(Event.key.RETURN)){
-		for(int x=0;x<MAP_W+1;x++){
-			for(int y=0;y<MAP_H+1;y++){
+		for(int x=0;x<mapW;x++){
+			for(int y=0;y<mapH;y++){
 				if(stage.GetTownOwner(x,y)==turn.GetCountry()){
 					if(stage.GetTownHp(x,y)<=90){
 						stage.DamageTown(x,y,-10,0);

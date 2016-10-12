@@ -4,15 +4,18 @@
 #include"Unit.h"
 #include"Cursor.h"
 #include"Screen.h"
-#include"Country.h"
 #include"UnitManager.h"
+#include"Files.h"
 
 class CBattle{
 private:
 	CScreen screen;
 	CCal cal;
 	CCommon common;
-	CTurn turn;
+	CFiles file;
+	int sNum;
+	int mapW;
+	int mapH;
 	int cursorX;
 	int cursorY;
 	int checkx[4];
@@ -57,8 +60,9 @@ private:
 public:
 	CCursorManager cursorm;
 	CUnitManager unitm;
+	CTurn turn;
 	CBattle();
-	void Awake();
+	void Awake(int stage);
 	bool GetBesiege();
 	int GetTDamage();
 	void SetTownOwner(int x,int y,int owner);

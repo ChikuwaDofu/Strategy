@@ -2,15 +2,17 @@
 
 #include"Suken.h"
 #include"Picture.h"
+#include"Files.h"
 
 class CTitle{
 private:
 	CPicture picture;
+	CFiles file;
 	int stageNow;
-	int tile[5][20][20];
-	int town[5][20][20];
-	int MapHandle[5];
-	int TMapHandle[5];
+	int tile[10][20][20];
+	int town[10][20][20];
+	int MapHandle[10];
+	int TMapHandle[10];
 
 	int howToNum;
 

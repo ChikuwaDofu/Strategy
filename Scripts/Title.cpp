@@ -12,11 +12,13 @@ void CTitle::Awake(){
 	picture.LoadMapPic();
 	picture.LoadFlagPic();
 
+	file.LoadMapSize();
+
 	stageNow = 1;
 
 	for (int i = 1; i <= STAGE_NUM; i++){
-		for (int x = 0; x < MAP_W + 1; x++){
-			for (int y = 0; y < MAP_H + 1; y++){
+		for (int x = 0; x < file.mapX[i]; x++){
+			for (int y = 0; y < file.mapY[i]; y++){
 				town[i][x][y] = -1;
 
 				CreateMap(x, y, i);
@@ -39,8 +41,8 @@ void CTitle::DrawTitle(){
 		ChangeStage(1);
 	}
 
-	for (int x = 0; x < MAP_W + 1; x++){
-		for (int y = 0; y < MAP_H + 1; y++){
+	for (int x = 0; x < file.mapX[stageNow]; x++){
+		for (int y = 0; y < file.mapX[stageNow]; y++){
 			DrawGraph(25 * x + 100, 25 * y + 50, picture.smallTile[tile[stageNow][x][y]], true);
 			DrawGraph(25 * x + 100, 25 * y + 50, picture.flagPic[town[stageNow][x][y]], true);
 		}
@@ -101,7 +103,7 @@ void CTitle::AwakeHow(){
 }
 
 void CTitle::HowTo(){
-	DrawGraph(0, 0, picture.howTo[stageNow], true);
+	DrawGraph(0, 0, picture.howTo[howToNum], true);
 
 	DrawGraph(0, 249, picture.arrowPic[2], true);
 	if (Event.LMouse.GetClick(0, 249, 25, 351)){
@@ -115,12 +117,12 @@ void CTitle::HowTo(){
 }
 
 void CTitle::ChangeHowTo(int change){
-	stageNow += change;
+	howToNum += change;
 
-	if (stageNow < 0){
-		stageNow = 3;
+	if (howToNum < 0){
+		howToNum = 3;
 	}
-	if (stageNow > 3){
-		stageNow = 0;
+	if (howToNum > 3){
+		howToNum = 0;
 	}
 }

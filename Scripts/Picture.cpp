@@ -35,6 +35,8 @@ void CPicture::LoadMapPic(){
 	tilePic[5] = LoadGraph("Kawachi2/Mountain.png");
 	townPic = LoadGraph("Kawachi2/Town.png");
 
+	coin=LoadGraph("Kawachi2/Coin.png");
+
 	arrowPic[0] = LoadGraph("Kawachi2/ArrowUp.png");
 	arrowPic[1] = LoadGraph("Kawachi2/ArrowDown.png");
 	arrowPic[2] = LoadGraph("Kawachi2/ArrowLeft.png");
@@ -86,4 +88,12 @@ void CPicture::LoadHowToPic(){
 	howTo[1] = LoadGraph("Kawachi2/HowTo2.png");
 	howTo[2] = LoadGraph("Kawachi2/HowTo3.png");
 	howTo[3] = LoadGraph("Kawachi2/HowTo4.png");
+}
+
+void CPicture::LoadResultPic(){
+	result = LoadGraph("Kawachi2/GameOver.png");
+
+	lFlag[1] = LoadGraph("Kawachi2/Lcountry1.png");
+	lFlag[2] = LoadGraph("Kawachi2/Lcountry2.png");
+	lFlag[3] = LoadGraph("Kawachi2/Lcountry3.png");
 }

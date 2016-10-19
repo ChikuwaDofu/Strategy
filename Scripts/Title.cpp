@@ -83,6 +83,9 @@ void CTitle::CreateTown(int x, int y, int stage){
 	if (r == 0 && g == 255 && b == 0){
 		town[stage][x][y] = 3;
 	}
+	if (r == 255 && g == 255 && b == 0){
+		town[stage][x][y] = 4;
+	}
 }
 
 void CTitle::ChangeStage(int stage){
@@ -106,12 +109,12 @@ void CTitle::HowTo(){
 	DrawGraph(0, 0, picture.howTo[howToNum], true);
 
 	DrawGraph(0, 249, picture.arrowPic[2], true);
-	if (Event.LMouse.GetClick(0, 249, 25, 351)){
+	if (Event.LMouse.GetClick(0, 249, 25, 351) || Event.key.GetDown(Event.key.LEFT)){
 		ChangeHowTo(-1);
 	}
 
 	DrawGraph(875, 249, picture.arrowPic[3], true);
-	if (Event.LMouse.GetClick(875, 249, 900, 351)){
+	if (Event.LMouse.GetClick(875, 249, 900, 351) || Event.key.GetDown(Event.key.RIGHT)){
 		ChangeHowTo(1);
 	}
 }
@@ -120,9 +123,9 @@ void CTitle::ChangeHowTo(int change){
 	howToNum += change;
 
 	if (howToNum < 0){
-		howToNum = 3;
+		howToNum = 6;
 	}
-	if (howToNum > 3){
+	if (howToNum > 6){
 		howToNum = 0;
 	}
 }

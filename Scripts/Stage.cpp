@@ -67,7 +67,11 @@ void CStage::CreateTown(int x,int y,int stage){
 		town[x][y] = 3;
 		townNum[3]++;
 		townHp[x][y] = 100;
-
+	}
+	if (r == 255 && g == 255 && b == 0){
+		town[x][y] = 4;
+		townNum[4]++;
+		townHp[x][y] = 100;
 	}
 }
 

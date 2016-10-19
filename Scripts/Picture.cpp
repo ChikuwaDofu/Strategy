@@ -18,12 +18,15 @@ void CPicture::LoadUnitPic(){
 	siegepic[1] = LoadGraph("Kawachi2/SiegeOK.png");
 
 	heal = LoadGraph("Kawachi2/heal.png");
+
+	attackable = LoadGraph("Kawachi2/Attackable.png");
 }
 
 void CPicture::LoadFlagPic(){
 	flagPic[1] = LoadGraph("Kawachi2/country1.png");
 	flagPic[2] = LoadGraph("Kawachi2/country2.png");
 	flagPic[3] = LoadGraph("Kawachi2/country3.png");
+	flagPic[4] = LoadGraph("Kawachi2/country4.png");
 }
 
 void CPicture::LoadMapPic(){
@@ -44,8 +47,10 @@ void CPicture::LoadMapPic(){
 
 	mapHandle[1] = LoadSoftImage("Kawachi2/TestMap.png");
 	mapHandle[2] = LoadSoftImage("Kawachi2/TestMap2.png");
+	mapHandle[3] = LoadSoftImage("Kawachi2/TestMap3.png");
 	TmapHandle[1] = LoadSoftImage("Kawachi2/TestMapTown.png");
 	TmapHandle[2] = LoadSoftImage("Kawachi2/TestMap2Town.png");
+	TmapHandle[3] = LoadSoftImage("Kawachi2/TestMap3Town.png");
 }
 
 void CPicture::LoadProductPic(){
@@ -54,6 +59,10 @@ void CPicture::LoadProductPic(){
 	cannot[0] = LoadGraph("Kawachi2/Can't.png");
 	cannot[1] = LoadGraph("Kawachi2/NoMoney.png");
 	ok = LoadGraph("Kawachi2/OK.png");
+	coin = LoadGraph("Kawachi2/Coin.png");
+	strength[0] = LoadGraph("Kawachi2/Str.png");
+	strength[1] = LoadGraph("Kawachi2/RStr.png");
+	strength[2] = LoadGraph("Kawachi2/SStr.png");
 }
 
 void CPicture::LoadNumPic(){
@@ -73,6 +82,11 @@ void CPicture::LoadUnitmPic(){
 	RangeBox = LoadGraph("Kawachi2/Range.png");
 }
 
+void CPicture::LoadBattlePic(){
+	shotRangeBox = LoadGraph("Kawachi2/ShotRange.png");
+	combatRangeBox=LoadGraph("Kawachi2/CombatRange.png");
+}
+
 void CPicture::LoadTitlePic(){
 	stageSelect = LoadGraph("Kawachi2/StageSelect.png");
 
@@ -88,6 +102,9 @@ void CPicture::LoadHowToPic(){
 	howTo[1] = LoadGraph("Kawachi2/HowTo2.png");
 	howTo[2] = LoadGraph("Kawachi2/HowTo3.png");
 	howTo[3] = LoadGraph("Kawachi2/HowTo4.png");
+	howTo[4] = LoadGraph("Kawachi2/HowTo5.png");
+	howTo[5] = LoadGraph("Kawachi2/HowTo6.png");
+	howTo[6] = LoadGraph("Kawachi2/HowTo7.png");
 }
 
 void CPicture::LoadResultPic(){
@@ -96,4 +113,5 @@ void CPicture::LoadResultPic(){
 	lFlag[1] = LoadGraph("Kawachi2/Lcountry1.png");
 	lFlag[2] = LoadGraph("Kawachi2/Lcountry2.png");
 	lFlag[3] = LoadGraph("Kawachi2/Lcountry3.png");
+	lFlag[4] = LoadGraph("Kawachi2/Lcountry4.png");
 }

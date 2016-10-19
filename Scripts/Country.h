@@ -14,5 +14,6 @@ public:
 	int money;
 	void Awake();
 	void ShowMoney(int num);
+	void GameOver();
 
 };

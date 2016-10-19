@@ -46,6 +46,7 @@ private:
 	void PaintUnit();
 	bool CheckLCOn(int nation, int unit);
 	bool CheckRCOn(int nation, int unit);
+	bool clickedNone;
 
 public:
 	CCountry country[COUNTRY_NUM + 1];

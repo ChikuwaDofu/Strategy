@@ -23,12 +23,17 @@ public:
 	int move[10];
 	int siegepic[5];
 	int heal;
+	int shotRangeBox;
+	int combatRangeBox;
+	int attackable;
+	int strength[3];
 	void LoadUnitPic();
 	void LoadFlagPic();
 	void LoadProductPic();
 	void LoadMapPic();
 	void LoadNumPic();
 	void LoadUnitmPic();
+	void LoadBattlePic();
 
 	int stageSelect;
 	int smallTile[10];

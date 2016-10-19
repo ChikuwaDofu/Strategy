@@ -232,6 +232,10 @@ void CUnit::DrawMoves(){
 				DrawGraph(displayX * 50 + 140, displayY * 50 + 51 + (i - 1) * 4, picture.move[i], true);
 			}
 		}
+
+		if(!MoveEnd && prepared && !attacked){
+			DrawGraph(displayX * GRID_L + 115, displayY * GRID_L + 65, picture.attackable, true);
+		}
 	}
 }
 

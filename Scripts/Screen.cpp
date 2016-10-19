@@ -3,13 +3,10 @@
 #include"Screen.h"
 #include"General.h"
 
-CScreen::CScreen(){
-	adjX = 0;
-	adjY = 0;
-}
-
 void CScreen::SetStage(){
 	file.LoadMapSize();
+	adjX = 0;
+	adjY = 0;
 }
 
 void CScreen::MoveAdj(int stage){

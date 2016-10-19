@@ -25,6 +25,8 @@ void CBattle::Awake(int stage){
 
 	file.LoadMapSize();
 
+	picture.LoadBattlePic();
+
 	screen.SetStage();
 	
 	sNum=stage;
@@ -73,19 +75,19 @@ int CBattle::GetRange(int country, int unit){
 	return unitm.country[country].unit[unit].GetRange();
 }
 
-bool CBattle::CheckRCOnUnit(int country,int unit){
+bool CBattle::CheckCOnUnit(int country,int unit){
 	displayX = LocationX(country, unit) - screen.adjX;
 	displayY = LocationY(country, unit) - screen.adjY;
 
-	if(Event.RMouse.GetClick(displayX*50+100,displayY*50+50,displayX*50+150,displayY*50+100)){
+	if (Event.RMouse.GetClick(displayX * 50 + 100, displayY * 50 + 50, displayX * 50 + 150, displayY * 50 + 100) || Event.LMouse.GetClick(displayX * 50 + 100, displayY * 50 + 50, displayX * 50 + 150, displayY * 50 + 100)){
 		return true;
 	}else{
 		return false;
 	}
 }
 
-bool CBattle::CheckRCOnTown(int type){
-	if(Event.RMouse.GetClick(100,50,100+GRID_L*(MAP_W-1),50+GRID_L*(MAP_H-1))){
+bool CBattle::CheckCOnTown(int type){
+	if (Event.RMouse.GetClick(100, 50, 100 + GRID_L * MAP_W, 50 + GRID_L*MAP_H) || Event.LMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H)){
 		switch (type){
 		case 1:
 			return SCtarget[cursorX+screen.adjX][cursorY+screen.adjY];
@@ -175,7 +177,7 @@ void CBattle::SetTarget(){
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		for(int n=1;n<=UNIT_NUM;n++){
 			for(int a=0;a<4;a++){
-				if(target[LocationX(selectingC,selectingU)+checkx[a]][LocationY(selectingC,selectingU)+checky[a]]){
+				if(target[LocationX(selectingC,selectingU)+checkx[a]][LocationY(selectingC,selectingU)+checky[a]] && GetRStrength(selectingC,selectingU)==0){
 					Ctarget[LocationX(selectingC,selectingU)+checkx[a]][LocationY(selectingC,selectingU)+checky[a]]=true;
 				}
 			}
@@ -203,7 +205,7 @@ void CBattle::SetTarget(){
 			if (townOwner[x][y] != selectingC && !target[x][y] && townOwner[x][y] != 0){
 				for (int a = 0; a < 4; a++){
 					if (town[LocationX(selectingC, selectingU) + checkx[a]][LocationY(selectingC, selectingU) + checky[a]]){
-						SCtarget[x][y] = true;
+						SCtarget[LocationX(selectingC, selectingU) + checkx[a]][LocationY(selectingC, selectingU) + checky[a]] = true;
 					}
 
 					if (cal.Absolute(LocationX(selectingC, selectingU) - x) + cal.Absolute(LocationY(selectingC, selectingU) - y) <= GetRange(selectingC, selectingU) && town[x][y] && GetRStrength(selectingC, selectingU)>0){
@@ -230,6 +232,17 @@ void CBattle::Battle(){
 	if(Selecting()){
 		SetTarget();
 
+		for (int x = screen.adjX; x < screen.adjX + MAP_W; x++){
+			for (int y = screen.adjY; y < screen.adjY + MAP_H; y++){
+				if (Ctarget[x][y] || SCtarget[x][y]){
+					DrawGraph((x - screen.adjX)*GRID_L + 102, (y - screen.adjY)*GRID_L + 52, picture.combatRangeBox, true);
+				}
+				if (Rtarget[x][y] || SRtarget[x][y]){
+					DrawGraph((x - screen.adjX)*GRID_L + 102, (y - screen.adjY)*GRID_L + 52, picture.shotRangeBox, true);
+				}
+			}
+		}
+
 		if (unitm.country[selectingC].unit[selectingU].GetPrepared() && !unitm.country[selectingC].unit[selectingU].GetAttacked()){
 			Siege();
 
@@ -245,7 +258,7 @@ void CBattle::Battle(){
 void CBattle::Combat(){
 	for(int i=1;i<=COUNTRY_NUM;i++){
 		for(int n=1;n<=UNIT_NUM;n++){
-			if(CheckRCOnUnit(i,n)&& Ctarget[LocationX(i,n)][LocationY(i,n)]  && Enemy(i)){
+			if(CheckCOnUnit(i,n)&& Ctarget[LocationX(i,n)][LocationY(i,n)]  && Enemy(i)){
 				DefDam=Attack(22,selectingC,selectingU,i,n);
 				AtkDam=Attack(22,i,n,selectingC,selectingU);
 
@@ -281,20 +294,25 @@ void CBattle::Ranged(){
 
 		for(int i=1;i<=COUNTRY_NUM;i++){
 			for(int n=1;n<=UNIT_NUM;n++){
-				if(CheckRCOnUnit(i,n) && Rtarget[LocationX(i,n)][LocationY(i,n)] && Enemy(i)){				
+				if(CheckCOnUnit(i,n) && Rtarget[LocationX(i,n)][LocationY(i,n)] && Enemy(i)){	
 					range_attack=true;
 
 					if (cal.Absolute(LocationX(selectingC, selectingU) - LocationX(i, n))+cal.Absolute(LocationY(selectingC, selectingU) - LocationY(i, n)) == 1){
-						AtkDam = Attack(22, i, n, selectingC, selectingU);
+						AtkDam = Attack(12, i, n, selectingC, selectingU);
 					}
 
-					DefDam=Attack(12,selectingC,selectingU,i,n);
+					DefDam=Attack(17,selectingC,selectingU,i,n);
 
 					Damage(i, n, DefDam);
 					Damage(selectingC, selectingU, AtkDam);
 
-					if(Dead(i,n)){
-						unitm.country[i].unit[n].Death();
+					if(Dead(selectingC,selectingU)){
+						unitm.country[selectingC].unit[selectingU].Death();
+						unitm.country[i].unit[n].Survive();
+					}else{
+						if(Dead(i,n)){
+							unitm.country[i].unit[n].Death();
+						}
 					}
 
 					unitm.country[selectingC].unit[selectingU].SetAttacked(true);
@@ -307,7 +325,7 @@ void CBattle::Ranged(){
 }
 
 void CBattle::Siege(){
-	if (CheckRCOnTown(2)){
+	if (CheckCOnTown(2)){
 		besiege=true;
 
 		tDamage=FightTown(ATTACK,10,unitm.country[selectingC].unit[selectingU].GetSstrength(),selectingC,selectingU);
@@ -316,7 +334,7 @@ void CBattle::Siege(){
 
 		unitm.country[selectingC].unit[selectingU].Move(0, 1);
 	}
-	else if(CheckRCOnTown(1)){
+	else if(CheckCOnTown(1)){
 		besiege=true;
 
 		tDamage=FightTown(ATTACK,18,unitm.country[selectingC].unit[selectingU].GetSstrength(),selectingC,selectingU);

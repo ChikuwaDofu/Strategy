@@ -26,3 +26,9 @@ bool CCountry::CanPay(int require){
 void CCountry::ShowMoney(int num){
 	DrawFormatString(870,25+num*25,YELLOW,"%d",money);
 }
+
+void CCountry::GameOver(){
+	for(int i=1;i<=UNIT_NUM;i++){
+		unit[i].Setunit();
+	}
+} 

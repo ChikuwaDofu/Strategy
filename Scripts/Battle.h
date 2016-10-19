@@ -5,6 +5,7 @@
 #include"Cursor.h"
 #include"Screen.h"
 #include"UnitManager.h"
+#include"Picture.h"
 #include"Files.h"
 
 class CBattle{
@@ -13,6 +14,7 @@ private:
 	CCal cal;
 	CCommon common;
 	CFiles file;
+	CPicture picture;
 	int sNum;
 	int mapW;
 	int mapH;
@@ -54,8 +56,8 @@ private:
 	void Damage(int country,int unit,int damage);
 	bool Dead(int country,int unit);
 	bool Enemy(int country); //“G‚È‚ç‚Îtrue
-	bool CheckRCOnUnit(int country,int unit);
-	bool CheckRCOnTown(int type);
+	bool CheckCOnUnit(int country,int unit);
+	bool CheckCOnTown(int type);
 
 public:
 	CCursorManager cursorm;

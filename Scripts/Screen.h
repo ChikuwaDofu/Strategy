@@ -8,7 +8,6 @@ private:
 	CFiles file;
 
 public:
-	CScreen();
 	void SetStage();
 	int adjX;//adjust
 	int adjY;

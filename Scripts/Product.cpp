@@ -58,6 +58,9 @@ void CProduct::Awake(int stageNum){
 
 	sNum=stageNum;
 
+	openwin=false;
+	cant[0]=false;
+	cant[1]=false;
 }
 
 bool CProduct::UnitOnTown(){
@@ -141,6 +144,11 @@ void CProduct::Product(){
 	if (openwin){
 		DrawGraph(100, 50, picture.productScr, true);
 
+		DrawGraph(257, 73, picture.coin, true);
+		for(int i=0;i<3;i++){
+			DrawGraph(278+20*i, 70, picture.strength[i], true);
+		}
+
 		for(int i=0;i<UTYPE_NUM;i++){
 			DrawGraph(150, 95+50*i, picture.unitPic[i], true);
 
@@ -199,12 +207,14 @@ void CProduct::Product(){
 	for (int i = 1; i <= COUNTRY_NUM; i++){
 		if (stage.GetTNum(i) != 0){
 			battle.unitm.country[i].ShowMoney(i);
+		}else{
+			battle.unitm.country[i].GameOver();
 		}
 	}
 
 	Income();
 
-	if (Event.RMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H)){
+	if (Event.RMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H) || Event.LMouse.GetClick(100, 50, 100 + GRID_L*MAP_W, 50 + GRID_L*MAP_H)){
 		DamageTown(cursor.Getcx() + screen.adjX, cursor.Getcy() + screen.adjY, battle.GetTDamage(), turn.GetCountry());
 	}
 

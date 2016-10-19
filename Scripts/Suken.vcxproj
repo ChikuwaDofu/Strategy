@@ -89,6 +89,7 @@
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Country.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Files.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Country.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Files.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="MyScene.h" />
@@ -165,6 +167,9 @@
     <ProjectReference Include="stage\stage.vcxproj">
       <Project>{a74596ab-8b6a-452f-9e7d-0c5b2110821e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Kawachi2\Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

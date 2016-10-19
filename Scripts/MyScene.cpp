@@ -82,7 +82,7 @@ void FightUnit(){
 void SkipTurn(){
 	turn.SkipTurn();
 
-	if (product.stage.GetTNum(turn.GetCountry()) == 0){
+	while (product.stage.GetTNum(turn.GetCountry()) == 0){
 		product.turn.SkipTurn();
 		product.stage.turn.SkipTurn();
 		product.battle.turn.SkipTurn();

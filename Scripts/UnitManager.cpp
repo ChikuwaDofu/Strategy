@@ -11,6 +11,8 @@ int Dy[4]={1,0,-1,0};
 CUnitManager::CUnitManager(){
 	selectingC=0;
 	selectingU=0;
+
+	clickedNone = false;
 }
 
 void CUnitManager::Awake(int stage){
@@ -75,7 +77,7 @@ bool CUnitManager::CheckLCOn(int nation,int unit){
 }
 
 bool CUnitManager::CheckRCOn(int nation, int unit){
-	if (Event.RMouse.GetClick(Getx(nation, unit) * 50 + 100, Gety(nation, unit) * 50 + 50, Getx(nation, unit) * 50 + 150, Gety(nation, unit) * 50 + 100)){
+	if (Event.RMouse.GetClick((Getx(nation, unit)) - cscreen.adjX * 50 + 100, (Gety(nation, unit) - cscreen.adjY) * 50 + 50, (Getx(nation, unit) - cscreen.adjX) * 50 + 150, (Gety(nation, unit) - cscreen.adjY) * 50 + 100)){
 		return true;
 	}
 	else{
@@ -107,13 +109,22 @@ void CUnitManager::Setselecting(){
 	
 	cursor.Setm();
 	cursor.Setc();
-	
-	if(Event.LMouse.GetClick(0,0,WINDOW_WIDTH,WINDOW_HEIGHT)){
+
+	if (clickedNone){
 		Select(0);
+	}
+
+	clickedNone = false;
+
+	if(Event.LMouse.GetClick(100,50,WINDOW_WIDTH-100,WINDOW_HEIGHT-50)){
 		for(int n=1;n<=UNIT_NUM;n++){
 			if(CheckLCOn(selectingC,n) && !country[selectingC].unit[n].GetMoveEnd() && !screen){
 				Select(n);
+				clickedNone = false;
+	
+				break;
 			}
+			clickedNone = true;
 		}
 	}
 }
@@ -357,8 +368,6 @@ void CUnitManager::PaintUnit(){
 		}
 
 		country[turn.GetCountry()].unit[n].DrawMoves();
-
-		country[turn.GetCountry()].unit[n].DrawHeal();
 	}
 }
 

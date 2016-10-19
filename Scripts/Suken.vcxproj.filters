@@ -145,6 +145,9 @@
     <ClCompile Include="Result.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>ソース　フォルダ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SukenLib\GameEngine\Physics\Primitive\Circle.h">
@@ -258,5 +261,13 @@
     <ClInclude Include="Result.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>ヘッダー　フォルダ</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Kawachi2\Resource.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

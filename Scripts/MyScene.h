@@ -10,6 +10,7 @@ extern CScene Result;
 
 void Start();
 void GoTitle();
+void BackToTitle();
 void DrawTitle();
 void GoHowTo();
 void DrawHowTo();
@@ -22,3 +23,6 @@ bool LastOne();
 void GameOver();
 void DrawResult();
 void StageEnter(int stage);
+void LoadStage(int stage);
+void SaveStage();
+void ContinueStage();

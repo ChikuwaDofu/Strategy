@@ -1,6 +1,6 @@
 #include"DxLib.h"
 #include"Unit.h"
-
+#include"Savedata.h"
 
 int Array2D(int x,int y){
 	return 19*x + y ;
@@ -83,7 +83,6 @@ void CUnit::Setunit(){
 }
 
 void CUnit::SetMoves(){
-	moved=false;
 	MoveEnd=false;
 	moves = file.move[unitType];
 }
@@ -115,12 +114,10 @@ void CUnit::Awake(int x,int y,int type){
 	picture.LoadUnitPic();
 	picture.LoadNumPic();
 	picture.LoadFlagPic();
-
-	turn.Awake();
 }
 
 void CUnit::SkipTurn(){
-	if(!moved && !MoveEnd){
+	if(!Moved() && !MoveEnd){
 		if(hp<=90){
 			Recover(10);
 		}else{
@@ -142,8 +139,6 @@ int CUnit::GetObstacle(int x, int y){
 }
 
 void CUnit::Move(int dir, int cost){
-	moved=true;
-
 	moves -= cost;
 
 	if (moves < 0){
@@ -161,6 +156,14 @@ void CUnit::Move(int dir, int cost){
 	}
 	if(dir==UP){
 		unitY--;
+	}
+}
+
+bool CUnit::Moved(){
+	if(moves==file.move[unitType]){
+		return false;
+	}else{
+		return true;
 	}
 }
 
@@ -241,8 +244,33 @@ void CUnit::DrawMoves(){
 
 void CUnit::DrawHeal(){
 	if (displayX >= 0 && displayX < MAP_W && displayY >= 0 && displayY < MAP_H){
-		if (!moved && !MoveEnd){
+		if (!Moved() && !MoveEnd){
 			DrawGraph(displayX * 50 + 125, displayY * 50 + 50, picture.heal, true);
 		}
+	}
+}
+
+void CUnit::Load(int country, int unit){
+	picture.LoadUnitPic();
+	picture.LoadNumPic();
+	picture.LoadFlagPic();
+
+	unitX=GetUnitX(country,unit);
+	unitY=GetUnitY(country,unit);
+	moves=GetUnitMove(country,unit);
+	prepared=GetUnitPrepare(country,unit);
+	attacked=GetUnitAttacked(country,unit);
+	unitType=GetUnitType(country,unit);
+	hp=GetUnitHP(country,unit);
+
+	strength = file.strength[unitType];
+	r_strength = file.rangedStrength[unitType];
+	s_strength = file.siegeStrength[unitType];
+	siege = file.siege[unitType];
+	moves = file.move[unitType];
+	range = file.range[unitType];
+
+	if(moves==0){
+		MoveEnd=true;
 	}
 }

@@ -1,6 +1,7 @@
 #include"DxLib.h"
 #include"Suken.h"
 #include"General.h"
+#include"Savedata.h"
 
 void CTurn::Awake(){
 	country=1;
@@ -74,4 +75,14 @@ int CCommon::CheckArrow(){
 		return RIGHT;
 	}
 	return 0;
+}
+
+void CTurn::Load(){
+	turn=GetTurnNum();
+	country=GetTurnCountry();
+}
+
+void CTurn::Save(){
+	SetTurnNum(turn);
+	SetTurnCountry(country);
 }

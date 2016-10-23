@@ -27,6 +27,8 @@ public:
 	int combatRangeBox;
 	int attackable;
 	int strength[3];
+	int saveButton[3];
+	int closeButton[2];
 	void LoadUnitPic();
 	void LoadFlagPic();
 	void LoadProductPic();
@@ -34,6 +36,7 @@ public:
 	void LoadNumPic();
 	void LoadUnitmPic();
 	void LoadBattlePic();
+	void LoadButtonPic();
 
 	int stageSelect;
 	int smallTile[10];

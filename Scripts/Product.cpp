@@ -250,3 +250,7 @@ void CProduct::DamageTown(int x,int y,int damage,int attacker){
 		stage.DamageTown(x, y, damage, attacker);
 	}
 }
+
+int CProduct::GetStage(){
+	return sNum;
+}

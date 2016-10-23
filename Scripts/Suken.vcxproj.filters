@@ -145,7 +145,10 @@
     <ClCompile Include="Result.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
+    <ClCompile Include="Music.cpp">
+      <Filter>ソース　フォルダ</Filter>
+    </ClCompile>
+    <ClCompile Include="Savedata.cpp">
       <Filter>ソース　フォルダ</Filter>
     </ClCompile>
   </ItemGroup>
@@ -261,7 +264,10 @@
     <ClInclude Include="Result.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
+    <ClInclude Include="Music.h">
+      <Filter>ヘッダー　フォルダ</Filter>
+    </ClInclude>
+    <ClInclude Include="Savedata.h">
       <Filter>ヘッダー　フォルダ</Filter>
     </ClInclude>
   </ItemGroup>

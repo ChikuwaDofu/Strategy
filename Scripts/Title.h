@@ -3,6 +3,7 @@
 #include"Suken.h"
 #include"Picture.h"
 #include"Files.h"
+#include"Music.h"
 
 class CTitle{
 private:

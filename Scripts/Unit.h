@@ -30,7 +30,6 @@ int Array2D(int x,int y);
 
 class CUnit{
 private:
-	CTurn turn;
 	CPicture picture;
 	CFiles file;
 	int unitType;
@@ -42,7 +41,7 @@ private:
 	int displayY;
 	int moves;
 	int obstacle[20][20];
-	bool moved;//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで
+	bool Moved();//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで
 	bool MoveEnd;
 	int hp;
 	int strength;
@@ -87,4 +86,5 @@ public:
 	void DrawUnit(int country, int stage, int adjX, int adjY);
 	void DrawMoves();
 	void DrawHeal();
+	void Load(int country,int unit);
 };

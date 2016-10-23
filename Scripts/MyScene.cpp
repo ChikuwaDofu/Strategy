@@ -8,6 +8,7 @@
 #include"Product.h"
 #include"Result.h"
 #include"Files.h"
+#include"Savedata.h"
 #include"General.h"
 #include"MyScene.h"
 
@@ -21,6 +22,7 @@ CCommon common;
 CTurn turn;
 CResult result;
 CFiles file;
+CButtons buttons;
 
 int stageNow;
 
@@ -35,8 +37,19 @@ void Start(){
 }
 
 void GoTitle(){
+	if(buttons.GetClosed()){
+		Game.RemoveChild();
+		Game.AddChild(&Title);
+
+		DeleteSave();
+	}
+}
+
+void BackToTitle(){
 	Game.RemoveChild();
 	Game.AddChild(&Title);
+
+	DeleteSave();
 }
 
 void DrawTitle(){
@@ -56,17 +69,16 @@ void DrawHowTo(){
 void GoStage(){
 	stageNow = title.GetStageNow();
 
-	if(Event.key.GetDown(Event.key.RETURN)){
-		Game.RemoveChild();
-		Game.AddChild(&Stage);
-		StageEnter(stageNow);
-	}
+	Game.RemoveChild();
+	Game.AddChild(&Stage);
+	StageEnter(stageNow);
 }
 
 void DrawStage(){
 	product.stage.DrawStage();
 	product.battle.unitm.DrawUnit();
 	back.DrawLine();
+	buttons.DrawButton();
 	product.battle.cursorm.DrawCursor();
 }
 
@@ -92,6 +104,7 @@ void SkipTurn(){
 }
 
 void StageEnter(int stage){
+	LoadSave(stage);
 
 	product.battle.unitm.Awake(stage);
 	product.stage.Awake(stage);
@@ -99,8 +112,43 @@ void StageEnter(int stage){
 	product.Awake(stage);
 	product.battle.Awake(stage);
 	turn.Awake();
+	buttons.Awake();
 
 //	stage = new CStage(1);
+}
+
+void LoadStage(int stage){
+	LoadSave(stage);
+	ReadSave(stage);
+
+	turn.Load();
+	product.turn.Load();
+	product.stage.turn.Load();
+	product.battle.turn.Load();
+	product.battle.unitm.turn.Load();
+
+	product.stage.Load();
+	product.battle.unitm.Load();
+}
+
+void ContinueStage(){
+	GoStage();
+
+	LoadStage(stageNow);
+}
+
+void SaveStage(){
+	if(buttons.GetSaved()){
+		product.stage.Save();
+		product.battle.unitm.Save();
+		turn.Save();
+		product.turn.Save();
+		product.stage.turn.Save();
+		product.battle.turn.Save();
+		product.battle.unitm.turn.Save();
+
+		WriteSave(product.GetStage());
+	}
 }
 
 void GameOver(){

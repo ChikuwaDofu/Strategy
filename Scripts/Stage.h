@@ -41,6 +41,8 @@ public:
 	void DamageTown(int x, int y, int damage, int attacker);
 	void DrawStage();
 	void Awake(int stage);
+	void Load();
+	void Save();
 };
 
 //CStage* stage;

@@ -97,6 +97,9 @@ void CTitle::ChangeStage(int stage){
 	if (stageNow > STAGE_NUM){
 		stageNow = 1;
 	}
+	
+	music->AddSound(sPractice);
+
 }
 
 void CTitle::AwakeHow(){

@@ -1,5 +1,6 @@
 #include"DxLib.h"
 #include"UnitManager.h"
+#include"Savedata.h"
 #include<queue>
 using namespace std;
 typedef pair<int,int>P;
@@ -368,11 +369,12 @@ void CUnitManager::PaintUnit(){
 		}
 
 		country[turn.GetCountry()].unit[n].DrawMoves();
+		country[turn.GetCountry()].unit[n].DrawHeal();
 	}
 }
 
 void CUnitManager::CheckMoveend(){
-	if (country[selectingC].unit[selectingU].GetMoves() == 0){
+	if (country[selectingC].unit[selectingU].GetMoves() == 0 && selectingU!=0){
 		country[selectingC].unit[selectingU].MakeMoveEnd();
 		Select(0);
 	}
@@ -390,4 +392,32 @@ void CUnitManager::DrawUnit(){
 	DrawFormatString(30,50,GREEN,"%d %d",cursor.Getmx(),cursor.Getmy());
 	
 	DrawFormatString(5,5,GREEN,"%d,%d",selectingC,selectingU);
+}
+
+void CUnitManager::Load(){
+	selectingC = GetTurnCountry();
+
+	for(int i=1;i<=COUNTRY_NUM;i++){
+		for(int n=1;n<=UNIT_NUM;n++){
+			country[i].unit[n].Load(i,n);
+		}
+
+		country[i].Load(i);
+	}
+}
+
+void CUnitManager::Save(){
+	for(int i=1;i<=COUNTRY_NUM;i++){
+		for(int n=1;n<=UNIT_NUM;n++){
+			SetUnitX(i,n,Getx(i,n));
+			SetUnitY(i,n,Gety(i,n));
+			SetUnitMove(i,n,GetMoves(i,n));
+			SetUnitType(i,n,country[i].unit[n].Gettype());
+			SetUnitHP(i,n,country[i].unit[n].Gethp());
+			SetUnitPrepare(i,n,country[i].unit[n].GetPrepared());
+			SetUnitAttacked(i,n,country[i].unit[n].GetAttacked());
+		}
+
+		SetCountryMoney(i,country[i].GetMoney());
+	}
 }

@@ -115,3 +115,11 @@ void CPicture::LoadResultPic(){
 	lFlag[3] = LoadGraph("Kawachi2/Lcountry3.png");
 	lFlag[4] = LoadGraph("Kawachi2/Lcountry4.png");
 }
+
+void CPicture::LoadButtonPic(){
+	closeButton[0] = LoadGraph("Kawachi2/Close.png");
+	closeButton[1] = LoadGraph("Kawachi2/AskClose.png");
+	saveButton[0] = LoadGraph("Kawachi2/SaveButton.png");
+	saveButton[1] = LoadGraph("Kawachi2/SaveButtonAsk.png");
+	saveButton[2] = LoadGraph("Kawachi2/SaveButtonEnd.png");
+}

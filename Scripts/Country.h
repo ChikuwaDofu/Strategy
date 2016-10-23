@@ -15,5 +15,6 @@ public:
 	void Awake();
 	void ShowMoney(int num);
 	void GameOver();
-
+	void Load(int country);
+	int GetMoney();
 };

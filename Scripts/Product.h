@@ -43,4 +43,5 @@ public:
 	CTurn turn;
 	void Awake(int stageNum);
 	void Product();
+	int GetStage();
 };

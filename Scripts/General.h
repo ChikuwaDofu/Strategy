@@ -34,7 +34,8 @@ public:
 	void SkipTurn();
 	bool Getskip();
 	int GetCountry();
-
+	void Load();
+	void Save();
 };
 
 class CCal{

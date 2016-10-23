@@ -1,0 +1,842 @@
+#THP25
+0
+#turnnow
+1
+#T25
+1
+#A24
+0
+#A23
+0
+#THP22
+100
+#T22
+1
+#countrynow
+1
+#Owner 290
+0
+#X35
+-100
+#Owner 225
+0
+#H22
+100
+#P22
+1
+#Owner 188
+0
+#Owner 49
+0
+#Y34
+-100
+#Owner 247
+0
+#H44
+100
+#X22
+-100
+#THP23
+0
+#T23
+1
+#A22
+0
+#THP209
+0
+#THP111
+0
+#T34
+1
+#Y22
+-100
+#A35
+0
+#P34
+1
+#Owner 211
+0
+#M22
+2
+#Owner 189
+0
+#Owner 48
+0
+#Y35
+-100
+#Owner 246
+0
+#THP241
+0
+#H45
+100
+#X23
+-100
+#THP208
+0
+#THP110
+0
+#T35
+1
+#Y23
+-100
+#P35
+1
+#A34
+0
+#Owner 210
+0
+#M23
+2
+#P23
+1
+#Owner 291
+0
+#X34
+-100
+#Owner 224
+0
+#H23
+100
+#Y32
+-100
+#THP246
+0
+#Owner 241
+0
+#H42
+100
+#X24
+-100
+#M42
+2
+#T32
+1
+#Y24
+-100
+#A33
+0
+#P32
+1
+#M24
+2
+#THP228
+0
+#P24
+1
+#A25
+0
+#THP24
+0
+#T24
+1
+#X33
+-100
+#Owner 223
+0
+#H24
+100
+#Y33
+-100
+#THP247
+0
+#H43
+100
+#X25
+-100
+#T33
+1
+#Y25
+-100
+#P33
+1
+#A32
+0
+#M25
+2
+#THP229
+0
+#P25
+1
+#X32
+-100
+#Owner 222
+0
+#H25
+100
+#Money2
+110
+#THP141
+0
+#THP42
+0
+#T42
+1
+#M32
+2
+#Y42
+-100
+#H32
+100
+#M33
+2
+#H33
+100
+#M34
+2
+#H34
+100
+#M35
+2
+#H35
+100
+#Money3
+100
+#THP11
+0
+#X42
+-100
+#A43
+0
+#P42
+1
+#P43
+1
+#A42
+0
+#THP10
+0
+#X43
+-100
+#Y43
+-100
+#M43
+2
+#THP43
+0
+#T43
+1
+#X44
+-100
+#Y44
+-100
+#THP89
+0
+#M44
+2
+#A45
+0
+#P44
+1
+#THP147
+100
+#THP44
+0
+#T44
+1
+#P45
+1
+#A44
+0
+#X45
+-100
+#Y45
+-100
+#THP88
+0
+#M45
+2
+#THP146
+0
+#THP45
+0
+#T45
+1
+#Money4
+100
+#THP286
+0
+#THP268
+0
+#Owner 263
+0
+#THP170
+0
+#
+100
+#Money5
+100
+#Owner 1
+0
+#THP1
+0
+#Owner 2
+0
+#THP2
+0
+#Owner 3
+0
+#THP3
+0
+#Owner 4
+0
+#Owner 209
+0
+#THP4
+0
+#Owner 5
+0
+#Owner 208
+0
+#THP5
+0
+#Owner 6
+0
+#THP6
+0
+#Owner 7
+0
+#THP7
+0
+#Owner 8
+0
+#Owner 205
+0
+#THP8
+0
+#Owner 9
+0
+#Owner 204
+0
+#THP9
+0
+#Owner 10
+0
+#Owner 11
+0
+#Owner 21
+0
+#Owner 169
+0
+#THP21
+0
+#Owner 22
+1
+#Owner 23
+0
+#Owner 24
+0
+#Owner 25
+0
+#Owner 26
+0
+#THP231
+0
+#THP129
+0
+#THP26
+0
+#Owner 27
+0
+#THP230
+100
+#THP128
+0
+#THP27
+0
+#Owner 28
+0
+#THP127
+0
+#THP28
+0
+#Owner 29
+0
+#Owner 161
+0
+#THP126
+0
+#THP29
+0
+#Owner 30
+0
+#THP30
+0
+#Owner 31
+0
+#THP31
+0
+#Owner 41
+0
+#THP142
+0
+#Owner 109
+0
+#THP41
+0
+#Owner 183
+0
+#Owner 42
+0
+#Owner 182
+0
+#Owner 43
+0
+#Owner 185
+0
+#Owner 44
+0
+#Owner 184
+0
+#Owner 45
+0
+#Owner 187
+0
+#Owner 46
+0
+#THP145
+0
+#THP46
+0
+#Owner 186
+0
+#Owner 47
+0
+#THP144
+0
+#THP47
+0
+#THP48
+0
+#Owner 101
+0
+#THP49
+0
+#Owner 50
+0
+#THP50
+0
+#Owner 51
+0
+#THP51
+0
+#Owner 61
+0
+#THP166
+0
+#THP61
+0
+#Owner 62
+0
+#THP165
+0
+#THP62
+0
+#Owner 63
+0
+#THP164
+0
+#THP63
+100
+#Owner 64
+0
+#THP291
+0
+#THP163
+0
+#THP64
+0
+#Owner 65
+0
+#THP290
+0
+#THP162
+0
+#THP65
+0
+#Owner 66
+0
+#Owner 250
+0
+#THP161
+0
+#THP66
+0
+#Owner 67
+0
+#Owner 251
+0
+#THP67
+0
+#Owner 68
+0
+#THP68
+0
+#Owner 69
+0
+#THP69
+0
+#Owner 70
+0
+#THP245
+0
+#Owner 242
+0
+#THP70
+0
+#Owner 71
+0
+#THP244
+0
+#Owner 243
+0
+#THP71
+0
+#Owner 81
+0
+#THP182
+0
+#THP81
+0
+#Owner 82
+0
+#Owner 270
+2
+#THP181
+0
+#THP82
+0
+#Owner 83
+0
+#Owner 271
+0
+#THP83
+0
+#Owner 84
+0
+#THP187
+0
+#THP84
+0
+#Owner 85
+0
+#THP186
+0
+#THP85
+0
+#Owner 129
+0
+#Owner 86
+0
+#THP185
+0
+#THP86
+0
+#Owner 128
+0
+#Owner 87
+0
+#THP184
+0
+#THP87
+0
+#Owner 127
+0
+#Owner 88
+0
+#Owner 126
+0
+#Owner 89
+0
+#Owner 90
+0
+#THP265
+0
+#THP90
+0
+#Owner 91
+0
+#THP264
+0
+#THP91
+0
+#THP101
+0
+#THP149
+0
+#Owner 102
+0
+#THP102
+0
+#THP148
+0
+#Owner 103
+0
+#THP103
+0
+#Owner 104
+0
+#THP104
+0
+#Owner 105
+0
+#THP105
+0
+#Owner 106
+0
+#THP106
+0
+#Owner 107
+0
+#THP107
+0
+#THP143
+0
+#Owner 108
+0
+#THP210
+0
+#THP108
+0
+#THP211
+0
+#THP109
+0
+#Owner 110
+0
+#Owner 111
+0
+#Owner 121
+0
+#Owner 166
+0
+#THP121
+0
+#Owner 122
+0
+#Owner 165
+0
+#THP122
+0
+#Owner 123
+0
+#Owner 164
+0
+#THP123
+0
+#Owner 124
+0
+#Owner 163
+0
+#THP124
+0
+#Owner 125
+0
+#Owner 162
+0
+#THP125
+0
+#Owner 130
+0
+#THP130
+0
+#Owner 131
+0
+#THP131
+0
+#Owner 141
+0
+#Owner 142
+0
+#Owner 143
+0
+#Owner 144
+0
+#Owner 145
+0
+#Owner 146
+0
+#Owner 147
+0
+#Owner 148
+0
+#Owner 149
+0
+#Owner 150
+0
+#THP150
+0
+#Owner 151
+0
+#THP151
+0
+#Owner 167
+0
+#THP167
+0
+#Owner 168
+0
+#THP270
+100
+#THP168
+0
+#THP271
+0
+#THP169
+0
+#Owner 170
+0
+#Owner 171
+0
+#THP287
+0
+#THP269
+0
+#Owner 262
+0
+#THP171
+0
+#Owner 181
+0
+#THP183
+0
+#THP188
+0
+#THP189
+0
+#Owner 190
+0
+#Owner 207
+0
+#THP190
+0
+#Owner 191
+0
+#Owner 206
+0
+#THP191
+0
+#Owner 201
+0
+#THP201
+0
+#Owner 202
+0
+#THP202
+0
+#Owner 203
+0
+#THP203
+0
+#THP204
+0
+#THP205
+0
+#THP206
+0
+#THP207
+0
+#Owner 221
+0
+#Owner 284
+0
+#THP221
+0
+#Owner 287
+0
+#THP222
+0
+#Owner 286
+0
+#THP223
+0
+#Owner 281
+0
+#THP224
+0
+#THP225
+0
+#Owner 226
+0
+#Owner 283
+0
+#THP226
+0
+#Owner 227
+0
+#Owner 282
+0
+#THP227
+0
+#Owner 228
+0
+#Owner 229
+0
+#Owner 230
+0
+#Owner 231
+0
+#Owner 245
+0
+#THP242
+0
+#Owner 244
+0
+#THP243
+0
+#Owner 248
+0
+#THP248
+0
+#Owner 249
+0
+#THP249
+0
+#THP250
+0
+#THP251
+0
+#THP284
+0
+#Owner 261
+0
+#THP261
+0
+#Owner 269
+0
+#THP262
+0
+#Owner 268
+0
+#THP263
+0
+#THP281
+0
+#Owner 264
+0
+#Owner 265
+0
+#THP283
+0
+#Owner 266
+0
+#THP288
+0
+#THP266
+0
+#THP282
+0
+#Owner 267
+0
+#THP289
+0
+#THP267
+0
+#Owner 285
+0
+#THP285
+0
+#Owner 288
+0
+#Owner 289
+0

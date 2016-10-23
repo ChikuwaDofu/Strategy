@@ -2,6 +2,7 @@
 #include"Suken.h"
 #include"Country.h"
 #include"General.h"
+#include"Savedata.h"
 
 void CCountry::Awake(){
 	money=100;
@@ -32,3 +33,11 @@ void CCountry::GameOver(){
 		unit[i].Setunit();
 	}
 } 
+
+void CCountry::Load(int country){
+	money=GetCountryMoney(country);
+}
+
+int CCountry::GetMoney(){
+	return money;
+}

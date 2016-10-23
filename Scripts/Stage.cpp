@@ -2,6 +2,7 @@
 #include"Suken.h"
 #include"Stage.h"
 #include"General.h"
+#include"Savedata.h"
 
 int Ax[4] = { 400, 400, 75, 800 };
 int Ay[4] = { 25, 550, 225, 225 };
@@ -181,6 +182,32 @@ int CStage::GetLast(){
 	for (int i = 1; i <= COUNTRY_NUM; i++){
 		if (exist[i]){
 			return i;
+		}
+	}
+}
+
+void CStage::Load(){
+	for(int i=1;i<=COUNTRY_NUM;i++){
+		townNum[i]=0;
+	}
+
+	for(int x=0;x<file.mapX[sNum];x++){
+		for(int y=0;y<file.mapY[sNum];y++){
+			town[x][y]=GetOwner(x,y);
+			townHp[x][y]=GetTHP(x,y);
+
+			if(town[x][y]!=0){
+				townNum[town[x][y]]++;
+			}
+		}
+	}
+}
+
+void CStage::Save(){
+	for(int x=0;x<file.mapX[sNum];x++){
+		for(int y=0;y<file.mapY[sNum];y++){
+			SetTOwner(x,y,town[x][y]);
+			SetTHP(x,y,townHp[x][y]);
 		}
 	}
 }

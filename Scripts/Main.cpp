@@ -1,9 +1,11 @@
 #include"DxLib.h"
 #include"MyScene.h"
 #include"General.h"
+#include"Music.h"
 
-int cross = 0;
 int howButton = 0;
+int cross = 0;
+int newGame,contGame;
 
 void suken::Awake(){
 	/*game.addChild(&Title);
@@ -15,21 +17,29 @@ void suken::Awake(){
 	Title.SetButton(400,500,500,550,YELLOW,"ì“à",BLACK,null);
 	Title.SetButton(&a[0],&a[1],&a[2],&a[3],YELLOW,"ì“à",BLACK,null);*/
 
-	cross = LoadGraph("Kawachi2/Close.PNG", true);
-
 	howButton = LoadGraph("Kawachi2/HowToButton.png", true);
+
+	cross = LoadGraph("Kawachi2/Close.png", true);
+
+	newGame = LoadGraph("Kawachi2/NewGame.png", true);
+	
+	contGame = LoadGraph("Kawachi2/Continue.png", true);
 
 	Start();
 
 	Title.input.AddEventListener(Event.EVERY_FRAME,DrawTitle);
 
-	Title.input.AddEventListener(Event.EVERY_FRAME,GoStage);
+	//Title.input.AddEventListener(Event.EVERY_FRAME,GoStage);
 
 	Title.SetButton(350, 0, 550, 50, howButton,GoHowTo);
 
+	Title.SetButton(150, 550, 350, 590, newGame, GoStage);
+
+	Title.SetButton(550, 550, 750, 590, contGame, ContinueStage);
+
 	HowTo.input.AddEventListener(Event.EVERY_FRAME, DrawHowTo);
 
-	HowTo.SetButton(870, 0, 900, 30, cross, GoTitle);
+	HowTo.SetButton(870, 0, 900, 30, cross, BackToTitle);
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME, SkipTurn);
 
@@ -41,9 +51,15 @@ void suken::Awake(){
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME, GameOver);
 
-	Stage.SetButton(870, 0, 900, 30, cross, GoTitle);
+	Stage.input.AddEventListener(Event.EVERY_FRAME, GoTitle);
+
+	Stage.input.AddEventListener(Event.EVERY_FRAME, SaveStage);
+
+	//Stage.SetButton(870, 0, 900, 30, cross, GoTitle);
 
 	Result.input.AddEventListener(Event.EVERY_FRAME, DrawResult);
+
+	AwakeMusic();
 }
 
 void suken::GameLoopEnter(){
@@ -53,4 +69,5 @@ void suken::GameLoopEnter(){
 }
 
 void suken::GameLoopExit(){
+	music->Play();
 }

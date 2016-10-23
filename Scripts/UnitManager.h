@@ -59,5 +59,6 @@ public:
 	void MoveUnit();
 	void CheckMoveend();
 	void Awake(int stage);
-
+	void Load();
+	void Save();
 };

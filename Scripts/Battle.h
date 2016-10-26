@@ -7,6 +7,7 @@
 #include"UnitManager.h"
 #include"Picture.h"
 #include"Files.h"
+#include"Music.h"
 
 class CBattle{
 private:
@@ -58,6 +59,7 @@ private:
 	bool Enemy(int country); //“G‚È‚ç‚Îtrue
 	bool CheckCOnUnit(int country,int unit);
 	bool CheckCOnTown(int type);
+	void LoadSound();
 
 public:
 	CCursorManager cursorm;

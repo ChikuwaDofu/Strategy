@@ -2,12 +2,13 @@
 
 #include"DxLib.h"
 #include"Suken.h"
+#include"Music.h"
 
 const int GRID_L = 50;
 const int MAP_W = 700/GRID_L;//700‚Æ500‚ÌŒö–ñ”
 const int MAP_H = 500/GRID_L;//2,2,5,5‚ğ‘g‚İ‡‚í‚¹‚é
 const int UNIT_NUM = 4;
-const int UTYPE_NUM = 4;
+const int UTYPE_NUM = 10;
 const int COUNTRY_NUM = 4;
 const int STAGE_NUM = 3;
 const int RIGHT = 1;
@@ -34,6 +35,7 @@ public:
 	void SkipTurn();
 	bool Getskip();
 	int GetCountry();
+	void PlayBGM();
 	void Load();
 	void Save();
 };

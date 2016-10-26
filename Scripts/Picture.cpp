@@ -4,122 +4,128 @@
 #include"General.h"
 
 void CPicture::LoadUnitPic(){
-	unitPic[0] = LoadGraph("Kawachi2/Spear.png");
-	unitPic[1] = LoadGraph("Kawachi2/Bow.png");
-	unitPic[2] = LoadGraph("Kawachi2/Artillery.png");
-	unitPic[3] = LoadGraph("Kawachi2/Horseman.png");
+	unitPic[0] = LoadGraph("Chikuwa2/Spear.png");
+	unitPic[1] = LoadGraph("Chikuwa2/CrossBow.png");
+	unitPic[2] = LoadGraph("Chikuwa2/Horseman.png");
+	unitPic[3] = LoadGraph("Chikuwa2/HorseArcher.png");
+	unitPic[4] = LoadGraph("Chikuwa2/HeavyHorseMan.png");
+	unitPic[5] = LoadGraph("Chikuwa2/Sword.png");
+	unitPic[6] = LoadGraph("Chikuwa2/Musket.png");
+	unitPic[7] = LoadGraph("Chikuwa2/Catapult.png");
+	unitPic[8] = LoadGraph("Chikuwa2/Trebuchet.png");
+	unitPic[9] = LoadGraph("Chikuwa2/Artillery.png");
 
-	move[1] = LoadGraph("Kawachi2/move1.png");
-	move[2] = LoadGraph("Kawachi2/move2.png");
-	move[3] = LoadGraph("Kawachi2/move3.png");
-	move[4] = LoadGraph("Kawachi2/move4.png");
+	move[1] = LoadGraph("Chikuwa2/move1.png");
+	move[2] = LoadGraph("Chikuwa2/move2.png");
+	move[3] = LoadGraph("Chikuwa2/move3.png");
+	move[4] = LoadGraph("Chikuwa2/move4.png");
 
-	siegepic[0] = LoadGraph("Kawachi2/SiegeNG.png");
-	siegepic[1] = LoadGraph("Kawachi2/SiegeOK.png");
+	siegepic[0] = LoadGraph("Chikuwa2/SiegeNG.png");
+	siegepic[1] = LoadGraph("Chikuwa2/SiegeOK.png");
 
-	heal = LoadGraph("Kawachi2/heal.png");
+	heal = LoadGraph("Chikuwa2/heal.png");
 
-	attackable = LoadGraph("Kawachi2/Attackable.png");
+	attackable = LoadGraph("Chikuwa2/Attackable.png");
 }
 
 void CPicture::LoadFlagPic(){
-	flagPic[1] = LoadGraph("Kawachi2/country1.png");
-	flagPic[2] = LoadGraph("Kawachi2/country2.png");
-	flagPic[3] = LoadGraph("Kawachi2/country3.png");
-	flagPic[4] = LoadGraph("Kawachi2/country4.png");
+	flagPic[1] = LoadGraph("Chikuwa2/country1.png");
+	flagPic[2] = LoadGraph("Chikuwa2/country2.png");
+	flagPic[3] = LoadGraph("Chikuwa2/country3.png");
+	flagPic[4] = LoadGraph("Chikuwa2/country4.png");
 }
 
 void CPicture::LoadMapPic(){
-	tilePic[0] = LoadGraph("Kawachi2/Void.png");
-	tilePic[1] = LoadGraph("Kawachi2/Grass.png");
-	tilePic[2] = LoadGraph("Kawachi2/River.png");
-	tilePic[3] = LoadGraph("Kawachi2/BridgeV.png");
-	tilePic[4] = LoadGraph("Kawachi2/BridgeH.png");
-	tilePic[5] = LoadGraph("Kawachi2/Mountain.png");
-	townPic = LoadGraph("Kawachi2/Town.png");
+	tilePic[0] = LoadGraph("Chikuwa2/Void.png");
+	tilePic[1] = LoadGraph("Chikuwa2/Grass.png");
+	tilePic[2] = LoadGraph("Chikuwa2/River.png");
+	tilePic[3] = LoadGraph("Chikuwa2/BridgeV.png");
+	tilePic[4] = LoadGraph("Chikuwa2/BridgeH.png");
+	tilePic[5] = LoadGraph("Chikuwa2/Mountain.png");
+	townPic = LoadGraph("Chikuwa2/Town.png");
 
-	coin=LoadGraph("Kawachi2/Coin.png");
+	coin=LoadGraph("Chikuwa2/Coin.png");
 
-	arrowPic[0] = LoadGraph("Kawachi2/ArrowUp.png");
-	arrowPic[1] = LoadGraph("Kawachi2/ArrowDown.png");
-	arrowPic[2] = LoadGraph("Kawachi2/ArrowLeft.png");
-	arrowPic[3] = LoadGraph("Kawachi2/ArrowRight.png");
+	arrowPic[0] = LoadGraph("Chikuwa2/ArrowUp.png");
+	arrowPic[1] = LoadGraph("Chikuwa2/ArrowDown.png");
+	arrowPic[2] = LoadGraph("Chikuwa2/ArrowLeft.png");
+	arrowPic[3] = LoadGraph("Chikuwa2/ArrowRight.png");
 
-	mapHandle[1] = LoadSoftImage("Kawachi2/TestMap.png");
-	mapHandle[2] = LoadSoftImage("Kawachi2/TestMap2.png");
-	mapHandle[3] = LoadSoftImage("Kawachi2/TestMap3.png");
-	TmapHandle[1] = LoadSoftImage("Kawachi2/TestMapTown.png");
-	TmapHandle[2] = LoadSoftImage("Kawachi2/TestMap2Town.png");
-	TmapHandle[3] = LoadSoftImage("Kawachi2/TestMap3Town.png");
+	mapHandle[1] = LoadSoftImage("Chikuwa2/TestMap.png");
+	mapHandle[2] = LoadSoftImage("Chikuwa2/TestMap2.png");
+	mapHandle[3] = LoadSoftImage("Chikuwa2/TestMap3.png");
+	TmapHandle[1] = LoadSoftImage("Chikuwa2/TestMapTown.png");
+	TmapHandle[2] = LoadSoftImage("Chikuwa2/TestMap2Town.png");
+	TmapHandle[3] = LoadSoftImage("Chikuwa2/TestMap3Town.png");
 }
 
 void CPicture::LoadProductPic(){
-	productScr = LoadGraph("Kawachi2/production.png");
-	close = LoadGraph("Kawachi2/close.png");
-	cannot[0] = LoadGraph("Kawachi2/Can't.png");
-	cannot[1] = LoadGraph("Kawachi2/NoMoney.png");
-	ok = LoadGraph("Kawachi2/OK.png");
-	coin = LoadGraph("Kawachi2/Coin.png");
-	strength[0] = LoadGraph("Kawachi2/Str.png");
-	strength[1] = LoadGraph("Kawachi2/RStr.png");
-	strength[2] = LoadGraph("Kawachi2/SStr.png");
+	productScr = LoadGraph("Chikuwa2/production.png");
+	close = LoadGraph("Chikuwa2/close.png");
+	cannot[0] = LoadGraph("Chikuwa2/Can't.png");
+	cannot[1] = LoadGraph("Chikuwa2/NoMoney.png");
+	ok = LoadGraph("Chikuwa2/OK.png");
+	coin = LoadGraph("Chikuwa2/Coin.png");
+	strength[0] = LoadGraph("Chikuwa2/Str.png");
+	strength[1] = LoadGraph("Chikuwa2/RStr.png");
+	strength[2] = LoadGraph("Chikuwa2/SStr.png");
 }
 
 void CPicture::LoadNumPic(){
-	numPic[0] = LoadGraph("Kawachi2/0.png");
-	numPic[1] = LoadGraph("Kawachi2/1.png");
-	numPic[2] = LoadGraph("Kawachi2/2.png");
-	numPic[3] = LoadGraph("Kawachi2/3.png");
-	numPic[4] = LoadGraph("Kawachi2/4.png");
-	numPic[5] = LoadGraph("Kawachi2/5.png");
-	numPic[6] = LoadGraph("Kawachi2/6.png");
-	numPic[7] = LoadGraph("Kawachi2/7.png");
-	numPic[8] = LoadGraph("Kawachi2/8.png");
-	numPic[9] = LoadGraph("Kawachi2/9.png");
+	numPic[0] = LoadGraph("Chikuwa2/0.png");
+	numPic[1] = LoadGraph("Chikuwa2/1.png");
+	numPic[2] = LoadGraph("Chikuwa2/2.png");
+	numPic[3] = LoadGraph("Chikuwa2/3.png");
+	numPic[4] = LoadGraph("Chikuwa2/4.png");
+	numPic[5] = LoadGraph("Chikuwa2/5.png");
+	numPic[6] = LoadGraph("Chikuwa2/6.png");
+	numPic[7] = LoadGraph("Chikuwa2/7.png");
+	numPic[8] = LoadGraph("Chikuwa2/8.png");
+	numPic[9] = LoadGraph("Chikuwa2/9.png");
 }
 
 void CPicture::LoadUnitmPic(){
-	RangeBox = LoadGraph("Kawachi2/Range.png");
+	RangeBox = LoadGraph("Chikuwa2/Range.png");
 }
 
 void CPicture::LoadBattlePic(){
-	shotRangeBox = LoadGraph("Kawachi2/ShotRange.png");
-	combatRangeBox=LoadGraph("Kawachi2/CombatRange.png");
+	shotRangeBox = LoadGraph("Chikuwa2/ShotRange.png");
+	combatRangeBox=LoadGraph("Chikuwa2/CombatRange.png");
 }
 
 void CPicture::LoadTitlePic(){
-	stageSelect = LoadGraph("Kawachi2/StageSelect.png");
+	stageSelect = LoadGraph("Chikuwa2/StageSelect.png");
 
-	smallTile[1] = LoadGraph("Kawachi2/SGrass.png");
-	smallTile[2] = LoadGraph("Kawachi2/SRiver.png");
-	smallTile[3] = LoadGraph("Kawachi2/SBridge.png");
-	smallTile[4] = LoadGraph("Kawachi2/SBridge.png");
-	smallTile[5] = LoadGraph("Kawachi2/SMountain.png");
+	smallTile[1] = LoadGraph("Chikuwa2/SGrass.png");
+	smallTile[2] = LoadGraph("Chikuwa2/SRiver.png");
+	smallTile[3] = LoadGraph("Chikuwa2/SBridge.png");
+	smallTile[4] = LoadGraph("Chikuwa2/SBridge.png");
+	smallTile[5] = LoadGraph("Chikuwa2/SMountain.png");
 }
 
 void CPicture::LoadHowToPic(){
-	howTo[0] = LoadGraph("Kawachi2/HowTo1.png");
-	howTo[1] = LoadGraph("Kawachi2/HowTo2.png");
-	howTo[2] = LoadGraph("Kawachi2/HowTo3.png");
-	howTo[3] = LoadGraph("Kawachi2/HowTo4.png");
-	howTo[4] = LoadGraph("Kawachi2/HowTo5.png");
-	howTo[5] = LoadGraph("Kawachi2/HowTo6.png");
-	howTo[6] = LoadGraph("Kawachi2/HowTo7.png");
+	howTo[0] = LoadGraph("Chikuwa2/HowTo1.png");
+	howTo[1] = LoadGraph("Chikuwa2/HowTo2.png");
+	howTo[2] = LoadGraph("Chikuwa2/HowTo3.png");
+	howTo[3] = LoadGraph("Chikuwa2/HowTo4.png");
+	howTo[4] = LoadGraph("Chikuwa2/HowTo5.png");
+	howTo[5] = LoadGraph("Chikuwa2/HowTo6.png");
+	howTo[6] = LoadGraph("Chikuwa2/HowTo7.png");
 }
 
 void CPicture::LoadResultPic(){
-	result = LoadGraph("Kawachi2/GameOver.png");
+	result = LoadGraph("Chikuwa2/GameOver.png");
 
-	lFlag[1] = LoadGraph("Kawachi2/Lcountry1.png");
-	lFlag[2] = LoadGraph("Kawachi2/Lcountry2.png");
-	lFlag[3] = LoadGraph("Kawachi2/Lcountry3.png");
-	lFlag[4] = LoadGraph("Kawachi2/Lcountry4.png");
+	lFlag[1] = LoadGraph("Chikuwa2/Lcountry1.png");
+	lFlag[2] = LoadGraph("Chikuwa2/Lcountry2.png");
+	lFlag[3] = LoadGraph("Chikuwa2/Lcountry3.png");
+	lFlag[4] = LoadGraph("Chikuwa2/Lcountry4.png");
 }
 
 void CPicture::LoadButtonPic(){
-	closeButton[0] = LoadGraph("Kawachi2/Close.png");
-	closeButton[1] = LoadGraph("Kawachi2/AskClose.png");
-	saveButton[0] = LoadGraph("Kawachi2/SaveButton.png");
-	saveButton[1] = LoadGraph("Kawachi2/SaveButtonAsk.png");
-	saveButton[2] = LoadGraph("Kawachi2/SaveButtonEnd.png");
+	closeButton[0] = LoadGraph("Chikuwa2/Close.png");
+	closeButton[1] = LoadGraph("Chikuwa2/AskClose.png");
+	saveButton[0] = LoadGraph("Chikuwa2/SaveButton.png");
+	saveButton[1] = LoadGraph("Chikuwa2/SaveButtonAsk.png");
+	saveButton[2] = LoadGraph("Chikuwa2/SaveButtonEnd.png");
 }

@@ -272,7 +272,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Kawachi2\Resource.rc">
+    <ResourceCompile Include="Chikuwa2\Resource.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
   </ItemGroup>

@@ -1,7 +1,26 @@
+#pragma once
+
 #include"Suken.h"
 
 enum SoundList {
 	sPractice,
+	sMarch,
+	sHorse,
+	sWheel,
+	sBoom,
+	sCrash,
+	sShoot,
+	sStab,
+	sSlash,
+	sBow,
+	sSave,
+	sLoad,
+	sWinner,
+	sCountry1,
+	sCountry2,
+	sCountry3,
+	sCountry4,
+	sTitle,
 	sEnd
 };
 

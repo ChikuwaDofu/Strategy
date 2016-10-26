@@ -2,6 +2,7 @@
 //QÆ
 #include"Suken.h"
 #include"Manager.h"
+#include"Music.h"
 //ƒV[ƒ“
 extern CScene Title;
 extern CScene HowTo;

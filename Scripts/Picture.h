@@ -11,7 +11,7 @@ public:
 	int townPic;
 	int coin;
 	int arrowPic[4];
-	int unitPic[10];
+	int unitPic[15];
 	int flagPic[5];
 	int productScr;//¶Y‰æ–Ê‚Ì”wŒi
 	int cannot[5];

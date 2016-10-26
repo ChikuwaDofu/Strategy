@@ -2,6 +2,7 @@
 
 #include"Suken.h"
 #include"Files.h"
+#include"Music.h"
 
 //enum SaveData{}
 //	ghjk,

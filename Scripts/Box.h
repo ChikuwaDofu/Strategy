@@ -23,69 +23,68 @@ const int table[361]={	18,17,16,15,14,13,12,11,10, 9,10,11,12,13,14,15,16,17,18,
 int Array2D(int x,int y);
 
 #include"Suken.h"
+#include"Cursor.h"
 #include"General.h"
-#include"Picture.h"
-#include"Files.h"
-#include"Screen.h"
-#include"Music.h"
 
 class CUnit{
 private:
-	CPicture picture;
-	CFiles file;
-	int unitType;
-	bool siege; //攻城兵器か否か
-	bool prepared;
+	CCursor cursor;
+	CTurn turn;
+	int width;
+	int height;
+	int type;
 	int unitX;
 	int unitY;
-	int displayX;
-	int displayY;
+	bool up,down,right,left;
+	bool lclick;
+	bool selected;
 	int moves;
-	int obstacle[20][20];
-	bool Moved();//　仮の変数：一度でも動いたか　ファイル読み込み方式導入まで
+	int route[20][20];
+	bool moving;
 	bool MoveEnd;
+	bool able[20][20];
 	int hp;
 	int strength;
-	int r_strength;
-	int s_strength;
+	int shotstrength;
 	int range;
-	bool attacked;
 
 public:
 	CUnit();
-	void Setunit();
+	void SetWidth();
+	void SetHeight();
+	void SetunitX();
+	void SetunitY();
 	void SetMoves();
 	void SetMoveEnd();
-	void MakeMoveEnd(); //移動停止判定
-	void SetPrepared(bool prepare);
-	void SetAttacked(bool hadAttacked);
-	bool GetPrepared();
+	void MakeMoveEnd();
 	int Getx();
 	int Gety();
+	int GetWidth();
+	int GetHeight();
 	int Gettype();
-	bool IsSiege();
 	int GetunitX();
 	int GetunitY();
 	int GetMoves();
-	int GetObstacle(int x, int y);
+	int GetRoute(int _x,int _y);
+	bool Getmoving();
+	bool GetSelected();
 	bool GetMoveEnd();
-	bool GetAttacked();
-	void Move(int dir /*direction*/, int cost);
-	void SetObstacle(int x,int y,int type);
-	void Awake(int x,int y,int type);
+	bool Getable(int _x,int _y);
+	void Move(int a);
+	void SetObstacle(int _x,int _y);
+	void CheckSelected();
+	void Awake(int _x,int _y,int type,int str,int Rstr);
+	void SetMoveable();
+	void CheckMoveable();
 	void SkipTurn();
 	int Gethp();
+	void Sethp();
 	int Getstrength();
-	int GetRstrength();
+	void Setstrength();
 	int GetSstrength();
 	int GetRange();
 	void Damage(int d);
 	void Death();
-	void Survive(); //強制生存処理
-	void Recover(int r);
-	void Product(int x,int y,int type); //生産されたときに使う
-	void DrawUnit(int country, int stage, int adjX, int adjY);
-	void DrawMoves();
-	void DrawHeal();
-	void Load(int country,int unit);
+	void Survive();
+
 };

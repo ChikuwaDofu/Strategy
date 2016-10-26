@@ -157,6 +157,36 @@ void CUnit::Move(int dir, int cost){
 	if(dir==UP){
 		unitY--;
 	}
+
+	if(dir!=0){
+		switch(unitType){
+		case 1:
+		case 2:
+		case 6:
+		case 7:
+
+			music->AddSound(sMarch);
+
+
+			break;
+
+		case 3:
+		case 4:
+		case 5:
+
+			music->AddSound(sHorse);
+
+			break;
+
+		case 8:
+		case 9:
+		case 10:
+
+			music->AddSound(sWheel);
+
+			break;
+		}
+	}
 }
 
 bool CUnit::Moved(){
@@ -217,7 +247,7 @@ void CUnit::DrawUnit(int country, int stage, int adjX, int adjY){
 			DrawGraph(displayX * 50 + 112, displayY * 50 + 77, picture.numPic[hp % 10], true);
 		}
 
-		if (unitType == 3){
+		if (siege){
 			if (prepared){
 				DrawGraph(displayX * 50 + 125, displayY * 50 + 60, picture.siegepic[1], true);
 			}

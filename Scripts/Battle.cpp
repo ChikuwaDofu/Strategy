@@ -277,6 +277,8 @@ void CBattle::Combat(){
 				unitm.country[selectingC].unit[selectingU].SetAttacked(true);
 
 				unitm.country[selectingC].unit[selectingU].Move(0, 1);
+
+				LoadSound();
 			}
 		}
 	}
@@ -318,6 +320,8 @@ void CBattle::Ranged(){
 					unitm.country[selectingC].unit[selectingU].SetAttacked(true);
 
 					unitm.country[selectingC].unit[selectingU].Move(0, 1);
+
+					LoadSound();
 				}
 			}
 		}
@@ -333,6 +337,8 @@ void CBattle::Siege(){
 		unitm.country[selectingC].unit[selectingU].SetAttacked(true);
 
 		unitm.country[selectingC].unit[selectingU].Move(0, 1);
+
+		LoadSound();
 	}
 	else if(CheckCOnTown(1)){
 		besiege=true;
@@ -349,6 +355,8 @@ void CBattle::Siege(){
 		unitm.country[selectingC].unit[selectingU].SetAttacked(true);
 
 		unitm.country[selectingC].unit[selectingU].Move(0, 1);
+
+		LoadSound();
 	}
 }
 
@@ -358,4 +366,36 @@ int CBattle::GetTDamage(){
 
 bool CBattle::GetBesiege(){
 	return besiege;
+}
+
+void CBattle::LoadSound(){
+	switch(unitm.country[selectingC].unit[selectingU].Gettype()){
+	case 1:
+	case 3:
+		music->AddSound(sStab);
+		break;
+
+	case 2:
+	case 4:
+		music->AddSound(sBow);
+		break;
+
+	case 5:
+	case 6:
+		music->AddSound(sSlash);
+		break;
+
+	case 7:
+		music->AddSound(sShoot);
+		break;
+
+	case 8:
+	case 9:
+		music->AddSound(sCrash);
+		break;
+
+	case 10:
+		music->AddSound(sBoom);
+		break;
+	}
 }

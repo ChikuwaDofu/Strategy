@@ -3,7 +3,24 @@
 CMusic *music;
 
 CMusic::CMusic(){
-	sound[sPractice] = LoadSoundMem("Kawachi2/keyopen.mp3");
+	sound[sPractice] = LoadSoundMem("Chikuwa2/keyopen.mp3");
+	sound[sMarch] = LoadSoundMem("Chikuwa2/March.mp3");
+	sound[sHorse] = LoadSoundMem("Chikuwa2/Horse.mp3");
+	sound[sWheel] = LoadSoundMem("Chikuwa2/Wheel.mp3");
+	sound[sBoom] = LoadSoundMem("Chikuwa2/Boom.mp3");
+	sound[sCrash] = LoadSoundMem("Chikuwa2/Crash.mp3");
+	sound[sShoot] = LoadSoundMem("Chikuwa2/Shoot.mp3");
+	sound[sStab] = LoadSoundMem("Chikuwa2/Stab.mp3");
+	sound[sSlash] = LoadSoundMem("Chikuwa2/Slash.mp3");
+	sound[sBow] = LoadSoundMem("Chikuwa2/Bow.mp3");
+	sound[sSave] = LoadSoundMem("Chikuwa2/Save.mp3");
+	sound[sLoad] = LoadSoundMem("Chikuwa2/Load.mp3");
+	sound[sWinner] = LoadSoundMem("Chikuwa2/Winner.mp3");
+	sound[sCountry1] = LoadSoundMem("Chikuwa2/Theme1.mp3");
+	sound[sCountry2] = LoadSoundMem("Chikuwa2/Theme2.mp3");
+	sound[sCountry3] = LoadSoundMem("Chikuwa2/Theme3.mp3");
+	sound[sCountry4] = LoadSoundMem("Chikuwa2/Theme4.mp3");
+	sound[sTitle] = LoadSoundMem("Chikuwa2/Title.mp3");
 	memset(sFlag,false,sEnd);
 	memset(loopFlag, false, sEnd);
 }

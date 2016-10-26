@@ -6,6 +6,8 @@
 void CTurn::Awake(){
 	country=1;
 	turn=1;
+
+	music->Loop(sCountry1);
 }
 
 void CTurn::SkipTurn(){
@@ -32,6 +34,13 @@ void CTurn::SkipTurn(){
 		}
 
 		skip=true;
+
+		music->StopLoop(sCountry1);
+		music->StopLoop(sCountry2);
+		music->StopLoop(sCountry3);
+		music->StopLoop(sCountry4);
+
+		PlayBGM();
 	}
 }
 
@@ -41,6 +50,26 @@ bool CTurn::Getskip(){
 
 int CTurn::GetCountry(){
 	return country;
+}
+
+void CTurn::PlayBGM(){
+	switch (country){
+	case 1:
+		music->Loop(sCountry1);
+		break;
+
+	case 2:
+		music->Loop(sCountry2);
+		break;
+
+	case 3:
+		music->Loop(sCountry3);
+		break;
+
+	case 4:
+		music->Loop(sCountry4);
+		break;
+	}
 }
 
 int CCal::Absolute(int a){
@@ -80,6 +109,26 @@ int CCommon::CheckArrow(){
 void CTurn::Load(){
 	turn=GetTurnNum();
 	country=GetTurnCountry();
+
+	music->StopLoop(sCountry1);
+
+	switch (country){
+	case 1:
+		music->Loop(sCountry1);
+		break;
+
+	case 2:
+		music->Loop(sCountry2);
+		break;
+
+	case 3:
+		music->Loop(sCountry3);
+		break;
+
+	case 4:
+		music->Loop(sCountry4);
+		break;
+	}
 }
 
 void CTurn::Save(){

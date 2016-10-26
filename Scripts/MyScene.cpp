@@ -34,6 +34,8 @@ bool enterHowTo;
 void Start(){
 	Game.AddChild(&Title);
 	title.Awake();
+
+	music->Loop(sTitle);
 }
 
 void GoTitle(){
@@ -42,6 +44,13 @@ void GoTitle(){
 		Game.AddChild(&Title);
 
 		DeleteSave();
+
+		music->StopLoop(sCountry1);
+		music->StopLoop(sCountry2);
+		music->StopLoop(sCountry3);
+		music->StopLoop(sCountry4);
+
+		music->Loop(sTitle);
 	}
 }
 
@@ -50,6 +59,8 @@ void BackToTitle(){
 	Game.AddChild(&Title);
 
 	DeleteSave();
+
+	music->Loop(sTitle);
 }
 
 void DrawTitle(){
@@ -72,6 +83,8 @@ void GoStage(){
 	Game.RemoveChild();
 	Game.AddChild(&Stage);
 	StageEnter(stageNow);
+
+	music->StopLoop(sTitle);
 }
 
 void DrawStage(){
@@ -156,14 +169,21 @@ void GameOver(){
 		Game.RemoveChild();
 		Game.AddChild(&Result);
 		result.Awake(product.stage.GetLast());
+
+		music->StopLoop(sCountry1);
+		music->StopLoop(sCountry2);
+		music->StopLoop(sCountry3);
+		music->StopLoop(sCountry4);
+
+		music->AddSound(sWinner);
 	}
 }
 
 void DrawResult(){
 	result.DrawResult();
 
-	if (Event.key.GetPush(Event.key.RETURN)){
-		GoTitle();
+	if (Event.key.GetDown(Event.key.RETURN)){
+		BackToTitle();
 	}
 }
 

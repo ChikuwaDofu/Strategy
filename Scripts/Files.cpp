@@ -4,7 +4,7 @@
 #include"General.h"
 
 void CFiles::LoadUnitFile(){
-	funit = fopen("Kawachi2/Data_Unit.txt", "r");
+	funit = fopen("Chikuwa2/Data_Unit.txt", "r");
 
 	fscanf(funit,"%d",&types);
 
@@ -16,7 +16,7 @@ void CFiles::LoadUnitFile(){
 }
 
 void CFiles::LoadTerrainFile(){
-	fterrain = fopen("Kawachi2/Data_Terrain.txt", "r");
+	fterrain = fopen("Chikuwa2/Data_Terrain.txt", "r");
 
 	fscanf(fterrain,"%d",&terrains);
 
@@ -28,7 +28,7 @@ void CFiles::LoadTerrainFile(){
 }
 
 void CFiles::LoadMapSize(){
-	fmap = fopen("Kawachi2/Data_MapSize.txt", "r");
+	fmap = fopen("Chikuwa2/Data_MapSize.txt", "r");
 
 	for (int i = 1; i <= STAGE_NUM; i++){
 		fscanf(fmap, "%d %d", &mapX[i], &mapY[i]);

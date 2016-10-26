@@ -13,14 +13,14 @@ private:
 public:
 	void LoadUnitFile();
 	int types;
-	char name[10][10];
-	int strength[10];
-	int rangedStrength[10];
-	int siegeStrength[10];
-	bool siege[10];
-	int move[10];
-	int range[10];
-	int cost[10];
+	char name[15][20];
+	int strength[15];
+	int rangedStrength[15];
+	int siegeStrength[15];
+	bool siege[15];
+	int move[15];
+	int range[15];
+	int cost[15];
 
 	void LoadTerrainFile();
 	int terrains;

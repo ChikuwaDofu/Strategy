@@ -25,15 +25,15 @@ CSaveData::CSaveData(int stage){
 
 	switch(stage){
 	case 1:
-		data=new CData("Kawachi2/Save1.txt");
+		data=new CData("Chikuwa2/Save1.txt");
 		break;
 		
 	case 2:
-		data=new CData("Kawachi2/Save2.txt");
+		data=new CData("Chikuwa2/Save2.txt");
 		break;
 
 	case 3:
-		data=new CData("Kawachi2/Save3.txt");
+		data=new CData("Chikuwa2/Save3.txt");
 		break;
 	}
 }
@@ -64,6 +64,8 @@ void CSaveData::Read(int stage){
 			townHP[x][y]=data->GetInt(townHp[x][y]);
 		}
 	}
+
+	music->AddSound(sLoad);
 }
 
 void CSaveData::Write(int stage){
@@ -92,6 +94,8 @@ void CSaveData::Write(int stage){
 	}
 
 	data->WriteAll();
+
+	music->AddSound(sSave);
 }
 
 void LoadSave(int stage){

@@ -17,13 +17,15 @@ void suken::Awake(){
 	Title.SetButton(400,500,500,550,YELLOW,"êÏì‡",BLACK,null);
 	Title.SetButton(&a[0],&a[1],&a[2],&a[3],YELLOW,"êÏì‡",BLACK,null);*/
 
-	howButton = LoadGraph("Kawachi2/HowToButton.png", true);
+	howButton = LoadGraph("Chikuwa2/HowToButton.png", true);
 
-	cross = LoadGraph("Kawachi2/Close.png", true);
+	cross = LoadGraph("Chikuwa2/Close.png", true);
 
-	newGame = LoadGraph("Kawachi2/NewGame.png", true);
+	newGame = LoadGraph("Chikuwa2/NewGame.png", true);
 	
-	contGame = LoadGraph("Kawachi2/Continue.png", true);
+	contGame = LoadGraph("Chikuwa2/Continue.png", true);
+
+	AwakeMusic();
 
 	Start();
 
@@ -47,9 +49,9 @@ void suken::Awake(){
 	
 	Stage.input.AddEventListener(Event.EVERY_FRAME,MoveUnit);
 
-	Stage.input.AddEventListener(Event.EVERY_FRAME,FightUnit);
-
 	Stage.input.AddEventListener(Event.EVERY_FRAME, GameOver);
+
+	Stage.input.AddEventListener(Event.EVERY_FRAME,FightUnit);
 
 	Stage.input.AddEventListener(Event.EVERY_FRAME, GoTitle);
 
@@ -58,8 +60,6 @@ void suken::Awake(){
 	//Stage.SetButton(870, 0, 900, 30, cross, GoTitle);
 
 	Result.input.AddEventListener(Event.EVERY_FRAME, DrawResult);
-
-	AwakeMusic();
 }
 
 void suken::GameLoopEnter(){

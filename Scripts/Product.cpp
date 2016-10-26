@@ -144,29 +144,32 @@ void CProduct::Product(){
 	if (openwin){
 		DrawGraph(100, 50, picture.productScr, true);
 
-		DrawGraph(257, 73, picture.coin, true);
-		for(int i=0;i<3;i++){
-			DrawGraph(278+20*i, 70, picture.strength[i], true);
+		for (int j = 0; j < 2; j++){
+			for (int i = 0; i < 3; i++){
+				DrawGraph(307 + j * 270, 73, picture.coin, true);
+
+				DrawGraph(328 + 20 * i + j * 270, 70, picture.strength[i], true);
+			}
 		}
 
 		for(int i=0;i<UTYPE_NUM;i++){
-			DrawGraph(150, 95+50*i, picture.unitPic[i], true);
+			DrawGraph(150 + (i / 5) * 270, 95 + 50 * (i % 5), picture.unitPic[i], true);
 
-			DrawFormatString(180, 100+50*i, BLACK, file.name[i+1]);
+			DrawFormatString(180 + (i / 5) * 270, 100 + 50 * (i % 5), BLACK, file.name[i + 1]);
 
-			draw.DrawNumber(245, 100+50*i, GRAY, file.cost[i+1]);
+			draw.DrawNumber(295 + (i / 5) * 270, 100 + 50 * (i % 5), GRAY, file.cost[i + 1]);
 			
-			draw.DrawNumber(270, 100+50*i, RED, file.strength[i+1]);
+			draw.DrawNumber(320 + (i / 5) * 270, 100 + 50 * (i % 5), RED, file.strength[i + 1]);
 			
-			draw.DrawNumber(290, 100+50*i, GREEN, file.rangedStrength[i+1]);
+			draw.DrawNumber(340 + (i / 5) * 270, 100 + 50 * (i % 5), GREEN, file.rangedStrength[i + 1]);
 			
-			draw.DrawNumber(310, 100+50*i, BLUE, file.siegeStrength[i+1]);
+			draw.DrawNumber(360 + (i / 5) * 270, 100 + 50 * (i % 5), BLUE, file.siegeStrength[i + 1]);
 			
-			if(cursor.Getmx()>140 && cursor.Getmx()<350 && cursor.Getmy()>95+i*50 && cursor.Getmy()<125+i*50){
-				DrawBox(140,90+i*50,350,125+i*50,RED,false);
+			if (cursor.Getmx()>140 + (i / 5) * 270 && cursor.Getmx()<390 + (i / 5) * 270 && cursor.Getmy()>95 + (i % 5) * 50 && cursor.Getmy()<125 + (i % 5) * 50){
+				DrawBox(140 + (i / 5) * 270, 90 + (i % 5) * 50, 390 + (i / 5) * 270, 125 + (i % 5) * 50, RED, false);
 			}
 			
-			if(Event.LMouse.GetClick(145,95+i*50,350,125+i*50) && !openednow){
+			if (Event.LMouse.GetClick(145 + (i / 5) * 270, 95 + (i % 5) * 50, 390 + (i / 5) * 270, 125 + (i % 5) * 50) && !openednow){
 				for(int n=1;n<=UNIT_NUM;n++){
 					if(battle.unitm.country[turn.GetCountry()].unit[n].GetunitX()==-100 && !produced){
 						if (battle.unitm.country[turn.GetCountry()].CanPay(file.cost[i + 1])){

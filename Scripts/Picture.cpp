@@ -51,12 +51,18 @@ void CPicture::LoadMapPic(){
 	arrowPic[2] = LoadGraph("Chikuwa2/ArrowLeft.png");
 	arrowPic[3] = LoadGraph("Chikuwa2/ArrowRight.png");
 
-	mapHandle[1] = LoadSoftImage("Chikuwa2/TestMap.png");
-	mapHandle[2] = LoadSoftImage("Chikuwa2/TestMap2.png");
-	mapHandle[3] = LoadSoftImage("Chikuwa2/TestMap3.png");
-	TmapHandle[1] = LoadSoftImage("Chikuwa2/TestMapTown.png");
-	TmapHandle[2] = LoadSoftImage("Chikuwa2/TestMap2Town.png");
-	TmapHandle[3] = LoadSoftImage("Chikuwa2/TestMap3Town.png");
+	mapHandle[1] = LoadSoftImage("Chikuwa2/Map1.png");
+	mapHandle[2] = LoadSoftImage("Chikuwa2/Map2.png");
+	mapHandle[3] = LoadSoftImage("Chikuwa2/Map3.png");
+	mapHandle[4] = LoadSoftImage("Chikuwa2/Map4.png");
+	mapHandle[5] = LoadSoftImage("Chikuwa2/Map5.png");
+	mapHandle[6] = LoadSoftImage("Chikuwa2/Map6.png");
+	TmapHandle[1] = LoadSoftImage("Chikuwa2/Map1Town.png");
+	TmapHandle[2] = LoadSoftImage("Chikuwa2/Map2Town.png");
+	TmapHandle[3] = LoadSoftImage("Chikuwa2/Map3Town.png");
+	TmapHandle[4] = LoadSoftImage("Chikuwa2/Map4Town.png");
+	TmapHandle[5] = LoadSoftImage("Chikuwa2/Map5Town.png");
+	TmapHandle[6] = LoadSoftImage("Chikuwa2/Map6Town.png");
 }
 
 void CPicture::LoadProductPic(){

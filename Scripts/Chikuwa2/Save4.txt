@@ -11,7 +11,7 @@
 #A23
 0
 #THP22
-100
+0
 #T22
 1
 #countrynow
@@ -107,7 +107,7 @@
 #Y32
 -100
 #THP246
-100
+0
 #Owner 241
 0
 #H42
@@ -117,7 +117,7 @@
 #M42
 2
 #THP306
-0
+100
 #THP32
 0
 #T32
@@ -327,13 +327,13 @@
 #Owner 9
 0
 #Owner 204
-1
+0
 #THP9
 0
 #Owner 10
 0
 #Owner 172
-0
+2
 #Owner 11
 0
 #Owner 171
@@ -363,7 +363,7 @@
 #THP129
 0
 #THP26
-100
+0
 #Owner 27
 0
 #THP230
@@ -439,7 +439,7 @@
 #THP144
 0
 #THP47
-100
+0
 #THP48
 0
 #Owner 101
@@ -451,9 +451,9 @@
 #THP50
 0
 #Owner 51
-3
+0
 #THP51
-100
+0
 #Owner 52
 0
 #THP52
@@ -471,11 +471,11 @@
 #THP62
 0
 #Owner 63
-0
+1
 #THP164
 0
 #THP63
-0
+100
 #Owner 64
 0
 #THP291
@@ -503,13 +503,13 @@
 #THP66
 0
 #Owner 67
-3
+0
 #THP292
 0
 #Owner 251
 0
 #THP67
-100
+0
 #Owner 68
 0
 #THP68
@@ -553,13 +553,13 @@
 #Owner 83
 0
 #Owner 271
-0
+2
 #THP83
 0
 #Owner 84
 0
 #THP187
-100
+0
 #THP84
 0
 #Owner 85
@@ -631,15 +631,15 @@
 #Owner 105
 0
 #THP105
-100
+0
 #Owner 106
 0
 #THP106
 0
 #Owner 107
-0
+1
 #THP107
-0
+100
 #THP143
 0
 #Owner 108
@@ -671,13 +671,13 @@
 #THP121
 0
 #Owner 122
-1
+0
 #THP311
 0
 #Owner 165
 0
 #THP122
-100
+0
 #Owner 123
 0
 #THP310
@@ -747,11 +747,11 @@
 #Owner 168
 0
 #THP270
-100
+0
 #THP168
 0
 #THP271
-0
+100
 #THP169
 0
 #Owner 170
@@ -759,9 +759,9 @@
 #THP287
 0
 #THP269
-100
-#Owner 262
 0
+#Owner 262
+3
 #THP171
 0
 #THP284
@@ -769,7 +769,7 @@
 #Owner 261
 0
 #THP172
-0
+100
 #Owner 181
 0
 #Owner 272
@@ -781,11 +781,11 @@
 #THP189
 0
 #Owner 190
-2
+0
 #Owner 207
 0
 #THP190
-100
+0
 #Owner 191
 0
 #Owner 206
@@ -807,9 +807,9 @@
 #Owner 203
 0
 #THP203
-100
+0
 #THP204
-100
+0
 #THP205
 0
 #THP206
@@ -887,9 +887,9 @@
 #THP261
 0
 #Owner 269
-2
-#THP262
 0
+#THP262
+100
 #Owner 268
 0
 #THP263
@@ -907,7 +907,7 @@
 #THP288
 0
 #THP266
-100
+0
 #THP282
 0
 #Owner 267
@@ -933,7 +933,7 @@
 #Owner 305
 0
 #Owner 306
-0
+3
 #Owner 307
 0
 #Owner 308

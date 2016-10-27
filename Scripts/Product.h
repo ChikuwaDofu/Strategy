@@ -32,7 +32,6 @@ private:
 	bool openednow;
 	bool produced;
 	bool UnitOnTown();
-	void Income();
 	void SetTownOwner();
 	void DamageTown(int x, int y, int damage, int attacker);
 
@@ -44,4 +43,5 @@ public:
 	void Awake(int stageNum);
 	void Product();
 	int GetStage();
+	void Income();
 };

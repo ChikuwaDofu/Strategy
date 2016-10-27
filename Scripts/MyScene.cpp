@@ -113,6 +113,8 @@ void SkipTurn(){
 		product.battle.turn.SkipTurn();
 		product.battle.unitm.turn.SkipTurn();
 		turn.SkipTurn();
+
+		product.Income();
 	}
 }
 

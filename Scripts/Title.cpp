@@ -11,6 +11,7 @@ void CTitle::Awake(){
 	picture.LoadTitlePic();
 	picture.LoadMapPic();
 	picture.LoadFlagPic();
+	picture.LoadNumPic();
 
 	file.LoadMapSize();
 
@@ -30,6 +31,39 @@ void CTitle::Awake(){
 
 void CTitle::DrawTitle(){
 	DrawGraph(0, 0, picture.stageSelect, true);
+
+	switch (stageNow){
+	case 1:
+	case 2:
+		DrawGraph(750, 50, picture.numPic[2], true);
+
+		for (int i = 0; i < 2; i++){
+			DrawGraph(750 + 30 * i, 80, picture.flagPic[i + 1], true);
+		}
+
+		break;
+
+	case 3:
+	case 4:
+		DrawGraph(750, 50, picture.numPic[3], true);
+
+		for (int i = 0; i < 3; i++){
+			DrawGraph(750 + 30 * i, 80, picture.flagPic[i + 1], true);
+		}
+
+		break;
+
+	case 5:
+	case 6:
+		DrawGraph(750, 50, picture.numPic[4], true);
+
+		for (int i = 0; i < 4; i++){
+			DrawGraph(750 + 30 * i, 80, picture.flagPic[i + 1], true);
+		}
+
+		break;
+
+	}
 
 	DrawGraph(75, 225, picture.arrowPic[2], true);
 	if (Event.LMouse.GetClick(75, 225, 100, 325) || Event.key.GetDown(Event.key.LEFT)){

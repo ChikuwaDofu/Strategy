@@ -8,6 +8,8 @@
 const int ATTACK=1;
 const int DEFEND=2;
 
+const int TOWN_STRENGTH=11;
+
 CBattle::CBattle(){
 	index=2;
 	checkx[0]=0;
@@ -109,18 +111,18 @@ int CBattle::Attack(int base,int atkC,int atkU,int defC,int defU){
 int CBattle::FightTown(int type,int base,int power,int unitC,int unitU){
 	switch(type){
 	case ATTACK:
-		if(power>=15){
-			return (base+GetRand(6))*(1+pow(power-15,index)/pow(15,index))*(GetHP(unitC,unitU)/2+50)/100;
+		if(power>=TOWN_STRENGTH){
+			return (base+GetRand(6))*(1+pow(power-TOWN_STRENGTH,index)/pow(TOWN_STRENGTH,index))*(GetHP(unitC,unitU)/2+50)/100;
 		}else{
-			return (base+GetRand(6))*(1-pow(power-15,index)/pow(15,index))*(GetHP(unitC,unitU)/2+50)/100;
+			return (base+GetRand(6))*(1-pow(power-TOWN_STRENGTH,index)/pow(TOWN_STRENGTH,index))*(GetHP(unitC,unitU)/2+50)/100;
 		}
 		break;
 
 	case DEFEND:
-		if(power>=15){
-			return (base+GetRand(6))*(1-pow(15-power,index)/pow(power,index));
+		if(power>=TOWN_STRENGTH){
+			return (base+GetRand(6))*(1-pow(TOWN_STRENGTH-power,index)/pow(power,index));
 		}else{
-			return (base+GetRand(6))*(1+pow(15-power,index)/pow(power,index));
+			return (base+GetRand(6))*(1+pow(TOWN_STRENGTH-power,index)/pow(power,index));
 		}
 		break;
 	}

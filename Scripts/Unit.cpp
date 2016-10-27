@@ -167,7 +167,6 @@ void CUnit::Move(int dir, int cost){
 
 			music->AddSound(sMarch);
 
-
 			break;
 
 		case 3:

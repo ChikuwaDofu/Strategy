@@ -35,6 +35,18 @@ CSaveData::CSaveData(int stage){
 	case 3:
 		data=new CData("Chikuwa2/Save3.txt");
 		break;
+		
+	case 4:
+		data=new CData("Chikuwa2/Save4.txt");
+		break;
+		
+	case 5:
+		data=new CData("Chikuwa2/Save5.txt");
+		break;
+
+	case 6:
+		data=new CData("Chikuwa2/Save6.txt");
+		break;
 	}
 }
 

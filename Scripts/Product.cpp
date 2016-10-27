@@ -243,7 +243,7 @@ void CProduct::Product(){
 }
 
 void CProduct::Income(){
-	if(turn.Getskip()){
+	if(turn.Getskip() && stage.GetTNum(turn.GetCountry()) != 0){
 		battle.unitm.country[turn.GetCountry()].Income(stage.GetTNum(turn.GetCountry())*10);
 	}
 }

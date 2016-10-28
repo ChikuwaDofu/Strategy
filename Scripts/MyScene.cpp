@@ -108,6 +108,8 @@ void SkipTurn(){
 	turn.SkipTurn();
 
 	while (product.stage.GetTNum(turn.GetCountry()) == 0){
+		product.HealTown();
+
 		product.turn.SkipTurn();
 		product.stage.turn.SkipTurn();
 		product.battle.turn.SkipTurn();

@@ -44,4 +44,5 @@ public:
 	void Product();
 	int GetStage();
 	void Income();
+	void HealTown();
 };

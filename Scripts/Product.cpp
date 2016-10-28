@@ -54,7 +54,7 @@ void CProduct::Awake(int stageNum){
 		}
 	}
 
-	battle.unitm.country[1].Income(stage.GetTNum(1)*10);
+	battle.unitm.country[1].Income(stage.GetTNum(1)*20);
 
 	sNum=stageNum;
 
@@ -221,6 +221,21 @@ void CProduct::Product(){
 		DamageTown(cursor.Getcx() + screen.adjX, cursor.Getcy() + screen.adjY, battle.GetTDamage(), turn.GetCountry());
 	}
 
+	HealTown();
+
+	SetTownOwner();
+
+	turn.SkipTurn();
+
+}
+
+void CProduct::Income(){
+	if(turn.Getskip() && stage.GetTNum(turn.GetCountry()) != 0){
+		battle.unitm.country[turn.GetCountry()].Income(stage.GetTNum(turn.GetCountry())*10);
+	}
+}
+
+void CProduct::HealTown(){
 	if(Event.key.GetDown(Event.key.RETURN)){
 		for(int x=0;x<mapW;x++){
 			for(int y=0;y<mapH;y++){
@@ -234,17 +249,6 @@ void CProduct::Product(){
 				}
 			}
 		}
-	}
-
-	SetTownOwner();
-
-	turn.SkipTurn();
-
-}
-
-void CProduct::Income(){
-	if(turn.Getskip() && stage.GetTNum(turn.GetCountry()) != 0){
-		battle.unitm.country[turn.GetCountry()].Income(stage.GetTNum(turn.GetCountry())*10);
 	}
 }
 

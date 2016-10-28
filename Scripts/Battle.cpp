@@ -8,7 +8,7 @@
 const int ATTACK=1;
 const int DEFEND=2;
 
-const int TOWN_STRENGTH=11;
+const int TOWN_STRENGTH=8;
 
 CBattle::CBattle(){
 	index=2;
